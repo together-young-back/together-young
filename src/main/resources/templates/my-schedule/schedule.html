@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 스케줄 | 함께해Young</title>
+    <link data-n-head="ssr" rel="preload" as="style"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="schedule.css">
+    <style>
+        @import url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css);
+        @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header style="width: 100%; height: 70px;position: fixed;top: 0;"></header>
+
+        <div class="main-container">
+            <div class="main-container-big-box">
+                <div class="main-container-middle-box">
+                    <div class="main-container-small-box">
+                        <div class="sidebar-container">
+                            <div class="sidebar-fixed">
+                                <div class="login-container">
+                                    <section class="login-user-container">
+                                        <div class="login-user-avatar">
+                                            <div class="no-avatar">
+                                                <svg width="36" height="36" viewBox="0 0 36 36" fill="black"
+                                                    xmlns="http://www.w3.org/2000/svg" style="fill:#CFD4D7;"
+                                                    data-v-bd9f2bcc="" data-v-16c10fa5="">
+                                                    <circle cx="18" cy="11" r="6" data-v-bd9f2bcc=""></circle>
+                                                    <path
+                                                        d="M8.89065 23.704C10.986 20.7531 14.3809 19 18 19C21.6191 19 25.014 20.7531 27.1094 23.704L27.3942 24.1052C29.7451 27.416 27.3779 32 23.3174 32H12.6826C8.6221 32 6.25494 27.416 8.60575 24.1052L8.89065 23.704Z"
+                                                        data-v-bd9f2bcc=""></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="need-login">
+                                                홍길동
+                                            </div>
+                                            <div class="userEmailContainer">
+                                                <div class="caption1" style="color: #767D82; letter-spacing: -0.25px;">
+                                                    abcd@naver.com
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div class="page-category">
+                                        <button class="to-mypage">마이페이지</button>
+                                        <button class="to-mypage">친구 목록</button>
+                                    </div>
+                                </div>
+                                <button class="to-post-write">게시글 작성</button>
+                                <div class="search-bar">
+                                    <input type="text" autocomplete="off" placeholder="친구이름을 입력해보세요"
+                                        class="search-input search-second">
+                                    <div class="input-erase-btn">
+                                        <svg data-v-bd9f2bcc="" data-v-02656bf6="" width="16" height="16"
+                                            viewBox="0 0 16 16" fill="black" xmlns="http://www.w3.org/2000/svg"
+                                            size="medium" role="button" tabindex="2" class="erase-all-second"
+                                            style="fill: rgb(207, 212, 215);">
+                                            <path data-v-bd9f2bcc="" fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8ZM5.39645 5.39645C5.59171 5.20118 5.90829 5.20118 6.10355 5.39645L8 7.29289L9.89645 5.39645C10.0917 5.20118 10.4083 5.20118 10.6036 5.39645C10.7988 5.59171 10.7988 5.90829 10.6036 6.10355L8.70711 8L10.6036 9.89645C10.7988 10.0917 10.7988 10.4083 10.6036 10.6036C10.4083 10.7988 10.0917 10.7988 9.89645 10.6036L8 8.70711L6.10355 10.6036C5.90829 10.7988 5.59171 10.7988 5.39645 10.6036C5.20118 10.4083 5.20118 10.0917 5.39645 9.89645L7.29289 8L5.39645 6.10355C5.20118 5.90829 5.20118 5.59171 5.39645 5.39645Z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="search-input-icon">
+                                        <svg data-v-bd9f2bcc="" data-v-02656bf6="" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg"
+                                            role="button" tabindex="1" size="medium" class="icon-search"
+                                            style="fill: rgb(148, 155, 160);">
+                                            <path data-v-bd9f2bcc="" fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11 16C14.3137 16 17 13.3137 17 10C17 6.68629 14.3137 4 11 4C7.68629 4 5 6.68629 5 10C5 13.3137 7.68629 16 11 16ZM11 18C15.4183 18 19 14.4183 19 10C19 5.58172 15.4183 2 11 2C6.58172 2 3 5.58172 3 10C3 14.4183 6.58172 18 11 18Z">
+                                            </path>
+                                            <path data-v-bd9f2bcc="" fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M15.2929 15.2929C15.6834 14.9024 16.3166 14.9024 16.7071 15.2929L20.7071 19.2929C21.0976 19.6834 21.0976 20.3166 20.7071 20.7071C20.3166 21.0976 19.6834 21.0976 19.2929 20.7071L15.2929 16.7071C14.9024 16.3166 14.9024 15.6834 15.2929 15.2929Z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="main-container-small-box-right">
+                            <div class="main-box-big">
+                                <section class="main-box-middle">
+                                    <div>
+                                        <div>
+                                            <div>
+                                                <div class="together-box-big">
+                                                    <div class="together-box-small">
+                                                        <div class="together-users-name"
+                                                            style="color: rgb(118, 125, 130); font-weight: 400;">
+                                                            2030년 1월 1일
+                                                        </div>
+                                                        <span class="together-with"
+                                                            style="color: rgb(118, 125, 130); font-weight: 400;">
+                                                            <span class="together-with-detail">
+                                                                &nbsp; 해당활동이 시작해요.
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <hr class="just-line" style="border-color: rgb(243,244,245);">
+                                                </div>
+                                                <article class="article-first">
+                                                    <div class="article-first-box" style="padding: 20px;">
+                                                        <div class="article-first-detail">
+                                                            <div class="article-first-detail-wrapper">
+                                                                <div class="article-first-detail-main"
+                                                                    style="color: rgb(4,5,5); font-weight: 500;">일정
+                                                                    제목입니다.</div>
+                                                                <div class="article-first-detail-sub"
+                                                                    style="color: rgb(89,95,99); font-weight: 400;">
+                                                                    일정의 내용입니다.
+                                                                    <span class="more-text">더보기</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="post-action">
+                                                                <div>
+                                                                    <button class="post-action-btn">
+                                                                        <svg data-v-bd9f2bcc="" data-v-3035bc76=""
+                                                                            width="24" height="24" viewBox="0 0 24 24"
+                                                                            fill="black"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            style="fill: rgb(148, 155, 160);">
+                                                                            <circle data-v-bd9f2bcc="" cx="12" cy="5.5"
+                                                                                r="1.5"></circle>
+                                                                            <circle data-v-bd9f2bcc="" cx="12" cy="12"
+                                                                                r="1.5"></circle>
+                                                                            <circle data-v-bd9f2bcc="" cx="12" cy="18.5"
+                                                                                r="1.5"></circle>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="post-action-list-container">
+                                                                    <div class="post-action-list">
+                                                                        <div class="post-action-selection">
+                                                                            <svg data-v-bd9f2bcc="" data-v-1fc573bf=""
+                                                                                width="16" height="16"
+                                                                                viewBox="0 0 16 16" fill="black"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                class="action-icon" data-v-45a3e27e=""
+                                                                                style="fill: rgb(89, 95, 99);">
+                                                                                <path data-v-bd9f2bcc=""
+                                                                                    fill-rule="evenodd"
+                                                                                    clip-rule="evenodd"
+                                                                                    d="M12 6.5V11H4V6.5C4 4.29086 5.79086 2.5 8 2.5C10.2091 2.5 12 4.29086 12 6.5ZM3 11.2676V6.5C3 3.73858 5.23858 1.5 8 1.5C10.7614 1.5 13 3.73858 13 6.5V11.2676C13.5978 11.6134 14 12.2597 14 13V14C14 14.5523 13.5523 15 13 15H3C2.44772 15 2 14.5523 2 14V13C2 12.2597 2.4022 11.6134 3 11.2676ZM4 12C3.44772 12 3 12.4477 3 13L3 14H13V13C13 12.4477 12.5523 12 12 12H4Z">
+                                                                                </path>
+                                                                            </svg>
+                                                                            수정
+                                                                        </div>
+                                                                        <hr class="post-action-devider">
+                                                                        <div class="post-action-selection">
+                                                                            <svg data-v-bd9f2bcc="" data-v-1fc573bf=""
+                                                                                width="16" height="16"
+                                                                                viewBox="0 0 16 16" fill="black"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                class="action-icon" data-v-45a3e27e=""
+                                                                                style="fill: rgb(89, 95, 99);">
+                                                                                <path data-v-bd9f2bcc=""
+                                                                                    fill-rule="evenodd"
+                                                                                    clip-rule="evenodd"
+                                                                                    d="M14 8C14 11.3137 11.3137 14 8 14C6.52314 14 5.17091 13.4664 4.12557 12.5815L12.5815 4.12557C13.4664 5.17091 14 6.52314 14 8ZM3.41847 11.8744L11.8744 3.41847C10.8291 2.53358 9.47685 2 8 2C4.68629 2 2 4.68629 2 8C2 9.47685 2.53358 10.8291 3.41847 11.8744ZM15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z">
+                                                                                </path>
+                                                                            </svg>
+                                                                            삭제
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="article-first-comment">
+                                                            <div class="article-first-comment-box">
+                                                                <div class="icon-box">
+                                                                    <svg width="16" height="16" viewbox="0 0 16"
+                                                                        fill="black" xmlns="http://www.w3.org/2000/svg"
+                                                                        class="comment-icon"
+                                                                        style="fill: rgb(148,155,60)">
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                            d="M13.8766 8C11.3452 12.6334 4.65478 12.6334 2.12331 8C4.65478 3.36658 11.3452 3.36658 13.8766 8ZM14.8923 7.78461C12.0525 2.10504 3.94746 2.10504 1.10767 7.78461C1.03988 7.9202 1.03988 8.07979 1.10767 8.21538C3.94746 13.895 12.0525 13.895 14.8923 8.21538C14.9601 8.07979 14.9601 7.9202 14.8923 7.78461Z">
+                                                                        </path>
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                            d="M8 9.5C8.82843 9.5 9.5 8.82843 9.5 8C9.5 7.17157 8.82843 6.5 8 6.5C7.17157 6.5 6.5 7.17157 6.5 8C6.5 8.82843 7.17157 9.5 8 9.5ZM8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <div class="comment-icon-count"
+                                                                        style="color: rgb(148,155,160);">100</div>
+                                                                </div>
+                                                                <div class="icon-box">
+                                                                    <svg width="16" height="16" viewbox="0 0 16"
+                                                                        fill="black" xmlns="http://www.w3.org/2000/svg"
+                                                                        class="comment-icon"
+                                                                        style="fill: rgb(148,155,60)">
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                            d="M3.69638 13.5299C4.05199 13.1404 4.04399 12.5417 3.67811 12.1619C2.63802 11.0821 2 9.6166 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8C14 11.3137 11.3137 14 8 14H3.26717L3.69638 13.5299ZM1 8C1 9.88557 1.74553 11.597 2.95789 12.8556L1.76434 14.1629C1.47131 14.4838 1.699 15 2.13358 15H8C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8Z">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M6 8C6 8.41421 5.66421 8.75 5.25 8.75C4.83579 8.75 4.5 8.41421 4.5 8C4.5 7.58579 4.83579 7.25 5.25 7.25C5.66421 7.25 6 7.58579 6 8Z">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M8.75 8C8.75 8.41421 8.41421 8.75 8 8.75C7.58579 8.75 7.25 8.41421 7.25 8C7.25 7.58579 7.58579 7.25 8 7.25C8.41421 7.25 8.75 7.58579 8.75 8Z">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M11.5 8C11.5 8.41421 11.1642 8.75 10.75 8.75C10.3358 8.75 10 8.41421 10 8C10 7.58579 10.3358 7.25 10.75 7.25C11.1642 7.25 11.5 7.58579 11.5 8Z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <div class="comment-icon-count"
+                                                                        style="color: rgb(148,155,160);">200</div>
+                                                                </div>
+                                                                <div class="icon-box">
+                                                                    <svg width="16" height="16" viewbox="0 0 16"
+                                                                        fill="black" xmlns="http://www.w3.org/2000/svg"
+                                                                        class="comment-icon"
+                                                                        style="fill: rgb(148,155,60)">
+                                                                        <path data-v-bd9f2bcc="" fill-rule="evenodd"
+                                                                            clip-rule="evenodd"
+                                                                            d="M12 3H4V12.5504L6.88646 10.6157C7.56015 10.1642 8.43985 10.1642 9.11354 10.6157L12 12.5504V3ZM4 2C3.44772 2 3 2.44772 3 3V13.4875C3 13.8874 3.44619 14.1255 3.77839 13.9028L7.44323 11.4464C7.78008 11.2206 8.21992 11.2206 8.55677 11.4464L12.2216 13.9028C12.5538 14.1255 13 13.8874 13 13.4875V3C13 2.44772 12.5523 2 12 2H4Z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <div class="comment-icon-count"
+                                                                        style="color: rgb(148,155,160);">10</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div>
+                                                <div class="together-box-big">
+                                                    <div class="together-box-small">
+                                                        <div class="together-users-name"
+                                                            style="color: rgb(118, 125, 130); font-weight: 400;">
+                                                            2030년 1월 2일
+                                                        </div>
+                                                        <span class="together-with"
+                                                            style="color: rgb(118, 125, 130); font-weight: 400;">
+                                                            <span class="together-with-detail">
+                                                                &nbsp; 해당활동이 시작해요.
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <hr class="just-line" style="border-color: rgb(243,244,245);">
+                                                </div>
+                                                <article class="article-first">
+                                                    <div class="article-first-box" style="padding: 20px;">
+                                                        <div class="article-first-detail">
+                                                            <div class="article-first-detail-wrapper">
+                                                                <div class="article-first-detail-main"
+                                                                    style="color: rgb(4,5,5); font-weight: 500;">일정
+                                                                    제목입니다.</div>
+                                                                <div class="article-first-detail-sub"
+                                                                    style="color: rgb(89,95,99); font-weight: 400;">
+                                                                    일정의 내용입니다.
+                                                                    <span class="more-text">더보기</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="post-action">
+                                                                <div>
+                                                                    <button class="post-action-btn">
+                                                                        <svg data-v-bd9f2bcc="" data-v-3035bc76=""
+                                                                            width="24" height="24" viewBox="0 0 24 24"
+                                                                            fill="black"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            style="fill: rgb(148, 155, 160);">
+                                                                            <circle data-v-bd9f2bcc="" cx="12" cy="5.5"
+                                                                                r="1.5"></circle>
+                                                                            <circle data-v-bd9f2bcc="" cx="12" cy="12"
+                                                                                r="1.5"></circle>
+                                                                            <circle data-v-bd9f2bcc="" cx="12" cy="18.5"
+                                                                                r="1.5"></circle>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="post-action-list-container">
+                                                                    <div class="post-action-list">
+                                                                        <div class="post-action-selection">
+                                                                            <svg data-v-bd9f2bcc="" data-v-1fc573bf=""
+                                                                                width="16" height="16"
+                                                                                viewBox="0 0 16 16" fill="black"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                class="action-icon" data-v-45a3e27e=""
+                                                                                style="fill: rgb(89, 95, 99);">
+                                                                                <path data-v-bd9f2bcc=""
+                                                                                    fill-rule="evenodd"
+                                                                                    clip-rule="evenodd"
+                                                                                    d="M12 6.5V11H4V6.5C4 4.29086 5.79086 2.5 8 2.5C10.2091 2.5 12 4.29086 12 6.5ZM3 11.2676V6.5C3 3.73858 5.23858 1.5 8 1.5C10.7614 1.5 13 3.73858 13 6.5V11.2676C13.5978 11.6134 14 12.2597 14 13V14C14 14.5523 13.5523 15 13 15H3C2.44772 15 2 14.5523 2 14V13C2 12.2597 2.4022 11.6134 3 11.2676ZM4 12C3.44772 12 3 12.4477 3 13L3 14H13V13C13 12.4477 12.5523 12 12 12H4Z">
+                                                                                </path>
+                                                                            </svg>
+                                                                            수정
+                                                                        </div>
+                                                                        <hr class="post-action-devider">
+                                                                        <div class="post-action-selection">
+                                                                            <svg data-v-bd9f2bcc="" data-v-1fc573bf=""
+                                                                                width="16" height="16"
+                                                                                viewBox="0 0 16 16" fill="black"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                class="action-icon" data-v-45a3e27e=""
+                                                                                style="fill: rgb(89, 95, 99);">
+                                                                                <path data-v-bd9f2bcc=""
+                                                                                    fill-rule="evenodd"
+                                                                                    clip-rule="evenodd"
+                                                                                    d="M14 8C14 11.3137 11.3137 14 8 14C6.52314 14 5.17091 13.4664 4.12557 12.5815L12.5815 4.12557C13.4664 5.17091 14 6.52314 14 8ZM3.41847 11.8744L11.8744 3.41847C10.8291 2.53358 9.47685 2 8 2C4.68629 2 2 4.68629 2 8C2 9.47685 2.53358 10.8291 3.41847 11.8744ZM15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z">
+                                                                                </path>
+                                                                            </svg>
+                                                                            삭제
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="article-first-comment">
+                                                            <div class="article-first-comment-box">
+                                                                <div class="icon-box">
+                                                                    <svg width="16" height="16" viewbox="0 0 16"
+                                                                        fill="black" xmlns="http://www.w3.org/2000/svg"
+                                                                        class="comment-icon"
+                                                                        style="fill: rgb(148,155,60)">
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                            d="M13.8766 8C11.3452 12.6334 4.65478 12.6334 2.12331 8C4.65478 3.36658 11.3452 3.36658 13.8766 8ZM14.8923 7.78461C12.0525 2.10504 3.94746 2.10504 1.10767 7.78461C1.03988 7.9202 1.03988 8.07979 1.10767 8.21538C3.94746 13.895 12.0525 13.895 14.8923 8.21538C14.9601 8.07979 14.9601 7.9202 14.8923 7.78461Z">
+                                                                        </path>
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                            d="M8 9.5C8.82843 9.5 9.5 8.82843 9.5 8C9.5 7.17157 8.82843 6.5 8 6.5C7.17157 6.5 6.5 7.17157 6.5 8C6.5 8.82843 7.17157 9.5 8 9.5ZM8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <div class="comment-icon-count"
+                                                                        style="color: rgb(148,155,160);">100</div>
+                                                                </div>
+                                                                <div class="icon-box">
+                                                                    <svg width="16" height="16" viewbox="0 0 16"
+                                                                        fill="black" xmlns="http://www.w3.org/2000/svg"
+                                                                        class="comment-icon"
+                                                                        style="fill: rgb(148,155,60)">
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                            d="M3.69638 13.5299C4.05199 13.1404 4.04399 12.5417 3.67811 12.1619C2.63802 11.0821 2 9.6166 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8C14 11.3137 11.3137 14 8 14H3.26717L3.69638 13.5299ZM1 8C1 9.88557 1.74553 11.597 2.95789 12.8556L1.76434 14.1629C1.47131 14.4838 1.699 15 2.13358 15H8C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8Z">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M6 8C6 8.41421 5.66421 8.75 5.25 8.75C4.83579 8.75 4.5 8.41421 4.5 8C4.5 7.58579 4.83579 7.25 5.25 7.25C5.66421 7.25 6 7.58579 6 8Z">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M8.75 8C8.75 8.41421 8.41421 8.75 8 8.75C7.58579 8.75 7.25 8.41421 7.25 8C7.25 7.58579 7.58579 7.25 8 7.25C8.41421 7.25 8.75 7.58579 8.75 8Z">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M11.5 8C11.5 8.41421 11.1642 8.75 10.75 8.75C10.3358 8.75 10 8.41421 10 8C10 7.58579 10.3358 7.25 10.75 7.25C11.1642 7.25 11.5 7.58579 11.5 8Z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <div class="comment-icon-count"
+                                                                        style="color: rgb(148,155,160);">200</div>
+                                                                </div>
+                                                                <div class="icon-box">
+                                                                    <svg width="16" height="16" viewbox="0 0 16"
+                                                                        fill="black" xmlns="http://www.w3.org/2000/svg"
+                                                                        class="comment-icon"
+                                                                        style="fill: rgb(148,155,60)">
+                                                                        <path data-v-bd9f2bcc="" fill-rule="evenodd"
+                                                                            clip-rule="evenodd"
+                                                                            d="M12 3H4V12.5504L6.88646 10.6157C7.56015 10.1642 8.43985 10.1642 9.11354 10.6157L12 12.5504V3ZM4 2C3.44772 2 3 2.44772 3 3V13.4875C3 13.8874 3.44619 14.1255 3.77839 13.9028L7.44323 11.4464C7.78008 11.2206 8.21992 11.2206 8.55677 11.4464L12.2216 13.9028C12.5538 14.1255 13 13.8874 13 13.4875V3C13 2.44772 12.5523 2 12 2H4Z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <div class="comment-icon-count"
+                                                                        style="color: rgb(148,155,160);">30</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div>
+                                                <div class="together-box-big">
+                                                    <div class="together-box-small">
+                                                        <div class="together-users-name"
+                                                            style="color: rgb(118, 125, 130); font-weight: 400;">
+                                                            2030년 1월 3일
+                                                        </div>
+                                                        <span class="together-with"
+                                                            style="color: rgb(118, 125, 130); font-weight: 400;">
+                                                            <span class="together-with-detail">
+                                                                &nbsp; 해당활동이 시작해요.
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <hr class="just-line" style="border-color: rgb(243,244,245);">
+                                                </div>
+                                                <article class="article-first">
+                                                    <div class="article-first-box" style="padding: 20px;">
+                                                        <div class="article-first-detail">
+                                                            <div class="article-first-detail-wrapper">
+                                                                <div class="article-first-detail-main"
+                                                                    style="color: rgb(4,5,5); font-weight: 500;">일정
+                                                                    제목입니다.</div>
+                                                                <div class="article-first-detail-sub"
+                                                                    style="color: rgb(89,95,99); font-weight: 400;">
+                                                                    일정의 내용입니다.
+                                                                    <span class="more-text">더보기</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="post-action btn1">
+                                                                <div>
+                                                                    <button class="post-action-btn btn11">
+                                                                        <svg data-v-bd9f2bcc="" data-v-3035bc76=""
+                                                                            width="24" height="24" viewBox="0 0 24 24"
+                                                                            fill="black"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            style="fill: rgb(148, 155, 160);">
+                                                                            <circle data-v-bd9f2bcc="" cx="12" cy="5.5"
+                                                                                r="1.5"></circle>
+                                                                            <circle data-v-bd9f2bcc="" cx="12" cy="12"
+                                                                                r="1.5"></circle>
+                                                                            <circle data-v-bd9f2bcc="" cx="12" cy="18.5"
+                                                                                r="1.5"></circle>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="post-action-list-container btn21">
+                                                                    <div class="post-action-list">
+                                                                        <div class="post-action-selection">
+                                                                            <svg data-v-bd9f2bcc="" data-v-1fc573bf=""
+                                                                                width="16" height="16"
+                                                                                viewBox="0 0 16 16" fill="black"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                class="action-icon" data-v-45a3e27e=""
+                                                                                style="fill: rgb(89, 95, 99);">
+                                                                                <path data-v-bd9f2bcc=""
+                                                                                    fill-rule="evenodd"
+                                                                                    clip-rule="evenodd"
+                                                                                    d="M12 6.5V11H4V6.5C4 4.29086 5.79086 2.5 8 2.5C10.2091 2.5 12 4.29086 12 6.5ZM3 11.2676V6.5C3 3.73858 5.23858 1.5 8 1.5C10.7614 1.5 13 3.73858 13 6.5V11.2676C13.5978 11.6134 14 12.2597 14 13V14C14 14.5523 13.5523 15 13 15H3C2.44772 15 2 14.5523 2 14V13C2 12.2597 2.4022 11.6134 3 11.2676ZM4 12C3.44772 12 3 12.4477 3 13L3 14H13V13C13 12.4477 12.5523 12 12 12H4Z">
+                                                                                </path>
+                                                                            </svg>
+                                                                            수정
+                                                                        </div>
+                                                                        <hr class="post-action-devider">
+                                                                        <div class="post-action-selection">
+                                                                            <svg data-v-bd9f2bcc="" data-v-1fc573bf=""
+                                                                                width="16" height="16"
+                                                                                viewBox="0 0 16 16" fill="black"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                class="action-icon" data-v-45a3e27e=""
+                                                                                style="fill: rgb(89, 95, 99);">
+                                                                                <path data-v-bd9f2bcc=""
+                                                                                    fill-rule="evenodd"
+                                                                                    clip-rule="evenodd"
+                                                                                    d="M14 8C14 11.3137 11.3137 14 8 14C6.52314 14 5.17091 13.4664 4.12557 12.5815L12.5815 4.12557C13.4664 5.17091 14 6.52314 14 8ZM3.41847 11.8744L11.8744 3.41847C10.8291 2.53358 9.47685 2 8 2C4.68629 2 2 4.68629 2 8C2 9.47685 2.53358 10.8291 3.41847 11.8744ZM15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z">
+                                                                                </path>
+                                                                            </svg>
+                                                                            삭제
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="article-first-comment">
+                                                            <div class="article-first-comment-box">
+                                                                <div class="icon-box">
+                                                                    <svg width="16" height="16" viewbox="0 0 16"
+                                                                        fill="black" xmlns="http://www.w3.org/2000/svg"
+                                                                        class="comment-icon"
+                                                                        style="fill: rgb(148,155,60)">
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                            d="M13.8766 8C11.3452 12.6334 4.65478 12.6334 2.12331 8C4.65478 3.36658 11.3452 3.36658 13.8766 8ZM14.8923 7.78461C12.0525 2.10504 3.94746 2.10504 1.10767 7.78461C1.03988 7.9202 1.03988 8.07979 1.10767 8.21538C3.94746 13.895 12.0525 13.895 14.8923 8.21538C14.9601 8.07979 14.9601 7.9202 14.8923 7.78461Z">
+                                                                        </path>
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                            d="M8 9.5C8.82843 9.5 9.5 8.82843 9.5 8C9.5 7.17157 8.82843 6.5 8 6.5C7.17157 6.5 6.5 7.17157 6.5 8C6.5 8.82843 7.17157 9.5 8 9.5ZM8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5Z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <div class="comment-icon-count"
+                                                                        style="color: rgb(148,155,160);">100</div>
+                                                                </div>
+                                                                <div class="icon-box">
+                                                                    <svg width="16" height="16" viewbox="0 0 16"
+                                                                        fill="black" xmlns="http://www.w3.org/2000/svg"
+                                                                        class="comment-icon"
+                                                                        style="fill: rgb(148,155,60)">
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                            d="M3.69638 13.5299C4.05199 13.1404 4.04399 12.5417 3.67811 12.1619C2.63802 11.0821 2 9.6166 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8C14 11.3137 11.3137 14 8 14H3.26717L3.69638 13.5299ZM1 8C1 9.88557 1.74553 11.597 2.95789 12.8556L1.76434 14.1629C1.47131 14.4838 1.699 15 2.13358 15H8C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8Z">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M6 8C6 8.41421 5.66421 8.75 5.25 8.75C4.83579 8.75 4.5 8.41421 4.5 8C4.5 7.58579 4.83579 7.25 5.25 7.25C5.66421 7.25 6 7.58579 6 8Z">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M8.75 8C8.75 8.41421 8.41421 8.75 8 8.75C7.58579 8.75 7.25 8.41421 7.25 8C7.25 7.58579 7.58579 7.25 8 7.25C8.41421 7.25 8.75 7.58579 8.75 8Z">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M11.5 8C11.5 8.41421 11.1642 8.75 10.75 8.75C10.3358 8.75 10 8.41421 10 8C10 7.58579 10.3358 7.25 10.75 7.25C11.1642 7.25 11.5 7.58579 11.5 8Z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <div class="comment-icon-count"
+                                                                        style="color: rgb(148,155,160);">200</div>
+                                                                </div>
+                                                                <div class="icon-box">
+                                                                    <svg width="16" height="16" viewbox="0 0 16"
+                                                                        fill="black" xmlns="http://www.w3.org/2000/svg"
+                                                                        class="comment-icon"
+                                                                        style="fill: rgb(148,155,60)">
+                                                                        <path data-v-bd9f2bcc="" fill-rule="evenodd"
+                                                                            clip-rule="evenodd"
+                                                                            d="M12 3H4V12.5504L6.88646 10.6157C7.56015 10.1642 8.43985 10.1642 9.11354 10.6157L12 12.5504V3ZM4 2C3.44772 2 3 2.44772 3 3V13.4875C3 13.8874 3.44619 14.1255 3.77839 13.9028L7.44323 11.4464C7.78008 11.2206 8.21992 11.2206 8.55677 11.4464L12.2216 13.9028C12.5538 14.1255 13 13.8874 13 13.4875V3C13 2.44772 12.5523 2 12 2H4Z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <div class="comment-icon-count"
+                                                                        style="color: rgb(148,155,160);">30</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br><br><br><br>
+        </div>
+
+        <footer style="width: 100%; height: 26px;"></footer>
+    </div>
+
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="schedule.js"></script>
+
+</script>
+
+</html>
