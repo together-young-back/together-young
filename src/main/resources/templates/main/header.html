@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <header>
+    <header th:fragment="header">
         <div class="header grid">
             <div class="header-nav-container">
                 <div class="header-nav-container-left">
@@ -345,5 +345,4 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="../../static/js/header-footer.js"></script>
-
 </html>

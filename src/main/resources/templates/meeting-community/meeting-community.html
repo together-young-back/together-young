@@ -19,7 +19,8 @@
 
 <body>
     <div class="wrap">
-        <header style="width: 100%; height: 70px;position: fixed;top: 0;"></header>
+<!--        <header style="width: 100%; height: 70px;position: fixed;top: 0;"></header>-->
+        <header th:replace="~{main/header :: header}"></header>
 
         <div class="main-container">
             <div class="backdrop"></div>
@@ -909,7 +910,8 @@
             </div>
         </div>
 
-        <footer style="width: 100%; height: 26px;"></footer>
+<!--        <footer style="width: 100%; height: 26px;"></footer>-->
+        <footer th:replace="~{main/footer :: footer}"></footer>
         <div class="write-btn">
             <svg data-v-bd9f2bcc="" data-v-49331dfe="" width="36" height="36" viewBox="0 0 36 36" fill="black"
                 xmlns="http://www.w3.org/2000/svg" class="c-application c-icon" style="fill: rgb(255, 255, 255);">

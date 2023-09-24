@@ -1244,6 +1244,7 @@ a {
   line-height: 68px;
   border-radius: 100%;
   display: block;
+  cursor: pointer;
 }
 
 .userInformationContainer .imageItem {
@@ -1380,7 +1381,7 @@ a {
   line-height: 25px;
   min-width: 56px;
   padding: 0 14px;
-  cursor: not-allowed !important;
+  cursor: not-allowed;
   align-items: center;
   border: none;
   color: #fff;
@@ -1499,7 +1500,7 @@ a {
 }
 
 .checked:before {
-  background-image: url("check.svg");
+  background-image: url("/static/images/check.svg") !important;
   border-color: #2a7de1;
   background-color: #fff;
 }
