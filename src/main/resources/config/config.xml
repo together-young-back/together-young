@@ -16,6 +16,5 @@
         <typeAlias type="com.app.togetheryoungback.domain.MessageSendDTO" alias="messageSendDTO" />
         <typeAlias type="com.app.togetheryoungback.domain.NotificationDTO" alias="notificationDTO" />
         <typeAlias type="com.app.togetheryoungback.domain.PostCategoryVO" alias="postCategoryVO" />
-
     </typeAliases>
 </configuration>

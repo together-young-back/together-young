@@ -96,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.target === verifyNickname) {
       verifyNickname.style.backgroundColor = "#d4e5f9";
       saveNickname.style.backgroundColor = "#2a7de1";
+      saveNickname.style.cursor = "pointer";
     }
 
     // 3. 저장 버튼 누를시 저장 버튼 css에 background-color: #1b5192; 주기
@@ -109,10 +110,12 @@ document.addEventListener("DOMContentLoaded", function () {
       if (verifyNickname.style.backgroundColor === "#d4e5f9") {
         verifyNickname.style.backgroundColor = "#fff";
         saveNickname.style.backgroundColor = "#2a7de1";
+        saveNickname.style.cursor = "not-allowed";
       }
       if (saveNickname.style.backgroundColor === "#1b5192") {
         verifyNickname.style.backgroundColor = "#fff";
         saveNickname.style.backgroundColor = "#2a7de1";
+        saveNickname.style.cursor = "not-allowed";
       }
     }
     // 5. 큰 옵션 선택하면 초기화되는 기능
@@ -124,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
       verifyNickname.style.backgroundColor = "#fff";
       saveNickname.style.backgroundColor = "#d4e5f9";
+      saveNickname.style.cursor = "not-allowed";
     }
   });
 
