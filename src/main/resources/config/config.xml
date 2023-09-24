@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.app.togetheryoungback.domain.FriendDTO" alias="friendDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.GeneralBookmarkDTO" alias="generalBookmarkDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.GeneralPostCommentsDTO" alias="generalPostCommentsDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.GeneralPostsDTO" alias="generalPostsDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MeetingBookmarkDTO" alias="meetingBookmarkDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MeetingPostCommentsDTO" alias="meetingPostCommentsDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MeetingPostsDTO" alias="meetingPostsDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MeetingTableDTO" alias="meetingTableDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MemberVO" alias="memberVO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MessageDTO" alias="messageDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MessageReceiveDTO" alias="messageReceiveDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MessageSendDTO" alias="messageSendDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.NotificationDTO" alias="notificationDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.PostCategoryVO" alias="postCategoryVO" />
+
+    </typeAliases>
+</configuration>
