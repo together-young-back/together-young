@@ -8,18 +8,20 @@
     <link data-n-head="ssr" rel="preload" as="style"
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="../../static/css/my-page.css">
+    <link rel="stylesheet" href="/css/member/my-page.css">
     <style>
         @import url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css);
         @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
     </style>
     <link rel="icon" href="/images/favicon.ico">
-    <script src="/js/my-page.js"></script>
+    <script src="/js/member/my-page.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="/css/header-footer.css"></script>
 </head>
 
 <body>
-<header th:replace="~{main/header :: header}"></header>
     <div class="wrap">
+        <header th:replace="~{main/header :: header}"></header>
         <div class="mypageWrapper">
             <div class="asideMenuContainer">
                 <div class="mypageAsideMenu">
@@ -294,9 +296,8 @@
                 </div>
             </div>
         </div>
+        <footer th:replace="~{main/footer :: footer}"></footer>
     </div>
-<footer th:replace="~{main/footer :: footer}"></footer>
+
 </body>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="/css/header-footer.css"></script>
 </html>
