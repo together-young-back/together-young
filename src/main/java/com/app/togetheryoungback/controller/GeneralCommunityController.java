@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class GeneralCommunityController {
 
     // 일반 게시판으로 이동
-    @GetMapping("general-community")
+    @GetMapping("community")
     public void goToGeneralCommunityForm(){;}
 
     // 일반 게시글 상세보기로 이동
-    @GetMapping("general-post")
+    @GetMapping("post")
     public void goToGeneralPostForm(){;}
 
     // 일반 게시글 작성으로 이동
-    @GetMapping("general-write")
+    @GetMapping("write")
     public void goToGeneralWriteForm(){;}
 
     // 일반 게시글 수정으로 이동
-    @GetMapping("general-edit")
+    @GetMapping("edit")
     public void goToGeneralEditForm(){;}
 
 }

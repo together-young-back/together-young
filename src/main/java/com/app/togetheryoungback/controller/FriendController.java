@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FriendController {
 
     // 친구 검색으로 이동
-    @GetMapping("friend-search")
+    @GetMapping("search")
     public void goToFriendSearchForm(){;}
 
     // 친구 목록으로 이동
-    @GetMapping("friend-list")
+    @GetMapping("list")
     public void goToFriendListForm(){;}
 
     // 친구 메시지함으로 이동
-    @GetMapping("frined-message")
+    @GetMapping("message")
     public void goToFriendMessageForm(){;}
 
 }

@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MeetingCommunityController {
 
     // 모임 게시판으로 이동
-    @GetMapping("meeting-community")
+    @GetMapping("community")
     public void goToMeetingCommunityForm(){;}
 
     // 모임 게시글 상세보기로 이동
-    @GetMapping("meeting-post")
+    @GetMapping("post")
     public void goToMeetingPostForm(){;}
 
     // 모임 게시글 작성으로 이동
-    @GetMapping("meeting-write")
+    @GetMapping("write")
     public void goToMeetingWriteForm(){;}
 
     // 모임 게시글 수정으로 이동
-    @GetMapping("meeting-edit")
+    @GetMapping("edit")
     public void goToMeetingEditForm(){;}
 
 }

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MessageController {
 
     // 메시지 목록으로 이동
-    @GetMapping("message-list")
+    @GetMapping("list")
     public void goToMessageListForm(){;}
 
     // 메시지 작성으로 이동
-    @GetMapping("message-write")
+    @GetMapping("write")
     public void goToMessageWriteForm(){;}
 
 }
