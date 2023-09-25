@@ -8,7 +8,8 @@
     <link data-n-head="ssr" rel="preload" as="style"
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="../../static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/header-footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
     <style>
         @import url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css);
         @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
@@ -22,9 +23,7 @@
 
         <div class="main-container">
             <div class="backdrop"></div>
-            <br>
-            <div class="c-application-main-grip"
-                style="min-height: calc(100vh - 324ph); background-color: rgb(255, 255, 255);">
+            <div class="c-application-main-grip">
                 <div class="c-application-c-row">
                     <div class="c-application-login">
                         <div class="c-application-login-view">
@@ -54,7 +53,6 @@
                     </div>
                 </div>
             </div>
-            <br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
 
         <footer th:replace="~{main/footer :: footer}"></footer>
@@ -158,6 +156,6 @@
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="../../static/js/login.js"></script>
+<script src="/js/header-footer.js"></script>
 
 </html>
