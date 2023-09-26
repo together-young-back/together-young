@@ -768,6 +768,16 @@ header {
   display: none;
 }
 
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  line-height: 68px;
+  background-size: 100% 100%;
+  border-radius: 100%;
+  display: block;
+  overflow: hidden;
+}
+
 /* Footer CSS ===============================================================================================================================================================*/
 footer {
   border: 1px solid #eaecee;
