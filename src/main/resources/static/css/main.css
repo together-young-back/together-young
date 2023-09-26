@@ -609,7 +609,7 @@ header {
     position: fixed;
     width: 100%;
     height: 52px;
-    transition: 0.2;
+    transition: 0.2s;
     transform: translateX(-16px);
     background-color: #fff;
     z-index: 10;
@@ -757,11 +757,14 @@ header {
     position: relative;
 }
 
+.mobile-detail-header-con {
+    display: none;
+}
+
 /* Main CSS ===============================================================================================================================================================*/
 .main-container {
-    min-height: calc(100vh - 342px);
+    min-height: calc(100vh - 96px);
     width: 100%;
-    height: 100%;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
@@ -875,12 +878,6 @@ header {
     justify-content: space-between;
 }
 
-/* 임시 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-.inner-container img {
-    width: 100%;
-    height: 100%;
-}
-
 .banner-mainfont {
     font-size: 42px;
     font-weight: 700;
@@ -897,6 +894,11 @@ header {
     display: flex;
     position: relative;
     overflow: hidden;
+}
+
+.banner-right-side-box img {
+    width: 100%;
+    height: 100%;
 }
 
 .banner-right-side-box-moving {
@@ -930,31 +932,27 @@ header {
 }
 
 .front-flip {
-    background-image: url("templates/main/bannerjpg");
+    background-image: url("../images/banner/front.jpg");
 }
 
 .back-flip {
     transform: rotateX(180deg);
-    background-image: url("templates/main/bannerpg");
+    background-image: url("../images/banner/back.jpg");
 }
 
 .back-flip::before {
     content: "";
-    /* 의사 요소의 내용은 비워둡니다 */
     position: absolute;
     /* 절대 위치로 설정하여 요소 위에 위치 */
     top: 0;
     left: 0;
     width: 100%;
-    /* 내부 요소의 너비와 높이를 100%로 설정하여 전체 영역을 채우도록 함 */
     height: 100%;
-    background-image: url("../../static/images/banner/flipbanner.jpg");
+    background-image: url("../../static/images/banner/back.jpg");
     background-size: cover;
     background-position: center;
     filter: blur(5px);
-    /* 블러 효과 적용 */
     z-index: -1;
-    /* 배경 이미지 레이어를 요소 아래로 이동시켜 내용을 가리지 않도록 함 */
 }
 
 .logo-font {

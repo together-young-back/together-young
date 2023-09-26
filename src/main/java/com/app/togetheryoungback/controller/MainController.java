@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
+@RequestMapping("/")
 public class MainController {
 
     // 메인 페이지
-    @GetMapping("/")
-    public void goToMainForm(){;}
-
+    @GetMapping
+    public String goToMainForm() {
+        return "/main/main";
+    }
 }

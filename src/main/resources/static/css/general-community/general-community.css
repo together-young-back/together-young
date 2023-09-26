@@ -631,6 +631,13 @@ hr {
     position: fixed;
 }
 
+.mobile-detail-header-con {
+    display: none;
+}
+
+.first-menu {
+    display: flex;
+}
 
 
 @media (max-width: 1000px) {

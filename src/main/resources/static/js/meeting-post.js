@@ -42,15 +42,15 @@ $(function () {
   // 맵 팝업
   let isMapOn = false;
 
-  $("#mapDisplay").on("click", function () {
+  $("#map").on("click", function () {
     if (!isMapOn) {
-      $(".mapDisplay-wrap").css({
+      $(".map-wrap").css({
         visibility: "visible",
         opacity: "1",
       });
       isMapOn = true;
     } else {
-      $(".mapDisplay-wrap").css({
+      $(".map-wrap").css({
         visibility: "hidden",
         opacity: "0",
       });

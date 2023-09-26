@@ -616,7 +616,7 @@ header {
   position: fixed;
   width: 100%;
   height: 52px;
-  transition: 0.2;
+  transition: 0.2s;
   transform: translateX(-16px);
   background-color: #fff;
   z-index: 10;
@@ -764,15 +764,8 @@ header {
   position: relative;
 }
 
-/* 메인 컨테이너 작성해주세요 */
-.main-container {
-  min-height: calc(100vh - 342px);
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  margin-top: 70px;
+.mobile-detail-header-con {
+  display: none;
 }
 
 /* Footer CSS ===============================================================================================================================================================*/
