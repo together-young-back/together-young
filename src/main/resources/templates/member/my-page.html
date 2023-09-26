@@ -8,6 +8,7 @@
     <link data-n-head="ssr" rel="preload" as="style"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/header-footer.css">
     <link rel="stylesheet" href="/css/member/my-page.css">
     <link rel="stylesheet" href="/css/header-footer.css">
     <link rel="icon" href="/images/favicon.ico">
@@ -15,9 +16,6 @@
         @import url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css);
         @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
     </style>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="/js/member/my-page.js"></script>
-    <script src="/js/header-footer.js"></script>
 </head>
 
 <body>
@@ -27,14 +25,18 @@
         <div class="mypageAsideMenu">
             <div class="profile">
                 <div class="imageUploadContainer">
-                    <label for="imageUploadContainer">
-                        <i class="image"></i>
-                        <div class="imageItem"></div>
-
-                    </label>
-                    <inp
-                            ut id="imageUploadContainer" class="imageUploadContainer" type="file"
-                           accept="image/jpg,image/png,image/jpeg,image/gif">
+                    <div class="user-avatar">
+                        <div class="no-avatar">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="black"
+                                 xmlns="http://www.w3.org/2000/svg" style="fill:#CFD4D7;"
+                                 data-v-bd9f2bcc="" data-v-16c10fa5="">
+                                <circle cx="18" cy="11" r="6" data-v-bd9f2bcc=""></circle>
+                                <path
+                                        d="M8.89065 23.704C10.986 20.7531 14.3809 19 18 19C21.6191 19 25.014 20.7531 27.1094 23.704L27.3942 24.1052C29.7451 27.416 27.3779 32 23.3174 32H12.6826C8.6221 32 6.25494 27.416 8.60575 24.1052L8.89065 23.704Z"
+                                        data-v-bd9f2bcc=""></path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
                 <div class="userInfoContainer">
                     <div class="userName">
@@ -151,7 +153,7 @@
                         닉네임 변경
                     </div>
                     <div class="editNicknameBody">
-                        <input type="text" class="nicknameBox" placeholder="손성민">
+                        <input type="text" class="nicknameBox">
                         <button class="verifyNickname">
                             중복확인
                         </button>
@@ -272,7 +274,7 @@
                         <div class="phoneNumberContainer">
                             <span>
                                 <div class="phoneNumberInputContainer">
-                                    <input type="text" class="phoneNumberBox" placeholder="010-2666-7407">
+                                    <input type="text" class="phoneNumberBox" placeholder="ex) 01012345678">
                                 </div>
                                 <div class="phoneNumberErrorMessage">
                                     올바른 번호를 입력해주세요.
@@ -289,6 +291,9 @@
     </div>
 </div>
 <footer th:replace="~{main/footer :: footer}"></footer>
-
 </body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="/js/header-footer.js"></script>
+<script src="/js/member/my-page.js"></script>
+
 </html>
