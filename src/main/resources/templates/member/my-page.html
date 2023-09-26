@@ -15,6 +15,16 @@
         @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
     </style>
     <link rel="icon" href="/images/favicon.ico">
+    <script th:inline="javascript">
+        /* 세션 확인 */
+        var sessionValue = [[${session.mySessionAttribute}]];
+        if (sessionValue === null || sessionValue === undefined) {
+            // 세션이 비어있을 때 알림창 표시
+            alert('세션이 비어있습니다. 로그인이 필요합니다.');
+            // 로그인 페이지로 이동
+            window.location.href = '/member/login';
+        }
+    </script>
 </head>
 
 <body>
