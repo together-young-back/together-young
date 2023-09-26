@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 //친구 DTO, 회원 정보와 DTO
-public class FriendDTO {
+public class FriendVO {
 //    친구 테이블 ID
     private Long id;
 //    회원 번호

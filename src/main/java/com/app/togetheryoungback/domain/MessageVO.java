@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 //메시지 DTO, 회원 정보 DTO
-public class MessageDTO {
+public class MessageVO {
 //    메시지 ID
     private Long id;
 //    유저 1
