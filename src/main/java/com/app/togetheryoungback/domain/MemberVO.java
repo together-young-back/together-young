@@ -19,5 +19,8 @@ public class MemberVO {
     private String memberCreateTime;
 //    수정 일자
     private String memberUpdateTime;
-
+//    이미지 이름
+    private String memberImgName;
+//    이미지 경로
+    private String memberImgPath;
 }
