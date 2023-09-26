@@ -8,8 +8,9 @@
     <link data-n-head="ssr" rel="preload" as="style"
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="css/meeting-write.css">
-    <link rel="stylesheet" href="/css/friend/friend-list.css">
+    <link rel="stylesheet" type="text/css" href="/css/header-footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/meeting-community/meeting-write-edit.css">
+    <link rel="icon" href="/images/favicon.ico">
     <style>
         @import url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css);
         @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
@@ -195,9 +196,9 @@
                                 </div>
                             </div>
                             <div class="flex-col">
-                                <div class="date-select-label">종료 시간</div>
+                                <div class="date-select-label">모임 총 예상 시간</div>
                                 <div class="select-each-con">
-                                    <input class="inputs" type="time" id="timePicker2">
+                                    <input class="inputs" type="number" id="meetingDuration">
                                 </div>
                             </div>
                         </div>
@@ -265,7 +266,7 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script type="text/javascript"
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a8f30a1b4987602002ff92addf5150bb&libraries=services"></script>
-<script src="/js/header-footer.js"></script>
+<script src="/js/meeting-header.js"></script>
 <script src="/js/form.js"></script>
 <script src="/js/map.js"></script>
 

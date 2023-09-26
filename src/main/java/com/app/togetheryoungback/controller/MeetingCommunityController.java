@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MeetingCommunityController {
 
     // 모임 게시판으로 이동
-    @GetMapping("community")
+    @GetMapping("posts")
     public void goToMeetingCommunityForm(){;}
 
     // 모임 게시글 상세보기로 이동

@@ -512,6 +512,9 @@ hr {
     margin-left: 4px;
 }
 
+.first-menu {
+    display: flex;
+}
 
 @media (max-width: 1000px) {
     footer {

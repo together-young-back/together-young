@@ -288,8 +288,6 @@ hr {
 .main-container {
     min-height: calc(100vh - 140px);
     width: 100%;
-    height: 100%;
-    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     margin-top: 114px;
@@ -680,6 +678,10 @@ hr {
     border-radius: 100%;
     background-color: #2A7DE1;
     position: fixed;
+}
+
+.second-menu {
+    display: flex;
 }
 
 
