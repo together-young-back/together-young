@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 //일반 게시글 DTO, 일반 게시글 북마크 & 게시글 카테고리 & 일반 게시글 댓글 DTO
-public class GeneralPostsDTO {
+public class GeneralPostVO {
 //    일반 게시글 번호
     private Long id;
 //    회원 번호
     private Long memberId;
-//    카테고리 번호
-    private Long categoryId;
+//    카테고리
+    private Long generalPostCategory;
 //    게시글 제목
     private String generalPostTitle;
 //    게시글 내용

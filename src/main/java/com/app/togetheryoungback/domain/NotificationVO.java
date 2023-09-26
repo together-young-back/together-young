@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 //알림 테이블, 회원 정보 DTO
-public class NotificationDTO {
+public class NotificationVO {
 //    알림 번호
     private Long id;
 //    회원 번호
