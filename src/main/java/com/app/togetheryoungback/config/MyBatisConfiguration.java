@@ -13,10 +13,10 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 import java.io.IOException;
 
+
 @Configuration
 @RequiredArgsConstructor
 public class MyBatisConfiguration {
-
     //    resources까지의 경로를 매핑하기 위해서 ApplicationContext객체 주입
     private final ApplicationContext applicationContext;
 
@@ -50,3 +50,4 @@ public class MyBatisConfiguration {
         return null;
     }
 }
+

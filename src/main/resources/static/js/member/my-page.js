@@ -187,6 +187,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // 9. 휴대폰 번호 유효성 검사
+  saveContactInfo.addEventListener("click", (e) => {
+    console.log(phoneNumberBox.value);
+    if(phoneNumberBox.value.length < 11){
+      phoneNumberErrorMessage.style.display = "block";
+      saveContactInfo.style.backgroundColor = "#d4e5f9";
+    } else {
+      phoneNumberErrorMessage.style.display = "none";
+      saveContactInfo.style.backgroundColor = "#2a7de1";
+    }
+  });
+
   document.addEventListener("click", (e) => {
     console.log(e.target);
   });
