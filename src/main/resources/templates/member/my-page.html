@@ -15,9 +15,11 @@
         @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
     </style>
     <link rel="icon" href="/images/favicon.ico">
+
+    <!--세션 확인 스크립트-->
     <script th:inline="javascript">
         /* 세션 확인 */
-        var sessionValue = [[${session.mySessionAttribute}]];
+        var sessionValue = [[${session.getAttribute}]];
         if (sessionValue === null || sessionValue === undefined) {
             // 세션이 비어있을 때 알림창 표시
             alert('세션이 비어있습니다. 로그인이 필요합니다.');
@@ -48,11 +50,9 @@
                     </div>
                 </div>
                 <div class="userInfoContainer">
-                    <div class="userName">
-                        손성민
-                    </div>
+                    <div class="userName" th:text="${session.member.memberNickname}"></div>
                     <div class="userEmailContainer">
-                        <div class="userEmail">alexzzanga7407@gmail.com</div>
+                        <div class="userEmail" th:text="${session.member.memberEmail}"></div>
                         <div class="socialIconContainer">
                             <img class="socialIcon" src="../../static/images/kakaoIcon.svg" alt="" width="8" height="8">
                         </div>
@@ -132,9 +132,7 @@
                             <input id="imageUploadContainer" class="imageUploadContainer" type="file"
                                    accept="image/jpg,image/png,image/jpeg,image/gif">
                         </div>
-                        <div class="userName">
-                            손성민
-                        </div>
+                        <div class="userName" th:text="${session.member.memberNickname}"></div>
                     </div>
                     <div class="serviceInformationContainer">
                         <div class="numPostContainer">
@@ -162,7 +160,7 @@
                         닉네임 변경
                     </div>
                     <div class="editNicknameBody">
-                        <input type="text" class="nicknameBox">
+                        <input type="text" class="nicknameBox" th:value="${session.member.memberNickname}">
                         <button class="verifyNickname">
                             중복확인
                         </button>
@@ -283,7 +281,8 @@
                         <div class="phoneNumberContainer">
                             <span>
                                 <div class="phoneNumberInputContainer">
-                                    <input type="text" class="phoneNumberBox" placeholder="ex) 01012345678">
+                                   <input type="text" class="phoneNumberBox" th:value="${session.member.memberTel}"
+                                          placeholder="ex) 01012345678">
                                 </div>
                                 <div class="phoneNumberErrorMessage">
                                     올바른 번호를 입력해주세요.
