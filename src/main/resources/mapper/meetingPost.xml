@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.togetheryoungback.mapper.MeetingPostsMapper">
+    <!--  모임 게시글 작성  -->
+    <insert id="insert">
+        INSERT INTO TBL_METTING_POST
+        VALUES (SEQ_MEETING_POST.NEXTVAL, #{id}, #{memberId}, #{meetingPostCategory}, #{meetingPostTitle}, #{meetingPostContent})
+   </insert>
+
+    <!--  모임 게시글 수정 -->
+    <update id="update">
+        UPDATE TBL_MEETING_POST
+        SET MEETING_POST_CATEGORY = #{meetingPostCategory}, MEETING_POST_TITLE = #{meetingPostTitle}, MEETING_POST_CONTENT = #{meetingPostTitle}
+        WHERE ID = #{id}
+    </update>
+
+    <!--  모임 게시글 목록  -->
+    <select id="selectAll" resultType="meetingPostVO">
+        SELECT MEETING_POST_CATEGORY, MEETING_POST_TITLE, MEETING_POST_CONTENT
+        FROM TBL_MEETING_POST
+    </select>
+
+    <!--  모임 게시글 조회  -->
+    <select id="selectId" resultType="meetingPostVO">
+        SELECT ID, MEMBER_ID, MEETING_POST_CATEGORY, MEETING_POST_TITLE, MEETING_POST_CONTENT
+        FROM TBL_MEETING_POST
+        WHERE MEETING_POST_ID = #{meetingPostId}
+    </select>
+
+    <!--  모임 게시글 삭제  -->
+    <delete id="delete">
+        DELETE FROM TBL_MEETING_POST
+        WHERE ID = #{id}
+    </delete>
+
+</mapper>

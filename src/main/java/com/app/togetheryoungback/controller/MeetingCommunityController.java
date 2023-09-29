@@ -26,4 +26,8 @@ public class MeetingCommunityController {
     @GetMapping("edit")
     public void goToMeetingEditForm(){;}
 
+//    모임게시판 삭제로 이동
+    @GetMapping("delete")
+    public void getDelete(){;}
+
 }
