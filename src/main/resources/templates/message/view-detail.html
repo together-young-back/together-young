@@ -4,24 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>친구 리스트 | 함께해Young</title>
+    <title>메세지 상세보기 | 함께해Young</title>
     <link data-n-head="ssr" rel="preload" as="style"
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="../../static/css/message/message-list.css">
-    <link rel="stylesheet" href="../../static/css/header-footer.css"></link>
+    <link rel="stylesheet" href="/css/message/message-view-detail.css">
+    <link rel="stylesheet" href="/css/header-footer.css"></link>
     <link rel="icon" href="/images/favicon.ico">
     <style>
         @import url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css);
         @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
     </style>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="../../static/js/message/message-list.js"></script>
-    <script src="../../static/js/header-footer.js"></script>
+    <script src="/js/header-footer.js"></script>
 </head>
 
 <body>
-<header th:replace="~{main/header::header}"></header>
+<header th:replace="~{main/header :: header}"></header>
 <div class="wrap">
 <!--        <header style="width: 100%; height: 70px;position: fixed;top: 0;"></header>-->
         <div class="main-container">
@@ -95,89 +94,44 @@
                             <div class="right-box-big">
                                 <div class="right-box-middle">
                                     <div class="right-box-small">
-                                        <div class="profileContentsHeader">
-                                            <div class="profileContentsTitle">
-                                                <div class="personalInfoSetting">
-                                                    메세지 보관함
+                                        <div class="right-box-friend-box">
+                                            <div class="right-box-friend"
+                                                 style="background-color: rgb(252,252,252); padding: 4px 0px">
+                                                <div class="right-box-name">
+                                                    <div class="nickname">삼장법사</div>
+                                                    <div class="date">2023.01.02</div>
                                                 </div>
+                                            </div>
+                                            <table class="right-box-friend title">
+                                                <td class="label">
+                                                    제목
+                                                </td>
+                                                <td class="value">
+                                                    도를 믿으시나요? 당신 곁에 신이 있습니다.
+                                                </td>
+                                            </table>
+                                            <table class="right-box-friend detail">
+                                                <td class="label detail">
+                                                    내용
+                                                </td>
+                                                <td class="value detail">
+                                                    관상이 좋아보이네. 이번 기회에 저희 교를 믿으시면서 그 느낌 그대로 그 행복 영원토록 지니고 삶을 산다면 좋겠습니다. 답장을 주거든 전화번호를 남겨줄 터이니 관심이 있거든 답을 주시게나.
+                                                </td>
+                                            </table>
+                                            <div class="right-box-friend command"
+                                                 style="background-color: rgb(252,252,252); padding: 4px 0px">
+                                                <button class="send-btn">
+                                                    <div class="enter-button-icon"></div> 답장
+                                                    <div class="enter-button-icon"></div>
+                                                </button>
                                                 <button class="delete-btn">
                                                     <div class="enter-button-icon"></div> 삭제
                                                     <div class="enter-button-icon"></div>
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="right-box-friend-box">
-                                            <div class="right-box-friend"
-                                                style="background-color: rgb(252,252,252); padding: 4px 0px">
-                                                <div class="right-box-profile">
-                                                    <div class="right-box-profile-box">
-                                                        <input type="checkbox" id="idx" name="idx" onclick="toggleCheck('fmNoteData','idx',this)" onfocus="this.blur()">
-                                                    </div>
-                                                </div>
-                                                <div class="right-box-name">
-                                                    <div class="title">제목</div>
-                                                    <div class="nickname">보낸사람</div>
-                                                    <div class="date">날짜</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="right-box-friend-box">
-                                            <div class="right-box-friend"
-                                                 style="background-color: rgb(252,252,252); padding: 4px 0px">
-                                                <div class="right-box-profile">
-                                                    <div class="right-box-profile-box">
-                                                        <input type="checkbox" id="idx_1" name="idx_1" onclick="toggleCheck('fmNoteData','idx_1',this)" onfocus="this.blur()">
-                                                    </div>
-                                                </div>
-                                                <div class="right-box-name">
-                                                    <div class="message-title">안녕하세요. 질문 있어서 보냅니다.</div>
-                                                    <div class="message-nickname">손오공</div>
-                                                    <div class="message-date">2023.01.03</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="right-box-friend-box">
-                                            <div class="right-box-friend"
-                                                 style="background-color: rgb(252,252,252); padding: 4px 0px">
-                                                <div class="right-box-profile">
-                                                    <div class="right-box-profile-box">
-                                                        <input type="checkbox" id="idx_2" name="idx_2" onclick="toggleCheck('fmNoteData','idx_2',this)" onfocus="this.blur()">
-                                                    </div>
-                                                </div>
-                                                <div class="right-box-name">
-                                                    <div class="message-title">도를 믿으시나요? 당신 곁에 신이 있습니다.</div>
-                                                    <div class="message-nickname">삼장법사</div>
-                                                    <div class="message-date">2023.01.02</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="right-box-friend-box">
-                                            <div class="right-box-friend"
-                                                 style="background-color: rgb(252,252,252); padding: 4px 0px">
-                                                <div class="right-box-profile">
-                                                    <div class="right-box-profile-box">
-                                                        <input type="checkbox" id="idx_3" name="idx_3" onclick="toggleCheck('fmNoteData','idx_3',this)" onfocus="this.blur()">
-                                                    </div>
-                                                </div>
-                                                <div class="right-box-name">
-                                                    <div class="message-title">식당은 구내식당으로 예약해놓았습니다.</div>
-                                                    <div class="message-nickname">저팔계</div>
-                                                    <div class="message-date">2023.01.01</div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="page-btn-wrap">
-                                <div class="btn-grid">&lt</div>
-                                <a href="#" class="btn-grid change-page">이전</a>
-                                <a href="#" class="btn-grid change-page number">1</a>
-                                <a href="#" class="btn-grid change-page">다음</a>
-                                <div class="btn-grid">&gt</div>
                             </div>
                         </div>
                     </div>
