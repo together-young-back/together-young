@@ -9,10 +9,12 @@
         <typeAlias type="com.app.togetheryoungback.domain.MeetingBookmarkVO" alias="meetingBookmarkVO" />
         <typeAlias type="com.app.togetheryoungback.domain.MeetingReplyVO" alias="meetingReplyVO" />
         <typeAlias type="com.app.togetheryoungback.domain.MeetingPostVO" alias="meetingPostVO" />
-        <typeAlias type="com.app.togetheryoungback.domain.MemberVO" alias="memberVO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MemberVO" alias="memberVO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MessageVO" alias="messageVO" />
         <typeAlias type="com.app.togetheryoungback.domain.ReceivedMessageVO" alias="receivedMessageVO" />
         <typeAlias type="com.app.togetheryoungback.domain.SentMessageVO" alias="sentMessageVO" />
         <typeAlias type="com.app.togetheryoungback.domain.NotificationVO" alias="notificationVO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MessageSentDTO" alias="messageSentDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MessageReceivedDTO" alias="messageReceivedDTO" />
     </typeAliases>
 </configuration>

@@ -3,6 +3,8 @@ package com.app.togetheryoungback.service;
 import com.app.togetheryoungback.domain.MemberVO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -11,7 +13,8 @@ import java.net.URL;
 import java.util.Optional;
 
 @Service
-
+@Slf4j
+@RequiredArgsConstructor
 public class KaKaoService {
     public String getKaKaoAccessToken(String code){
         String accessToken = null;
