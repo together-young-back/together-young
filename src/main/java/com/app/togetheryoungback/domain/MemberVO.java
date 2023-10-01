@@ -4,10 +4,10 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Component
 @Data
-//    회원 정보 VO
 public class MemberVO implements Serializable {
 //    회원 번호
     private Long id;
@@ -18,9 +18,9 @@ public class MemberVO implements Serializable {
 //    회원 닉네임
     private String memberNickname;
 //    가입 일자
-    private String memberCreateTime;
+    private Timestamp memberCreateTime;
 //    수정 일자
-    private String memberUpdateTime;
+    private Timestamp memberUpdateTime;
 //    이미지 이름
     private String memberImgName;
 //    이미지 경로

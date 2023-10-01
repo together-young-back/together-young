@@ -18,6 +18,7 @@ public class MemberMapperTest {
     @Test
     public void insertTest() {
         MemberVO memberVO = new MemberVO();
+
         memberVO.setMemberEmail("test1234@gmail.com");
         memberVO.setMemberNickname("테스트");
         memberVO.setMemberKakaoProfileUrl("test");
@@ -31,7 +32,4 @@ public class MemberMapperTest {
 
         memberMapper.selectByEmail(email).map(MemberVO::toString).ifPresent(log::info);
     }
-
-    @Test
-    public void selectAllTest(){memberMapper.selectAll().stream().map(MemberVO::toString).forEach(log::info);}
 }
