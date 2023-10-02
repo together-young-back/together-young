@@ -22,37 +22,30 @@
 
     <!--  받은 메시지 목록  -->
     <select id="selectAllReceived" resultType="messageReceivedDTO">
---         SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CREATE_TIME
---         FROM TBL_MEMBER
---             LEFT JOIN (
---             SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CREATE_TIME
---             FROM TBL_MESSAGE MES
---                      LEFT JOIN TBL_MEMBER MEM
---                                ON MEM.ID = MES.MEMBER_RECEIVED_ID
---             WHERE MES.MEMBER_RECEIVED_ID = #{id}
---             SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_TITLE, MESSAGE_CREATE_TIME
-            SELECT MESSAGE_TITLE, MEMBER_RECEIVED_ID, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
-            FROM TBL_MESSAGE MES
-                     LEFT JOIN TBL_RECEIVED_MESSAGE RM
-                               ON RM.MESSAGE_ID = MES.ID
-            WHERE MES.MEMBER_RECEIVED_ID = #{id}
+        SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
+        FROM TBL_MESSAGE MES
+                 JOIN TBL_RECEIVED_MESSAGE RM
+                      ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{id}
+                 JOIN TBL_MEMBER MEM
+                      ON MEM.ID = MES.MEMBER_RECEIVED_ID
     </select>
 
     <!--  보낸 메시지 목록  -->
     <select id="selectAllSent" resultType="messageSentDTO">
-        SELECT MESSAGE_TITLE, MEMBER_SENT_ID, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
+        SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
         FROM TBL_MESSAGE MES
-                 LEFT JOIN TBL_SENT_MESSAGE SM
-                           ON SM.MESSAGE_ID = MES.ID
-        WHERE MES.MEMBER_SENT_ID = #{id}
+                 JOIN TBL_SENT_MESSAGE SM
+                      ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_SENT_ID = #{id}
+                 JOIN TBL_MEMBER MEM
+                      ON MEM.ID = MES.MEMBER_SENT_ID
+
     </select>
 
     <!--  메시지 상세보기  -->
-<!--    <select id="select" resultType="MessageVO">-->
-<!--        SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT-->
-<!--        FROM TBL_MEMBER MEM-->
-<!--                 LEFT JOIN TBL_RECEIVED_MESSAGE RM-->
-<!--                           ON RM.MESSAGE_ID = MEM.ID-->
-<!--        WHERE MEM.ID =-->
-<!--    </select>-->
+    <select id="select" resultType="MessageVO">
+        SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT
+        FROM TBL_MEMBER MEM
+                 JOIN TBL_MESSAGE MES
+                      ON MEM.ID = MES.ID AND MES.ID = #{id}
+    </select>
 </mapper>
