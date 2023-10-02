@@ -32,4 +32,12 @@ public class MemberMapperTest {
 
         memberMapper.selectByEmail(email).map(MemberVO::toString).ifPresent(log::info);
     }
+
+    @Test
+    public void updateTelTest(){
+        String phoneTel = "01036316448";
+        Long id = 142L;
+
+        memberMapper.updateMemberTel(phoneTel, id);
+    }
 }

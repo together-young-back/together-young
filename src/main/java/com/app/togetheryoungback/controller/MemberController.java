@@ -27,26 +27,21 @@ public class MemberController {
 
     // 마이페이지로 이동
     @GetMapping("my-page")
-    public void goToMyPage(HttpSession session) {
-        MemberVO memberVO = new MemberVO();
-        memberVO.setId(82L);
-        memberVO.setMemberEmail("cnh1234578@gmail.com");
-        memberVO.setMemberNickname("yty");
-        memberVO.setMemberTel("01036316448");
-        memberVO.setMemberKakaoProfileUrl("https://cdn.comento.kr/images/user/profile/pf_LZYbaE58eX.JPG?s=60x60");
-
-        session.setAttribute("member", memberVO);
-    }
+    public void goToMyPage(MemberVO memberVO, HttpSession session) {;}
 
 
 
-    @PostMapping("my-page")
+    @PostMapping("update-tel")
     public RedirectView updatePhoneNumber(@RequestParam("memberTel") String memberTel, HttpSession session) {
         MemberVO memberVO = (MemberVO) session.getAttribute("member");
+        log.info(String.valueOf(memberVO));
+        log.info(memberTel);
 
         Long id = memberVO.getId();
+        log.info("id: " + id);
+
         memberService.saveTel(memberTel, id);
-        return new RedirectView("member/my-page");
+        return new RedirectView("/member/my-page");
     }
 
     // 북마크로 이동
@@ -61,4 +56,9 @@ public class MemberController {
         ;
     }
 
+    @GetMapping("logout")
+    public RedirectView logout(HttpSession session){
+        session.invalidate();
+        return new RedirectView("/member/login");
+    }
 }
