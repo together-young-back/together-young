@@ -19,9 +19,9 @@ public class MemberMapperTest {
     public void insertTest() {
         MemberVO memberVO = new MemberVO();
 
-        memberVO.setMemberEmail("test1234@gmail.com");
-        memberVO.setMemberNickname("테스트");
-        memberVO.setMemberKakaoProfileUrl("test");
+        memberVO.setMemberEmail("test1234578@gmail.com");
+        memberVO.setMemberNickname("테스트1313");
+        memberVO.setMemberKakaoProfileUrl("test2333");
 
         memberMapper.insert(memberVO);
     }

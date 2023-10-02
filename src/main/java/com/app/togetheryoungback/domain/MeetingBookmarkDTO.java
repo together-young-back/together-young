@@ -5,14 +5,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class GeneralBookmarkDTO {
-    //    일반 북마크 번호
+public class MeetingBookmarkDTO {
+    //    모임 북마크 번호
     private Long id;
-    //    일반 게시글 번호
     //    회원 번호
     private Long memberId;
-    //    일반 게시글 번호
-    private Long generalPostId;
+    //    모임 게시글 번호
+    private Long meetingPostId;
     //    카테고리
     private Long meetingPostCategory;
     //    모임 지역

@@ -38,7 +38,7 @@
                     <li class="header-nav-menu">
                         <a href="/meeting-community/posts" class="to-second">모임 게시판</a>
                     </li>
-                    <li class="header-nav-menu" th:if="${session.member != null}">
+                    <li class="header-nav-menu" th:if="${session.member == null}">
                         <a href="/member/my-schedule" class="to-third">나의 일정</a>
                     </li>
                 </ul>
@@ -68,7 +68,7 @@
                         </svg>
                     </div>
                 </div>
-                <div class="header-login" th:if="${session.member == null}">
+                <div class="header-login" th:if="${session.member == null || session.member == 'undefined'}">
                     <a href="/member/login">
                         <button class="header-login-btn">
                             <div>가입/로그인</div>
@@ -121,7 +121,7 @@
                             </button>
                             <div class="header-user-info-popover-wrap">
                                 <div class="header-user-info-popover-container">
-                                    <a href="#">
+                                    <a href="/member/my-page">
                                         <div class="header-user-info-container">
                                             <div class="header-detailed-user-avatar">
                                                 <div class="no-avatar">
@@ -141,20 +141,16 @@
                                                 <div class="header-detailed-user-id">sample-user-name</div>
                                                 <div class="header-detailed-user-more">프로필 보기</div>
                                             </div>
+
                                         </div>
                                     </a>
                                     <hr class="header-popover-devider">
-                                    <a href="#">
+                                    <a href="/member/my-schedule">
                                         <div class="header-popover-content">
                                             <div class="header-popover-content-font">나의 일정</div>
                                         </div>
                                     </a>
-                                    <a href="#">
-                                        <div class="header-popover-content">
-                                            <div class="header-popover-content-font">나의 게시물</div>
-                                        </div>
-                                    </a>
-                                    <a href="#">
+                                    <a href="/friend/list">
                                         <div class="header-popover-content">
                                             <div class="header-popover-content-font">친구 목록</div>
                                         </div>
