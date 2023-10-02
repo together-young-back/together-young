@@ -1,7 +1,6 @@
 package com.app.togetheryoungback.service;
 
 import com.app.togetheryoungback.dao.MessageDAO;
-import com.app.togetheryoungback.domain.MemberVO;
 import com.app.togetheryoungback.domain.MessageReceivedDTO;
 import com.app.togetheryoungback.domain.MessageSentDTO;
 import com.app.togetheryoungback.domain.MessageVO;
@@ -22,9 +21,9 @@ public class MessageServiceImpl implements MessageService {
     public void write(MessageVO messageVO) {
         //  메시지 작성
         messageDAO.send(messageVO);
-        //    메시지 작성시 보낸 메시지함 등록 서비스 실행
+        //  메시지 작성시 받은 메시지함 등록 서비스 실행
         setReceived(messageVO.getId());
-        //    메시지 작성시 보낸 메시지함 등록 서비스 실행
+        //  메시지 작성시 보낸 메시지함 등록 서비스 실행
         setSent(messageVO.getId());
     }
 
@@ -42,14 +41,24 @@ public class MessageServiceImpl implements MessageService {
 
     //    받은 메시지 목록
     @Override
-    public List<MessageReceivedDTO> getMessagesReceived() {
-        return messageDAO.findAllReceived();
+    public List<MessageReceivedDTO> getMessagesReceived(Long id) {
+        return messageDAO.findAllReceived(id);
     }
 
     //    보낸 메시지 목록
     @Override
-    public List<MessageSentDTO> getMessagesSent() {
-        return messageDAO.findAllSent();
+    public List<MessageSentDTO> getMessagesSent(Long id) {
+        return messageDAO.findAllSent(id);
     }
 
+    //    메시지 상세보기
+    @Override
+    public MessageVO getMessage(Long messageId) {
+        return messageDAO.findMessage(messageId);
+    }
+
+    @Override
+    public void delete(Long messageId) {
+        messageDAO.deleteMessage(messageId);
+    }
 }
