@@ -14,7 +14,12 @@
         <typeAlias type="com.app.togetheryoungback.domain.ReceivedMessageVO" alias="receivedMessageVO" />
         <typeAlias type="com.app.togetheryoungback.domain.SentMessageVO" alias="sentMessageVO" />
         <typeAlias type="com.app.togetheryoungback.domain.NotificationVO" alias="notificationVO" />
+<<<<<<< Updated upstream
         <typeAlias type="com.app.togetheryoungback.domain.MessageSentDTO" alias="messageSentDTO" />
         <typeAlias type="com.app.togetheryoungback.domain.MessageReceivedDTO" alias="messageReceivedDTO" />
+=======
+        <typeAlias type="com.app.togetheryoungback.domain.MessageReceivedDTO" alias="messageReceivedDTO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.MessageSentDTO" alias="messageSentDTO"/>
+>>>>>>> Stashed changes
     </typeAliases>
 </configuration>

@@ -22,6 +22,7 @@
 
     <!--  받은 메시지 목록  -->
     <select id="selectAllReceived" resultType="messageReceivedDTO">
+<<<<<<< Updated upstream
 --         SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CREATE_TIME
 --         FROM TBL_MEMBER
 --             LEFT JOIN (
@@ -36,14 +37,28 @@
                      LEFT JOIN TBL_RECEIVED_MESSAGE RM
                                ON RM.MESSAGE_ID = MES.ID
             WHERE MES.MEMBER_RECEIVED_ID = #{id}
+=======
+        SELECT MESSAGE_TITLE, MEMBER_SENT_ID, MESSAGE_TITLE, MESSAGE_CREATE_TIME
+        FROM TBL_RECEIVED_MESSAGE RM
+                 LEFT JOIN TBL_MESSAGE MES
+                           ON RM.MESSAGE_ID = MES.ID
+        WHERE MES.MEMBER_RECEIVED_ID = #{id}
+>>>>>>> Stashed changes
     </select>
 
-    <!--  보낸 메시지 목록  -->
+<!--    보낸 메시지 목록-->
     <select id="selectAllSent" resultType="messageSentDTO">
+<<<<<<< Updated upstream
         SELECT MESSAGE_TITLE, MEMBER_SENT_ID, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
         FROM TBL_MESSAGE MES
                  LEFT JOIN TBL_SENT_MESSAGE SM
                            ON SM.MESSAGE_ID = MES.ID
+=======
+        SELECT MESSAGE_TITLE, MEMBER_RECEIVED_ID, MESSAGE_TITLE, MESSAGE_CREATE_TIME
+        FROM TBL_RECEIVED_MESSAGE RM
+                 LEFT JOIN TBL_MESSAGE MES
+                           ON RM.MESSAGE_ID = MES.ID
+>>>>>>> Stashed changes
         WHERE MES.MEMBER_SENT_ID = #{id}
     </select>
 

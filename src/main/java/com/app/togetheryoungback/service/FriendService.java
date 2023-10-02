@@ -1,13 +1,10 @@
-package com.app.togetheryoungback.mapper;
+package com.app.togetheryoungback.service;
 
 import com.app.togetheryoungback.domain.FriendVO;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;
 
-@Mapper
-//친구 Mapper
-public interface FriendMapper {
+public interface FriendService {
 //    친구 추가
     public void insert(FriendVO friendVO);
 
@@ -15,5 +12,5 @@ public interface FriendMapper {
     public void delete(Long id);
 
 //    친구 검색
-    public Optional<FriendVO> select(Long id);
+    public Optional<FriendVO> seslect(Long id);
 }

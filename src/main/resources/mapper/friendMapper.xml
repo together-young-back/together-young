@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.togetheryoungback.mapper.FriendMapper">
+
+<!-- 친구 추가   -->
+    <insert id="insert">
+        INSERT INTO TBL_FRIEND
+        <choose>
+            <when test="friendRequestUpdatedTime == null">
+                VALUES(SEQ_FRIEND.NEXTVAL, #{id}, #{memberId}, #{friendId}, TO_DATE(#{friendRequestStatus},'YYYY-MM-DD HH:MISS'), NULL, #{friendDescription} )
+            </when>
+            <otherwise>
+                VALUES(SEQ_FRIEND.NEXTVAL, #{id}, #{memberId}, #{friendId}, TO_DATE(#{friendRequestStatus},'YYYY-MM-DD HH:MISS'), TO_DATE(#{friendRequestUpdatedTime},'YYYY-MM-DD HH:MISS'), #{friendDescription} )
+            </otherwise>
+        </choose>
+    </insert>
+
+<!-- 친구 삭제   -->
+    <delete id="delete">
+        DELETE
+        FROM TBL_FRIEND
+        WHERE ID = #{id}
+    </delete>
+
+<!-- 친구 검색   -->
+    <select id="select" resultType="FriendVO">
+        SELECT (ID, MEMBER_ID, FRIEND_ID, FRIEND_DESCRIPTION)
+        FROM TBL_FRIEND
+        WHERE ID = #{id}
+    </select>
+
+</mapper>

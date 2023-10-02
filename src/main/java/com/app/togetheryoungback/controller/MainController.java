@@ -15,4 +15,11 @@ public class MainController {
     public String goToMainForm() {
         return "/main/main";
     }
+
+    @GetMapping("/main/main")
+    public void goToMainPage(){;}
+
+    //  전체 조회수 상위 중 일반 게시글 가지고 오기 (미완성)
+
+    //  전체 조회수 상위 중 모임 게시글 가지고 오기 (미완성)
 }

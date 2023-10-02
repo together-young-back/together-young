@@ -32,4 +32,13 @@ public class MemberMapperTest {
 
         memberMapper.selectByEmail(email).map(MemberVO::toString).ifPresent(log::info);
     }
+<<<<<<< Updated upstream
+=======
+
+    @Test
+    public void selectAllTest(){memberMapper.selectAll().stream().map(MemberVO::toString).forEach(log::info);}
+
+
+
+>>>>>>> Stashed changes
 }

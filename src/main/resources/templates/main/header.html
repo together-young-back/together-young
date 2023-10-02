@@ -22,7 +22,11 @@
         <div class="header-nav-container">
             <div class="header-nav-container-left">
                 <div class="header-logo">
+<<<<<<< Updated upstream
                     <a href="/">
+=======
+                    <a th:href="@{/main/main}">
+>>>>>>> Stashed changes
                         <svg xmlns="http://www.w3.org/2000/svg" width="150" height="40" viewBox="0 0 101 16"
                              style="display: flex; align-items: center">
                             <text id="함께해YO" class="cls-1" transform="translate(50.553 13.035) scale(0.325)">
@@ -33,6 +37,7 @@
                 </div>
                 <ul class="header-nav">
                     <li class="header-nav-menu">
+<<<<<<< Updated upstream
                         <a href="/general-community/posts" class="to-first">일반 게시판</a>
                     </li>
                     <li class="header-nav-menu">
@@ -40,6 +45,15 @@
                     </li>
                     <li class="header-nav-menu" th:if="${session.member != null}">
                         <a href="/member/my-schedule" class="to-third">나의 일정</a>
+=======
+                        <a th:href="@{/general-community/posts}" class="to-first">일반 게시판</a>
+                    </li>
+                    <li class="header-nav-menu">
+                        <a th:href="@{/meeting-community/posts}" class="to-second">모임 게시판</a>
+                    </li>
+                    <li class="header-nav-menu">
+                        <a th:href="@{/member/my-schedule}" class="to-third">나의 일정</a>
+>>>>>>> Stashed changes
                     </li>
                 </ul>
             </div>
@@ -68,6 +82,7 @@
                         </svg>
                     </div>
                 </div>
+<<<<<<< Updated upstream
                 <div class="header-login" th:if="${session.member == null}">
                     <a href="/member/login">
                         <button class="header-login-btn">
@@ -89,6 +104,27 @@
                                     </svg>
                                 </button>
                             </a>
+=======
+                <div class="header-login">
+                    <a href="#">
+                        <button class="header-login-btn">
+                            <a th:href="@{/member/login}">가입/로그인</a>
+                        </button>
+                    </a>
+                </div>
+                <div class="header-icons-division">
+                    <ul>
+                        <li class="header-icon">
+                            <button th:onclick="|location.href='@{/member/bookmark}'|" class="icons-btn">
+                                <svg data-v-bd9f2bcc="" data-v-3035bc76="" width="24" height="24"
+                                     viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg"
+                                     class="c-application c-icon" style="fill: rgb(173, 179, 184);">
+                                    <path data-v-bd9f2bcc="" fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M18 5H6V18.1643L10.3939 15.3791C11.3744 14.7575 12.6256 14.7575 13.6061 15.3791L18 18.1643V5ZM6 3C4.89543 3 4 3.89543 4 5V19.9821C4 20.7704 4.86958 21.2488 5.53538 20.8267L11.4646 17.0683C11.7915 16.8611 12.2085 16.8611 12.5354 17.0683L18.4646 20.8267C19.1304 21.2488 20 20.7704 20 19.9821V5C20 3.89543 19.1046 3 18 3H6Z">
+                                    </path>
+                                </svg>
+                            </button>
+>>>>>>> Stashed changes
                         </li>
                         <li class="header-icon">
                             <button class="icons-btn">
@@ -121,7 +157,11 @@
                             </button>
                             <div class="header-user-info-popover-wrap">
                                 <div class="header-user-info-popover-container">
+<<<<<<< Updated upstream
                                     <a href="#">
+=======
+                                    <a th:href="@{/member/my-page}">
+>>>>>>> Stashed changes
                                         <div class="header-user-info-container">
                                             <div class="header-detailed-user-avatar">
                                                 <div class="no-avatar">
@@ -144,23 +184,39 @@
                                         </div>
                                     </a>
                                     <hr class="header-popover-devider">
+<<<<<<< Updated upstream
                                     <a href="#">
+=======
+                                    <a th:href="@{/member/my-schedule}">
+>>>>>>> Stashed changes
                                         <div class="header-popover-content">
                                             <div class="header-popover-content-font">나의 일정</div>
                                         </div>
                                     </a>
+<<<<<<< Updated upstream
                                     <a href="#">
+=======
+                                    <a th:href="@{/member/my-schedule}">
+>>>>>>> Stashed changes
                                         <div class="header-popover-content">
                                             <div class="header-popover-content-font">나의 게시물</div>
                                         </div>
                                     </a>
+<<<<<<< Updated upstream
                                     <a href="#">
+=======
+                                    <a th:href="@{/friend/list}">
+>>>>>>> Stashed changes
                                         <div class="header-popover-content">
                                             <div class="header-popover-content-font">친구 목록</div>
                                         </div>
                                     </a>
                                     <hr class="header-popover-devider">
+<<<<<<< Updated upstream
                                     <a href="#">
+=======
+                                    <a th:href="@{/main/main}">
+>>>>>>> Stashed changes
                                         <div class="header-popover-content">
                                             <div class="header-popover-logout-font">로그아웃</div>
                                         </div>
