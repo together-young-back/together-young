@@ -2,19 +2,21 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="com.app.togetheryoungback.domain.FriendVO" alias="friendVO" />
-        <typeAlias type="com.app.togetheryoungback.domain.GeneralBookmarkVO" alias="generalBookmarkVO" />
-        <typeAlias type="com.app.togetheryoungback.domain.GeneralReplyVO" alias="generalReplyVO" />
-        <typeAlias type="com.app.togetheryoungback.domain.GeneralPostVO" alias="generalPostVO" />
-        <typeAlias type="com.app.togetheryoungback.domain.MeetingBookmarkVO" alias="meetingBookmarkVO" />
-        <typeAlias type="com.app.togetheryoungback.domain.MeetingReplyVO" alias="meetingReplyVO" />
-        <typeAlias type="com.app.togetheryoungback.domain.MeetingPostVO" alias="meetingPostVO" />
+        <typeAlias type="com.app.togetheryoungback.domain.FriendVO" alias="friendVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.GeneralBookmarkVO" alias="generalBookmarkVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.GeneralBookmarkDTO" alias="generalBookmarkDTO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.GeneralReplyVO" alias="generalReplyVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.GeneralPostVO" alias="generalPostVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.MeetingBookmarkVO" alias="meetingBookmarkVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.MeetingBookmarkDTO" alias="meetingBookmarkDTO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.MeetingReplyVO" alias="meetingReplyVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.MeetingPostVO" alias="meetingPostVO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MemberVO" alias="memberVO"/>
-        <typeAlias type="com.app.togetheryoungback.domain.MessageVO" alias="messageVO" />
-        <typeAlias type="com.app.togetheryoungback.domain.ReceivedMessageVO" alias="receivedMessageVO" />
-        <typeAlias type="com.app.togetheryoungback.domain.SentMessageVO" alias="sentMessageVO" />
-        <typeAlias type="com.app.togetheryoungback.domain.NotificationVO" alias="notificationVO" />
-        <typeAlias type="com.app.togetheryoungback.domain.MessageSentDTO" alias="messageSentDTO" />
-        <typeAlias type="com.app.togetheryoungback.domain.MessageReceivedDTO" alias="messageReceivedDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.MessageVO" alias="messageVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.ReceivedMessageVO" alias="receivedMessageVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.SentMessageVO" alias="sentMessageVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.NotificationVO" alias="notificationVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.MessageSentDTO" alias="messageSentDTO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.MessageReceivedDTO" alias="messageReceivedDTO"/>
     </typeAliases>
 </configuration>

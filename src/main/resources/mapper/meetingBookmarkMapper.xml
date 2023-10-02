@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.togetheryoungback.mapper.MeetingBookmarkMapper">
+    <!--세션의 id로 일반게시글 북마크 조회-->
+    <select id="selectMeetingPosts" resultType="meetingBookmarkDTO">
+        SELECT B.ID,
+               B.MEMBER_ID,
+               B.MEETING_POST_ID,
+               P.MEETING_POST_CATEGORY,
+               P.MEETING_POST_REGION,
+               P.MEETING_POST_TITLE,
+               P.MEETING_POST_CONTENT,
+               P.MEETING_DATE,
+               P.MEETING_DURATION,
+               P.MEETING_POST_MIN,
+               P.MEETING_POST_MAX,
+               P.MEETING_PLACE,
+               P.MEETING_POST_VIEW_COUNT,
+               P.MEETING_POST_LIKE_COUNT,
+               P.MEETING_POST_BOOKMARK_COUNT
+        FROM TBL_MEETING_BOOKMARK B
+                 JOIN
+             TBL_MEETING_POST P ON B.MEETING_POST_ID = P.ID
+        WHERE B.MEMBER_ID = #{memberId};
+    </select>
+
+</mapper>
