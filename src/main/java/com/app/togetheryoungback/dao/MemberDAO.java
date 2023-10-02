@@ -39,7 +39,7 @@ public class MemberDAO {
 
     //    전화번호 업데이트
     public void saveTel(String memberTel, Long id) {
-        memberMapper.updateMemberTel(memberTel);
+        memberMapper.updateMemberTel(memberTel, id);
     }
 
 //    계정 소프트 딜리트

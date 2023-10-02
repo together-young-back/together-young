@@ -18,16 +18,16 @@
     <link rel="icon" href="/images/favicon.ico">
 
     <!--세션 확인 스크립트-->
-    <!--    <script th:inline="javascript">-->
-    <!--        /* 세션 확인 */-->
-    <!--        var sessionValue = [[${session.getAttribute}]];-->
-    <!--        if (sessionValue === null || sessionValue === undefined) {-->
-    <!--            // 세션이 비어있을 때 알림창 표시-->
-    <!--            alert('세션이 비어있습니다. 로그인이 필요합니다.');-->
-    <!--            // 로그인 페이지로 이동-->
-    <!--            window.location.href = '/member/login';-->
-    <!--        }-->
-    <!--    </script>-->
+    <script th:inline="javascript">
+        /* 세션 확인 */
+        var session = [[${session.member}]];
+        if (session == null) {
+            // 세션이 비어있거나 memberVO 속성이 없을 때 알림창 표시
+            alert('로그인이 필요합니다.');
+            // 로그인 페이지로 이동
+            window.location.href = '/member/login';
+        }
+    </script>
 </head>
 
 <body>
@@ -100,7 +100,7 @@
                         </path>
                         <path data-v-bd9f2bcc="" fill-rule="evenodd" clip-rule="evenodd"
                               d="M20 12C20 11.4477 19.5523 11 19 11H6C5.44771 11 5 11.4477 5 12C5 12.5523 5.44771 13 6 13H19C19.5523 13 20 12.5523 20 12Z">
-                            </path>
+                        </path>
                     </svg>
                 </div>
                 <div class="personalInfoSetting">
@@ -260,11 +260,12 @@
                     각종 알림을 받을 연락처를 입력해주세요.
                 </div>
                 <span>
-                    <form th:action="@{/member/my-page}" method="post" id="phoneNumberForm">
+                    <form th:action="@{/member/update-tel}" method="post" id="phoneNumberForm">
                         <div class="phoneNumberContainer">
                             <span>
                                 <label class="phoneNumberInputContainer">
-                                   <input type="text" name="memberTel" class="phoneNumberBox" th:value="${session.member.memberTel}"
+                                   <input type="text" name="memberTel" class="phoneNumberBox"
+                                          th:value="${session.member.memberTel}"
                                           placeholder="ex) 01012345678" maxlength="11">
                                 </label>
                                 <div class="phoneNumberErrorMessage">

@@ -38,7 +38,7 @@
                     <li class="header-nav-menu">
                         <a href="/meeting-community/posts" class="to-second">모임 게시판</a>
                     </li>
-                    <li class="header-nav-menu" th:if="${session.member == null}">
+                    <li class="header-nav-menu" th:if="${session.member != null}">
                         <a href="/member/my-schedule" class="to-third">나의 일정</a>
                     </li>
                 </ul>
@@ -75,7 +75,7 @@
                         </button>
                     </a>
                 </div>
-                <div class="header-icons-division" th:if="${session.member == null}">
+                <div class="header-icons-division" th:if="${session.member != null}">
                     <ul>
                         <li class="header-icon">
                             <a href="/member/bookmark">
@@ -107,7 +107,8 @@
                         <li class="header-icon">
                             <button class="icons-btn user-profile">
                                 <div class="header-avatar">
-                                    <div class="no-avatar">
+                                    <div class="no-avatar"
+                                         th:if="${session.member.memberImgName == null and session.member.memberKakaoProfileUrl == null}">
                                         <svg data-v-bd9f2bcc="" data-v-16c10fa5="" width="16" height="16"
                                              viewBox="0 0 16 16" fill="black" xmlns="http://www.w3.org/2000/svg"
                                              style="fill: rgb(207, 212, 215);">
@@ -117,6 +118,13 @@
                                             </path>
                                         </svg>
                                     </div>
+                                    <div th:if="${session.member.memberImgName != null}">>
+                                        <img class="profile-img" th:src="${session.member.memberImgName}">
+                                    </div>
+                                    <div th:if="${session.member.memberKakaoProfileUrl != null and session.member.memberImgName == null}">
+                                        <img class="profile-img"
+                                             th:src="${session.member.memberKakaoProfileUrl}">
+                                    </div>
                                 </div>
                             </button>
                             <div class="header-user-info-popover-wrap">
@@ -124,7 +132,8 @@
                                     <a href="/member/my-page">
                                         <div class="header-user-info-container">
                                             <div class="header-detailed-user-avatar">
-                                                <div class="no-avatar">
+                                                <div class="no-avatar"
+                                                     th:if="${session.member.memberImgName == null and session.member.memberKakaoProfileUrl == null}">
                                                     <svg width="24" height="24" viewBox="0 0 36 36" fill="black"
                                                          xmlns="http://www.w3.org/2000/svg" style="fill:#CFD4D7;"
                                                          data-v-bd9f2bcc="" data-v-16c10fa5="">
@@ -136,9 +145,17 @@
                                                         </path>
                                                     </svg>
                                                 </div>
+                                                <div th:if="${session.member.memberImgName != null}">>
+                                                    <img class="profile-img" th:src="${session.member.memberImgName}">
+                                                </div>
+                                                <div th:if="${session.member.memberKakaoProfileUrl != null and session.member.memberImgName == null}">
+                                                    <img class="profile-img"
+                                                         th:src="${session.member.memberKakaoProfileUrl}">
+                                                </div>
                                             </div>
                                             <div class="header-detailed-user-con">
-                                                <div class="header-detailed-user-id">sample-user-name</div>
+                                                <div class="header-detailed-user-id"
+                                                     th:text="${session.member.memberNickname}"></div>
                                                 <div class="header-detailed-user-more">프로필 보기</div>
                                             </div>
 
@@ -156,7 +173,7 @@
                                         </div>
                                     </a>
                                     <hr class="header-popover-devider">
-                                    <a href="#">
+                                    <a href="/member/logout">
                                         <div class="header-popover-content">
                                             <div class="header-popover-logout-font">로그아웃</div>
                                         </div>
