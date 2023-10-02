@@ -3,11 +3,15 @@ $(function () {
   $("#general").click(function () {
     $(this).addClass("active");
     $("#meeting").removeClass("active");
+    $("#generalArticles").css("display", "flex");
+    $("#meetingArticles").css("display", "none");
   });
 
   $("#meeting").click(function () {
     $(this).addClass("active");
-    $("#general").removeClass("active");
+    $("#general").removeClass("active")
+    $("#generalArticles").css("display", "none");
+    $("#meetingArticles").css("display", "flex");
   });
 
   // 모바일 쿼리

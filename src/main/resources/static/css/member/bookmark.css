@@ -324,6 +324,10 @@ hr {
     position: relative;
 }
 
+.menus.active {
+    cursor: default;
+}
+
 .menus:not(.active) {
     color: #adb3b8;
 }
