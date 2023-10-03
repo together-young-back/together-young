@@ -4,5 +4,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 //모임 게시글 댓글 Mapper
-public interface MeetingPostCommentsMapper {
+public interface MeetingReplyMapper {
+    public int selectCountByMemberId(Long memberId);
 }

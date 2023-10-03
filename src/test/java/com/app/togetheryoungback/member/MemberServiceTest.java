@@ -1,7 +1,6 @@
 package com.app.togetheryoungback.member;
 
-import com.app.togetheryoungback.dao.MemberDAO;
-import com.app.togetheryoungback.mapper.MemberMapper;
+import com.app.togetheryoungback.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +8,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-public class MemberDAOTest {
+public class MemberServiceTest {
     @Autowired
-    private MemberDAO memberDAO;
+    private MemberService memberService;
 
     @Test
-    public void updateTelTest(){
-        String tel = "01036316448";
+    public void saveTelTest(){
+        String tel = "01036316412";
         Long id = 142L;
-        memberDAO.saveTel(tel, id);
-    }
 
+        memberService.saveTel(tel, id);
+    }
 }

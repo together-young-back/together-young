@@ -42,6 +42,8 @@ public class MemberDAO {
         memberMapper.updateMemberTel(memberTel, id);
     }
 
-//    계정 소프트 딜리트
-    public void softDeleteAccount(Long id){memberMapper.softDelete(id);}
+    //    계정 소프트 딜리트
+    public void softDeleteAccount(Long id) {
+        memberMapper.softDelete(id);
+    }
 }
