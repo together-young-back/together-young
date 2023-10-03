@@ -31,7 +31,7 @@
 
     <update id="updateMemberTel">
         UPDATE TBL_MEMBER
-        SET MEMBER_TEL = #{memberTel}
+        SET MEMBER_TEL = #{memberTel}, MEMBER_UPDATE_TIME = CURRENT_TIMESTAMP
         WHERE ID = #{id}
     </update>
 

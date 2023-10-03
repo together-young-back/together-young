@@ -9,24 +9,24 @@ import java.sql.Timestamp;
 @Component
 @Data
 public class MemberVO implements Serializable {
-//    회원 번호
+    //    회원 번호
     private Long id;
-//    회원 이메일
+    //    회원 이메일
     private String memberEmail;
-//    회원 전화번호
+    //    회원 전화번호
     private String memberTel;
-//    회원 닉네임
+    //    회원 닉네임
     private String memberNickname;
-//    가입 일자
+    //    가입 일자
     private Timestamp memberCreateTime;
-//    수정 일자
+    //    수정 일자
     private Timestamp memberUpdateTime;
-//    이미지 이름
-    private String memberImgName;
-//    이미지 경로
-    private String memberImgPath;
-//    유저 계정 상태
-    private String memberStatus;
-//    카카오 프로필 사진
+    //    카카오 프로필 사진
     private String memberKakaoProfileUrl;
+    //    이미지 이름
+    private String memberImgName;
+    //    이미지 경로
+    private String memberImgPath;
+    //    유저 계정 상태
+    private String memberStatus;
 }

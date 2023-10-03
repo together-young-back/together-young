@@ -35,7 +35,7 @@ public class MemberMapperTest {
 
     @Test
     public void updateTelTest(){
-        String phoneTel = "01036316448";
+        String phoneTel = "01036316422";
         Long id = 142L;
 
         memberMapper.updateMemberTel(phoneTel, id);
