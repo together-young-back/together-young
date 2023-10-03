@@ -11,7 +11,7 @@ import java.util.Optional;
 public class GeneralPostServiceImpl implements GeneralPostService {
     public final GeneralPostDAO generalPostDAO;
     @Override
-    public Integer bringCountOfGeneralPost(Long memberId) {
+    public int bringCountOfGeneralPost(Long memberId) {
         return generalPostDAO.selectCountByMemberId(memberId);
     }
 }

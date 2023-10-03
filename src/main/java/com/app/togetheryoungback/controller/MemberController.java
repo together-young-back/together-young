@@ -1,8 +1,7 @@
 package com.app.togetheryoungback.controller;
 
 import com.app.togetheryoungback.domain.MemberVO;
-import com.app.togetheryoungback.service.GeneralPostService;
-import com.app.togetheryoungback.service.MemberService;
+import com.app.togetheryoungback.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,6 +21,10 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
     private final MemberService memberService;
     private final GeneralPostService generalPostService;
+    private final MeetingPostService meetingPostService;
+    private final GeneralReplyService generalReplyService;
+    private final MeetingReplyService meetingReplyService;
+    private final ParticipationService participationService;
 
     // 로그인 페이지로 이동
     @GetMapping("login")
@@ -34,10 +37,15 @@ public class MemberController {
     public void goToMyPage(MemberVO memberVO, HttpSession session, Model model) {
         if (session.getAttribute("member") != null) {
             MemberVO sessionMemberVO = (MemberVO) session.getAttribute("member");
-            int postCount = generalPostService.bringCountOfGeneralPost(sessionMemberVO.getId());
+
+            int postCount = generalPostService.bringCountOfGeneralPost(sessionMemberVO.getId()) + meetingPostService.bringCountOfMeetingPost(sessionMemberVO.getId());
             log.info(String.valueOf(postCount));
+            int replyCount = generalReplyService.bringCountOfGeneralReply(sessionMemberVO.getId()) + meetingReplyService.bringCountOfMeetingReply(sessionMemberVO.getId());
+            log.info(String.valueOf(replyCount));
 
             model.addAttribute("postCount", postCount);
+            model.addAttribute("replyCount", replyCount);
+            model.addAttribute("participationCount", participationService.bringCountOfParticipation(sessionMemberVO.getId()));
         }
     }
 
