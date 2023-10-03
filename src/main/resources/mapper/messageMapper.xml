@@ -5,7 +5,7 @@
     <!--  메시지 작성  -->
     <insert id="insert">
         INSERT INTO TBL_MESSAGE
-        VALUES(SEQ_MESSAGE.NEXTVAL, #{memberSentId}, #{memberReceivedId}, #{messageTitle}, #{messageContent}, #{messageCreateTime})
+        VALUES(SEQ_MESSAGE.NEXTVAL, #{memberSentId}, #{memberReceivedId}, #{messageTitle}, #{messageContent}, CURRENT_TIMESTAMP, 0)
     </insert>
 
     <!--  메시지 작성시 받은 메시지함 등록   -->
@@ -21,6 +21,13 @@
     </insert>
 
     <!--  받은 메시지 목록  -->
+    <select id="select" resultType="messageVO">
+        SELECT *
+        FROM TBL_MESSAGE
+        WHERE ID = #{messageId}
+    </select>
+
+    <!--  받은 메시지 목록  -->
     <select id="selectAllReceived" resultType="messageReceivedDTO">
         SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
         FROM TBL_MESSAGE MES
@@ -30,6 +37,20 @@
                       ON MEM.ID = MES.MEMBER_RECEIVED_ID
     </select>
 
+    <!--  받은 메시지 상세보기  -->
+    <select id="selectReceived" resultType="MessageVO">
+        SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT
+        FROM TBL_MEMBER MEM
+                 JOIN TBL_MESSAGE MES
+                      ON MEM.ID = MES.MEMBER_RECEIVED_ID AND MES.ID = #{id}
+    </select>
+
+    <!--  받은 메시지 목록에서 메시지 삭제  -->
+    <delete id="deleteReceived">
+        DELETE FROM TBL_RECEIVED_MESSAGE
+        WHERE MESSAGE_ID = #{messageId}
+    </delete>
+
     <!--  보낸 메시지 목록  -->
     <select id="selectAllSent" resultType="messageSentDTO">
         SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
@@ -38,14 +59,35 @@
                       ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_SENT_ID = #{id}
                  JOIN TBL_MEMBER MEM
                       ON MEM.ID = MES.MEMBER_SENT_ID
-
     </select>
 
-    <!--  메시지 상세보기  -->
-    <select id="select" resultType="MessageVO">
+    <!--  보낸 메시지 상세보기  -->
+    <select id="selectSent" resultType="MessageVO">
         SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT
         FROM TBL_MEMBER MEM
                  JOIN TBL_MESSAGE MES
-                      ON MEM.ID = MES.ID AND MES.ID = #{id}
+                      ON MEM.ID = MES.MEMBER_SENT_ID AND MES.ID = #{id}
     </select>
+
+    <!--  보낸 메시지 목록에서 메시지 삭제  -->
+    <delete id="deleteSent">
+        DELETE FROM TBL_SENT_MESSAGE
+        WHERE MESSAGE_ID = #{messageId}
+    </delete>
+
+    <!--  메시지 삭제  -->
+    <delete id="delete">
+        DELETE FROM TBL_MESSAGE
+        WHERE ID = #{messageId}
+    </delete>
+
+    <!--  메시지 삭제 카운트 증가  -->
+    <update id="update">
+        UPDATE TBL_MESSAGE
+        SET MESSAGE_DELETE_STATUS = CASE
+                                        WHEN MESSAGE_DELETE_STATUS = 0 THEN 1
+                                        ELSE 2
+            END
+    </update>
 </mapper>
+
