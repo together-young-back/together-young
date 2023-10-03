@@ -29,21 +29,48 @@ public class MessageDAO {
         messageMapper.insertSent(messageId);
     }
 
-    //    받은 메시지 목록
-    public List<MessageReceivedDTO> findAllReceived(Long id){
-        return messageMapper.selectAllReceived(id);
+    //    메시지 객체 불러오기
+    public MessageVO selectMessage(Long messageId){
+        return messageMapper.select(messageId);
     }
+
+    //    받은 메시지 목록
+    public List<MessageReceivedDTO> findAllReceived(Long memberId){
+        return messageMapper.selectAllReceived(memberId);
+    }
+
+    //    받은 메시지 상세보기
+    public MessageReceivedDTO findMessageReceived(Long messageId) { return messageMapper.selectReceived(messageId);}
+
+    //    받은 메시지 삭제
+    public void deleteReceivedMessage(Long messageId){
+        messageMapper.deleteReceived(messageId);
+    }
+
 
     //    보낸 메시지 목록
-    public List<MessageSentDTO> findAllSent(Long id){
-        return messageMapper.selectAllSent(id);
+    public List<MessageSentDTO> findAllSent(Long memberId){
+        return messageMapper.selectAllSent(memberId);
     }
 
-    //    메시지 상세보기
-    public MessageVO findMessage(Long messageId) { return messageMapper.select(messageId);}
+    //    보낸 메시지 상세보기
+    public MessageSentDTO findMessageSent(Long messageId) { return messageMapper.selectSent(messageId);}
+
+    //    보낸 메시지 삭제
+    public void deleteSentMessage(Long messageId){
+        messageMapper.deleteSent(messageId);
+    }
+
 
     //    메시지 삭제
     public void deleteMessage(Long messageId){
         messageMapper.delete(messageId);
     }
+
+    //    메시지 삭제 카운트 증가
+    public void updateMessage(Long messageId){
+        messageMapper.update(messageId);
+    }
+
 }
+
