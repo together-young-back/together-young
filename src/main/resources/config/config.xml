@@ -13,6 +13,7 @@
         <typeAlias type="com.app.togetheryoungback.domain.MeetingPostVO" alias="meetingPostVO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MemberVO" alias="memberVO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MessageVO" alias="messageVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.MessageDTO" alias="messageDTO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MessageReceivedVO" alias="receivedMessageVO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MessageSentVO" alias="sentMessageVO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MessageReceivedDTO" alias="messageReceivedDTO"/>

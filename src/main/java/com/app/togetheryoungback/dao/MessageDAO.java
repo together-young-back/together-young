@@ -19,6 +19,16 @@ public class MessageDAO {
         messageMapper.insert(messageVO);
     }
 
+    //    메시지 작성시 닉네임으로 Id 조회
+    public Long findIdByNickname(String memberNickname){
+        return messageMapper.selectIdByNickname(memberNickname);
+    }
+
+    //    방금 작성된 메시지 Id 조회
+    public Long findInsertedMessageId(){
+        return messageMapper.selectInsertedMessageId();
+    }
+
     //    메시지 작성시 받은 메시지함 등록
     public void sendReceived(Long messageId){
         messageMapper.insertReceived(messageId);
@@ -73,4 +83,3 @@ public class MessageDAO {
     }
 
 }
-

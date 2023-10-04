@@ -1,9 +1,6 @@
 package com.app.togetheryoungback.controller;
 
-import com.app.togetheryoungback.domain.MemberVO;
-import com.app.togetheryoungback.domain.MessageReceivedDTO;
-import com.app.togetheryoungback.domain.MessageSentDTO;
-import com.app.togetheryoungback.domain.MessageVO;
+import com.app.togetheryoungback.domain.*;
 import com.app.togetheryoungback.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,12 +18,15 @@ public class MessageController {
 
     // 메시지 작성으로 이동
     @GetMapping("write")
-    public void goToMessageWriteForm(MessageVO messageVO){;}
+    public void goToMessageWriteForm(MessageDTO messageDTO){;}
     // 작성 후 보낸 메시지함으로 이동
     @PostMapping("write")
-    public RedirectView write(MessageVO messageVO, HttpSession session){
-        messageVO.setMemberSentId(((MemberVO)session.getAttribute("member")).getId());
-        messageService.write(messageVO);
+    // RequestParam
+    public RedirectView write(MessageDTO messageDTO, HttpSession session){
+        // 폼 태그로 submit을 통해 DTO에 작성된 정보가 자동으로 채워진 채 넘어옴
+        // session에서 내 id 값만 주입하고 messageService로 DTO 넘겨주기
+        messageDTO.setMemberSentId(((MemberVO)session.getAttribute("member")).getId());
+        messageService.write(messageDTO);
         return new RedirectView("sent");
     }
 
@@ -73,4 +73,3 @@ public class MessageController {
     }
 
 }
-
