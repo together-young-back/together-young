@@ -13,6 +13,12 @@ public interface MessageMapper {
     //    메시지 작성
     public void insert(MessageVO messageVO);
 
+    //    메시지 작성시 닉네임으로 Id 조회
+    public Long selectIdByNickname(String memberNickname);
+
+    //    방금 작성된 메시지 Id 조회
+    public Long selectInsertedMessageId();
+
     //    메시지 작성시 받은 메시지함 등록
     public void insertReceived(Long messageId);
 
@@ -49,4 +55,3 @@ public interface MessageMapper {
     public void update(Long messageId);
 
 }
-

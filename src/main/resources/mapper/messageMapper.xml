@@ -8,6 +8,18 @@
         VALUES(SEQ_MESSAGE.NEXTVAL, #{memberSentId}, #{memberReceivedId}, #{messageTitle}, #{messageContent}, CURRENT_TIMESTAMP, 0)
     </insert>
 
+    <!--  메시지 작성 시 닉네임으로 Id 조회  -->
+    <select id="selectIdByNickname" resultType="long">
+        SELECT ID
+        FROM TBL_MEMBER
+        WHERE MEMBER_NICKNAME = #{memberNickname}
+    </select>
+
+    <!--  방금 작성된 메시지 Id 조회  -->
+    <select id="selectInsertedMessageId" resultType="long">
+        SELECT MAX(ID) FROM TBL_MESSAGE
+    </select>
+
     <!--  메시지 작성시 받은 메시지함 등록   -->
     <insert id="insertReceived">
         INSERT INTO TBL_RECEIVED_MESSAGE
@@ -29,7 +41,7 @@
 
     <!--  받은 메시지 목록  -->
     <select id="selectAllReceived" resultType="messageReceivedDTO">
-        SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
+        SELECT MESSAGE_TITLE, MEM.MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
         FROM TBL_MESSAGE MES
                  JOIN TBL_RECEIVED_MESSAGE RM
                       ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{id}
@@ -38,7 +50,7 @@
     </select>
 
     <!--  받은 메시지 상세보기  -->
-    <select id="selectReceived" resultType="MessageVO">
+    <select id="selectReceived" resultType="messageVO">
         SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT
         FROM TBL_MEMBER MEM
                  JOIN TBL_MESSAGE MES
@@ -62,7 +74,7 @@
     </select>
 
     <!--  보낸 메시지 상세보기  -->
-    <select id="selectSent" resultType="MessageVO">
+    <select id="selectSent" resultType="messageVO">
         SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT
         FROM TBL_MEMBER MEM
                  JOIN TBL_MESSAGE MES
@@ -90,4 +102,3 @@
             END
     </update>
 </mapper>
-

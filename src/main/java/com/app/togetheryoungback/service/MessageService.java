@@ -1,5 +1,6 @@
 package com.app.togetheryoungback.service;
 
+import com.app.togetheryoungback.domain.MessageDTO;
 import com.app.togetheryoungback.domain.MessageReceivedDTO;
 import com.app.togetheryoungback.domain.MessageSentDTO;
 import com.app.togetheryoungback.domain.MessageVO;
@@ -8,7 +9,13 @@ import java.util.List;
 
 public interface MessageService {
     //    메시지 작성
-    public void write(MessageVO messageVO);
+    public void write(MessageDTO messageDTO);
+
+    //    메시지 작성시 닉네임으로 Id 조회
+    public Long getIdByNickname(String memberNickname);
+
+    //    방금 작성된 메시지 Id 조회
+    public Long getInsertedMessageId();
 
     //    메시지 작성시 받은 메시지함 등록
     public void setReceived(Long messageId);
