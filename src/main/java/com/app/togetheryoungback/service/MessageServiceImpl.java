@@ -64,9 +64,9 @@ public class MessageServiceImpl implements MessageService {
         messageDAO.sendSent(messageId);
     }
 
-    //    메시지 객체 불러오기
+    //    메시지 삭제시 메시지 객체 불러오기
     @Override
-    public MessageVO getMessage(Long messageId) {
+    public MessageDTO getMessage(Long messageId) {
         return messageDAO.selectMessage(messageId);
     }
 

@@ -1,5 +1,6 @@
 package com.app.togetheryoungback.dao;
 
+import com.app.togetheryoungback.domain.MessageDTO;
 import com.app.togetheryoungback.domain.MessageReceivedDTO;
 import com.app.togetheryoungback.domain.MessageSentDTO;
 import com.app.togetheryoungback.domain.MessageVO;
@@ -40,7 +41,7 @@ public class MessageDAO {
     }
 
     //    메시지 객체 불러오기
-    public MessageVO selectMessage(Long messageId){
+    public MessageDTO selectMessage(Long messageId){
         return messageMapper.select(messageId);
     }
 

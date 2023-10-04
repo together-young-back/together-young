@@ -30,21 +30,23 @@
                     <h2 class="write-form-title">
                         메세지 보내기
                     </h2>
-                    <div class="write-form-title-con">
-                        <input placeholder="수신자를 입력하세요" name="question" label="" autocomplete="off" type="text"
-                               class="form-title" style="text-align: left;">
-                    </div>
-                    <div class="write-form-title-con">
-                        <input placeholder="제목을 입력하세요" name="question" label="" autocomplete="off" type="text"
-                               class="form-title" style="text-align: left;">
-                    </div>
-                    <div class="write-form-content-container">
-                            <textarea cols="30" rows="10" placeholder="보낼 메세지를 입력해주세요." maxlength="1000"
-                                      class="form-content"></textarea>
-                    </div>
-                    <div class="summit-container">
-                        <button class="summit-btn">보내기</button>
-                    </div>
+                    <form th:action ="@{/message/write}" method="post" th:object="${messageDTO}">
+                        <div class="write-form-title-con">
+                            <input type="text" th:field="*{memberNickname}"
+                                   placeholder="수신자를 입력하세요" class="form-title" style="text-align: left;">
+                        </div>
+                        <div class="write-form-title-con">
+                            <input type="text" th:field="*{messageTitle}"
+                                   placeholder="제목을 입력하세요" class="form-title" style="text-align: left;">
+                        </div>
+                        <div class="write-form-content-container">
+                            <input type="text" th:field="*{messageContent}"
+                                   placeholder="보낼 메세지를 입력해주세요." class="form-content" style="text-align: left;">
+                        </div>
+                        <div class="summit-container">
+                            <button class="summit-btn">보내기</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -55,3 +57,4 @@
 
 
 </html>
+
