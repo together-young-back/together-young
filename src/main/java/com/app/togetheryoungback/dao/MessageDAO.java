@@ -72,6 +72,10 @@ public class MessageDAO {
         messageMapper.deleteSent(messageId);
     }
 
+    //    메시지 전체 삭제 (회원 탈퇴시)
+    public void deleteAllMessages(Long memberId) {
+        messageMapper.deleteAll(memberId);
+    }
 
 //    //    메시지 삭제
 //    public void deleteMessage(Long messageId){

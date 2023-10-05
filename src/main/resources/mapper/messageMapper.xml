@@ -73,4 +73,9 @@
         DELETE FROM TBL_SENT_MESSAGE
         WHERE MESSAGE_ID = #{messageId}
     </delete>
+
+    <delete id="deleteAll">
+        DELETE FROM TBL_MESSAGE
+        WHERE MEMBER_SENT_ID = #{memberId} OR MEMBER_RECEIVED_ID = #{memberId}
+    </delete>
 </mapper>
