@@ -49,11 +49,12 @@
                                         data-v-bd9f2bcc=""></path>
                             </svg>
                         </div>
-                        <div th:if="${session.member.memberImgName != null}">>
-                            <img class="profile-img" th:src="${session.member.memberImgName}">
+                        <div th:if="${session.member.memberImgName != null}">
+                            <img class="sidebar-profile-img"
+                                 th:src="@{/file/display(fileName=${session.member.memberImgPath} + '/' + ${session.member.memberImgName})}">
                         </div>
                         <div th:if="${session.member.memberKakaoProfileUrl != null and session.member.memberImgName == null}">
-                            <img class="profile-img" th:src="${session.member.memberKakaoProfileUrl}">
+                            <img class="sidebar-profile-img" th:src="${session.member.memberKakaoProfileUrl}">
                         </div>
                     </div>
                 </div>
@@ -137,16 +138,28 @@
                                 <div th:if="${session.member.memberImgName == null and session.member.memberKakaoProfileUrl == null}">
                                     <i class="image"></i>
                                 </div>
-                                <div th:if="${session.member.memberImgName != null}">>
-                                    <img class="update-container-img" th:src="${session.member.memberImgName}">
+                                <div th:if="${session.member.memberImgName != null}">
+                                    <img class="update-container-img"
+                                         th:src="@{/file/display(fileName=${session.member.memberImgPath} + '/' + ${session.member.memberImgName})}">
                                 </div>
                                 <div th:if="${session.member.memberKakaoProfileUrl != null and session.member.memberImgName == null}">
                                     <img class="update-container-img" th:src="${session.member.memberKakaoProfileUrl}">
                                 </div>
                             </label>
+                            <button th:if="${session.member.memberImgName != null}" class="profile-img-delete-btn" onclick="deleteImage()">
+                                <svg height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg">
+                                    <polygon fill-rule="evenodd"
+                                             points="8 9.414 3.707 13.707 2.293 12.293 6.586 8 2.293 3.707 3.707 2.293 8 6.586 12.293 2.293 13.707 3.707 9.414 8 13.707 12.293 12.293 13.707 8 9.414"/>
+                                </svg>
+                            </button>
                         </div>
-                        <input id="imageUploadContainer" class="imageUploadContainer" style="display: none" type="file"
-                               accept="image/jpg,image/png,image/jpeg,image/gif">
+                        <form th:action="@{/member/img-upload}" name="file-form" method="post"
+                              enctype="multipart/form-data">
+                            <input id="imageUploadContainer" name="uploadFile" class="imageUploadContainer"
+                                   style="display: none"
+                                   type="file"
+                                   accept="image/jpg,image/png,image/jpeg,image/gif">
+                        </form>
                         <div class="userName" th:text="${session.member.memberNickname}"></div>
                     </div>
                     <div class="serviceInformationContainer">
@@ -290,5 +303,33 @@
 <script th:inline="javascript">
     const member = [[${session.member}]];
     console.log(member);
+
+
+    const file = document.querySelector("#imageUploadContainer");
+    const profileImgForm = document.querySelector("form[name='file-form']");
+
+    file.addEventListener("change", (e) => {
+        const formData = new FormData();
+        formData.append("uploadFile", e.target.files[0])
+        console.log(e.target.files[0]);
+        fetch("/file/upload", {
+            method: "POST",
+            body: formData
+        }).then((response) => response.json())
+            .then((uuid) => {
+                let input = document.createElement("input");
+                input.name = "uuid";
+                input.value = uuid[0];
+                input.type = "hidden";
+                profileImgForm.append(input);
+
+                profileImgForm.submit();
+            })
+    });
+
+    function deleteImage() {
+        window.location.href = '/member/img-delete';
+    }
+
 </script>
 </html>

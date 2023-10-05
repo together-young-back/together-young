@@ -13,6 +13,12 @@ import java.util.Optional;
 @Transactional(rollbackFor = Exception.class)
 public class MemberServiceImpl implements MemberService {
     private final MemberDAO memberDAO;
+
+    @Override
+    public MemberVO bringMemberInfo(Long id) {
+        return memberDAO.bringMemberInfo(id);
+    }
+
     @Override
     public void join(MemberVO memberVO) {
         Optional<MemberVO> foundMember = findAccount(memberVO.getMemberEmail());
@@ -29,6 +35,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void saveProfileImg(MemberVO memberVO) {
         memberDAO.saveProfileImg(memberVO);
+    }
+
+    @Override
+    public void deleteProfileImg(Long id) {
+        memberDAO.deleteProfileImg(id);
     }
 
     @Override

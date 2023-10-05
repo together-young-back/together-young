@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.togetheryoungback.mapper.MemberMapper">
+    <select id="selectById" resultType="memberVO">
+        SELECT ID, MEMBER_EMAIL, MEMBER_TEL, MEMBER_NICKNAME, MEMBER_KAKAO_PROFILE_URL, MEMBER_IMG_NAME, MEMBER_IMG_PATH
+        FROM TBL_MEMBER
+        WHERE ID = #{id}
+    </select>
+
     <select id="selectByEmail" resultType="memberVO">
         SELECT ID, MEMBER_EMAIL, MEMBER_TEL, MEMBER_NICKNAME, MEMBER_IMG_NAME, MEMBER_IMG_PATH, MEMBER_KAKAO_PROFILE_URL
         FROM TBL_MEMBER
@@ -15,6 +21,12 @@
     <update id="updateProfileImg">
         UPDATE TBL_MEMBER
         SET MEMBER_IMG_NAME = #{memberImgName}, MEMBER_IMG_PATH = #{memberImgPath}
+        WHERE ID = #{id}
+    </update>
+
+    <update id="updateToDeleteProfileImg">
+        update TBL_MEMBER
+        SET MEMBER_IMG_NAME = NULL, MEMBER_IMG_PATH = NULL
         WHERE ID = #{id}
     </update>
 

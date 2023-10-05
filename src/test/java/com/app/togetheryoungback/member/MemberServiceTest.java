@@ -13,6 +13,13 @@ public class MemberServiceTest {
     private MemberService memberService;
 
     @Test
+    public void bringMemberInfo(){
+        Long id = 181L;
+
+        log.info(String.valueOf(memberService.bringMemberInfo(id)));
+    }
+
+    @Test
     public void saveTelTest(){
         String tel = "01036316412";
         Long id = 142L;

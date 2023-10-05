@@ -12,6 +12,10 @@ import java.util.Optional;
 public class MemberDAO {
     private final MemberMapper memberMapper;
 
+    public MemberVO bringMemberInfo(Long id) {
+        return memberMapper.selectById(id);
+    }
+
     //    계정 추가
     public void save(MemberVO memberVO) {
         memberMapper.insert(memberVO);
@@ -24,7 +28,12 @@ public class MemberDAO {
 
     //    계정 이미지 추가
     public void saveProfileImg(MemberVO memberVO) {
-        memberMapper.updateMemberProfileImg(memberVO);
+        memberMapper.updateProfileImg(memberVO);
+    }
+
+    //    계정 이미지 삭제
+    public void deleteProfileImg(Long id) {
+        memberMapper.updateToDeleteProfileImg(id);
     }
 
     //    닉네임 중복확인
