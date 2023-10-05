@@ -146,7 +146,8 @@
                                     <img class="update-container-img" th:src="${session.member.memberKakaoProfileUrl}">
                                 </div>
                             </label>
-                            <button th:if="${session.member.memberImgName != null}" class="profile-img-delete-btn" onclick="deleteImage()">
+                            <button th:if="${session.member.memberImgName != null}" class="profile-img-delete-btn"
+                                    onclick="deleteImage()">
                                 <svg height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg">
                                     <polygon fill-rule="evenodd"
                                              points="8 9.414 3.707 13.707 2.293 12.293 6.586 8 2.293 3.707 3.707 2.293 8 6.586 12.293 2.293 13.707 3.707 9.414 8 13.707 12.293 12.293 13.707 8 9.414"/>
@@ -187,31 +188,17 @@
                     <div class="editNicknameTitle">
                         닉네임 변경
                     </div>
-                    <div class="editNicknameBody">
-                        <input type="text" class="nicknameBox" th:value="${session.member.memberNickname}">
-                        <button class="verifyNickname">
+                    <form th:action="@{/member/update-nickname}" method="post" class="editNicknameBody">
+                        <input type="text" name="memberNickname" class="nicknameBox" th:value="${session.member.memberNickname}">
+                        <div class="verifyNickname">
                             중복확인
-                        </button>
-                        <button class="saveNickname">
+                        </div>
+                        <button class="saveNickname disable" disabled>
                             저장
                         </button>
-                    </div>
+                    </form>
                 </div>
-                <div class="nicknameUpdateMessageContainer">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="black"
-                         xmlns="http://www.w3.org/2000/svg" class="c-application c-icon"
-                         style="fill: rgb(42, 125, 225);">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M11 6C11 8.76142 8.76142 11 6 11C3.23858 11 1 8.76142 1 6C1 3.23858 3.23858 1 6 1C8.76142 1 11 3.23858 11 6ZM6 3.25C6.27614 3.25 6.5 3.47386 6.5 3.75V6.25C6.5 6.52614 6.27614 6.75 6 6.75C5.72386 6.75 5.5 6.52614 5.5 6.25V3.75C5.5 3.47386 5.72386 3.25 6 3.25ZM6 8.75C6.41421 8.75 6.75 8.41421 6.75 8C6.75 7.58579 6.41421 7.25 6 7.25C5.58579 7.25 5.25 7.58579 5.25 8C5.25 8.41421 5.58579 8.75 6 8.75Z">
-                        </path>
-                    </svg>
-                    사용 가능한 닉네임입니다.
-                    <!--
-                    에러시
-                    이미 사용중인 닉네임입니다.
-                    한글 1~10자, 영문 2~20자까지 가능합니다.
-                    -->
-                </div>
+                <div id="availableNicknameIndicator"></div>
             </div>
         </div>
         <div class="membershipWithdrawalWrapper">
@@ -308,28 +295,81 @@
     const file = document.querySelector("#imageUploadContainer");
     const profileImgForm = document.querySelector("form[name='file-form']");
 
-    file.addEventListener("change", (e) => {
-        const formData = new FormData();
-        formData.append("uploadFile", e.target.files[0])
-        console.log(e.target.files[0]);
-        fetch("/file/upload", {
-            method: "POST",
-            body: formData
-        }).then((response) => response.json())
-            .then((uuid) => {
-                let input = document.createElement("input");
-                input.name = "uuid";
-                input.value = uuid[0];
-                input.type = "hidden";
-                profileImgForm.append(input);
+    file.addEventListener("change", async (e) => {
+        try {
+            const formData = new FormData();
+            formData.append("uploadFile", e.target.files[0]);
+            console.log(e.target.files[0]);
 
-                profileImgForm.submit();
-            })
+            const response = await fetch("/file/upload", {
+                method: "POST",
+                body: formData
+            });
+
+            const uuid = await response.json();
+
+            let input = document.createElement("input");
+            input.name = "uuid";
+            input.value = uuid[0];
+            input.type = "hidden";
+            profileImgForm.append(input);
+
+            profileImgForm.submit();
+        } catch (error) {
+            console.error("오류 발생:", error);
+        }
     });
+
 
     function deleteImage() {
         window.location.href = '/member/img-delete';
     }
+
+    // 닉네임 검사용 비동기 j쿼리
+    const $verifyBtn = $(".verifyNickname");
+
+    $verifyBtn.on("click", async () => {
+        const newNickname = $(".nicknameBox").val();
+
+        try {
+            const response = await fetch(`/member/check-nickname?memberNickname=${newNickname}`);
+            const result = await response.json();
+
+            console.log(result);
+
+            const availableNicknameIndicator = document.getElementById("availableNicknameIndicator");
+            const messageContainer = document.createElement("div");
+
+            const svgIcon = `
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="black" xmlns="http://www.w3.org/2000/svg" class="c-application c-icon" style="fill: rgb(42, 125, 225);">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11 6C11 8.76142 8.76142 11 6 11C3.23858 11 1 8.76142 1 6C1 3.23858 3.23858 1 6 1C8.76142 1 11 3.23858 11 6ZM6 3.25C6.27614 3.25 6.5 3.47386 6.5 3.75V6.25C6.5 6.52614 6.27614 6.75 6 6.75C5.72386 6.75 5.5 6.52614 5.5 6.25V3.75C5.5 3.47386 5.72386 3.25 6 3.25ZM6 8.75C6.41421 8.75 6.75 8.41421 6.75 8C6.75 7.58579 6.41421 7.25 6 7.25C5.58579 7.25 5.25 7.58579 5.25 8C5.25 8.41421 5.58579 8.75 6 8.75Z"></path>
+                </svg>
+            `;
+
+            if (result === true) {
+                messageContainer.classList.add("nicknameUpdateMessageContainer");
+                messageContainer.innerHTML = `${svgIcon} 사용 가능한 닉네임입니다.`;
+                availableNicknameIndicator.innerHTML = '';
+                availableNicknameIndicator.appendChild(messageContainer);
+
+                const $saveNickBtn = $(".saveNickname");
+                $saveNickBtn.removeClass("disable");
+                $saveNickBtn.removeAttr("disabled");
+            } else {
+                messageContainer.classList.add("nicknameUpdateMessageContainer", "error");
+                messageContainer.innerHTML = `${svgIcon} 이미 사용중인 이름입니다.`;
+                availableNicknameIndicator.innerHTML = '';
+                availableNicknameIndicator.appendChild(messageContainer);
+
+                const $saveNickBtn = $(".saveNickname");
+                $saveNickBtn.addClass("disable");
+                $saveNickBtn.attr("disabled", "disabled");
+            }
+        } catch (error) {
+            console.error("오류 발생:", error);
+        }
+    });
+
 
 </script>
 </html>

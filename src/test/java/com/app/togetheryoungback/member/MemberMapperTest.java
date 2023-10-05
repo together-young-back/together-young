@@ -24,6 +24,14 @@ public class MemberMapperTest {
     }
 
     @Test
+    public void updateNick(){
+        String nickname = "nathan";
+        Long id = 181L;
+
+        memberMapper.updateMemberNickname(nickname, id);
+    }
+
+    @Test
     public void insertTest() {
         MemberVO memberVO = new MemberVO();
 

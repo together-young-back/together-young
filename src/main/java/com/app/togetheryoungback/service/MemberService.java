@@ -15,9 +15,15 @@ public interface MemberService {
 
     public void deleteProfileImg(Long id);
 
+    public int getAllPostCount(Long id);
+
+    public int getAllReplyCount(Long id);
+
+    public int getAllParticipationCount(Long id);
+
     public Optional<String> findNickname(String memberNickname);
 
-    public void saveNickname(String memberNickname);
+    public void saveNickname(String memberNickname, Long id);
 
     public void saveTel(String memberTel, Long id);
 }

@@ -1368,6 +1368,7 @@ a {
 .verifyNickname {
     height: 40px;
     margin-left: 4px;
+    display: flex;
     background-color: transparent;
     border: 1px solid #2a7de1;
     color: #2a7de1;
@@ -1388,7 +1389,7 @@ a {
 .saveNickname {
     height: 40px;
     margin-left: 4px;
-    background-color: #d4e5f9;
+    background-color: #2A7DE1;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
@@ -1396,13 +1397,18 @@ a {
     line-height: 25px;
     min-width: 56px;
     padding: 0 14px;
-    cursor: not-allowed;
+    cursor: pointer;
     align-items: center;
     border: none;
     color: #fff;
     justify-content: center;
     overflow: hidden;
     position: relative;
+}
+
+.saveNickname.disable {
+    background-color: #d4e5f9;
+    cursor: not-allowed;
 }
 
 .nicknameUpdateMessageContainer {
@@ -1417,21 +1423,20 @@ a {
     margin-left: 100px; /* 임시로 추가함 */
 }
 
-/* 
-  닉네임 에러시
-  .nicknameBox {
+
+  .nicknameBox.error {
     border-color: #e92525;
     color: #e92525;
   }
 
-  .nicknameUpdateMessageContainer {
+  .nicknameUpdateMessageContainer.error {
     color: rgb(233, 37, 37);
   }
 
-  .nicknameUpdateMessageContainer > svg {
+  .nicknameUpdateMessageContainer.error > svg {
     fill: rgb(233, 37, 37) !important;
   }
-  */
+
 
 .notificationSettingTitle {
     color: #3c4144;

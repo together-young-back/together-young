@@ -42,8 +42,8 @@ public class MemberDAO {
     }
 
     // 닉네임 업데이트
-    public void saveNickname(String memberNickname) {
-        memberMapper.updateMemberNickname(memberNickname);
+    public void saveNickname(String memberNickname, Long id) {
+        memberMapper.updateMemberNickname(memberNickname, id);
     }
 
     //    전화번호 업데이트

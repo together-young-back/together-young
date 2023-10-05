@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.Option;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -45,15 +46,15 @@ public class MemberController {
     public void goToMyPage(HttpSession session, Model model) {
         if (session.getAttribute("member") != null) {
             MemberVO memberVO = (MemberVO) session.getAttribute("member");
-
-            int postCount = generalPostService.bringCountOfGeneralPost(memberVO.getId()) + meetingPostService.bringCountOfMeetingPost(memberVO.getId());
+            Long id = memberVO.getId();
+            int postCount = memberService.getAllPostCount(id);
+            int replyCount = memberService.getAllReplyCount(id);
             log.info(String.valueOf(postCount));
-            int replyCount = generalReplyService.bringCountOfGeneralReply(memberVO.getId()) + meetingReplyService.bringCountOfMeetingReply(memberVO.getId());
             log.info(String.valueOf(replyCount));
 
             model.addAttribute("postCount", postCount);
             model.addAttribute("replyCount", replyCount);
-            model.addAttribute("participationCount", participationService.bringCountOfParticipation(memberVO.getId()));
+            model.addAttribute("participationCount", memberService.getAllParticipationCount(id));
         }
     }
 
@@ -62,7 +63,7 @@ public class MemberController {
     @PostMapping("img-upload")
     public RedirectView upload(@RequestParam("uuid") String uuid, @RequestParam("uploadFile") MultipartFile uploadFile, HttpSession session) throws IOException {
         MemberVO memberVO = (MemberVO) session.getAttribute("member");
-//        MemberVO memberVO = new MemberVO();
+
         memberVO.setMemberImgName("t_" + uuid + "_" + uploadFile.getOriginalFilename());
         memberVO.setMemberImgPath(getPath());
         session.setAttribute("member", memberVO);
@@ -71,8 +72,12 @@ public class MemberController {
         return new RedirectView("/member/my-page");
     }
 
+    private String getPath() {
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+    }
+
     @GetMapping("img-delete")
-    public RedirectView deleteImg(HttpSession session){
+    public RedirectView deleteImg(HttpSession session) {
         MemberVO memberVO = (MemberVO) session.getAttribute("member");
         memberVO.setMemberImgName(null);
         memberVO.setMemberImgPath(null);
@@ -83,10 +88,29 @@ public class MemberController {
         return new RedirectView("/member/my-page");
     }
 
-    private String getPath() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+    @GetMapping("check-nickname")
+    @ResponseBody
+    public String checkNickname(@RequestParam("memberNickname") String memberNickname) {
+        Optional<String> foundNickname = memberService.findNickname(memberNickname);
+
+        // 이름 찾은 후 못찾으면 true 반환 / 반대의 경우 false 반환
+        if (foundNickname.isEmpty()) {
+            return "true";
+        } else {
+            return "false";
+        }
     }
 
+    @PostMapping("update-nickname")
+    public RedirectView updateNickname(@RequestParam("memberNickname") String memberNickname, HttpSession session){
+        MemberVO sessionMemberVO = (MemberVO) session.getAttribute("member");
+
+        sessionMemberVO.setMemberNickname(memberNickname);
+        session.setAttribute("member", sessionMemberVO);
+        memberService.saveNickname(memberNickname, sessionMemberVO.getId());
+
+        return new RedirectView("/member/my-page");
+    }
 
     @PostMapping("update-tel")
     public RedirectView updatePhoneNumber(@RequestParam("memberTel") String memberTel, HttpSession session) {

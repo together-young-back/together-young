@@ -21,7 +21,7 @@ public interface MemberMapper {
 //    유저 닉네임 유무 조회 - 마이페이지
     public Optional<String> selectByMemberNickname(String memberNickname);
 //    유저 닉네임 업데이트 - 마이페이지
-    public void updateMemberNickname(String memberNickname);
+    public void updateMemberNickname(String memberNickname, Long id);
 //    유저 전화번호 업데이트 - 마이페이지
     public void updateMemberTel(String memberTel, Long id);
 //    유저 계정 삭제(MEMBER_STATUS = 'DISABLED')
