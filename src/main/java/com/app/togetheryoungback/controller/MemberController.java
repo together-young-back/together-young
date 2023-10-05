@@ -29,11 +29,6 @@ import java.util.UUID;
 @RequestMapping("/member/*")
 public class MemberController {
     private final MemberService memberService;
-    private final GeneralPostService generalPostService;
-    private final MeetingPostService meetingPostService;
-    private final GeneralReplyService generalReplyService;
-    private final MeetingReplyService meetingReplyService;
-    private final ParticipationService participationService;
 
     // 로그인 페이지로 이동
     @GetMapping("login")
