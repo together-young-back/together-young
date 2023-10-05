@@ -777,9 +777,15 @@ header {
     height: 48px;
     line-height: 68px;
     background-size: 100% 100%;
+    border: 1px solid #e1e4e6;
     border-radius: 100%;
     display: block;
     overflow: hidden;
+}
+
+.sidebar-profile-img {
+    width: 48px;
+    height: 48px;
 }
 
 /* Footer CSS ===============================================================================================================================================================*/
@@ -978,6 +984,15 @@ footer {
     height: 48px;
     line-height: 68px;
     text-align: center;
+}
+
+.profile-img-delete-btn {
+    position: absolute;
+    border: 0;
+    background-color: transparent;
+    right: -4px;
+    top: -4px;
+    cursor: pointer;
 }
 
 .image {
@@ -1776,6 +1791,7 @@ a {
     height: 90px;
     background-size: 100% 100%;
     line-height: 68px;
+    border: 1px solid #e1e4e6;
     border-radius: 100%;
     display: block;
     cursor: pointer;
