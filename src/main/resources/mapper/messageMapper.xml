@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.togetheryoungback.mapper.MessageMapper">
+    <sql id="search">
+        <if test="search.type != null and !search.type.equals('')">
+            <trim prefix="AND(" prefixOverrides="OR" suffix=")">
+                <foreach item="type" collection="search.types">
+                    <trim prefix="OR">
+                        <choose>
+                            <when test="type=='t'.toString()">
+                                POST_TITLE LIKE '%'||#{search.keyword}||'%'
+                            </when>
+                            <when test="type=='c'.toString()">
+                                POST_CONTENT LIKE '%'||#{search.keyword}||'%'
+                            </when>
+                            <when test="type=='w'.toString()">
+                                MEMBER_NAME LIKE '%'||#{search.keyword}||'%'
+                            </when>
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
     <insert id="insert">
         INSERT INTO TBL_MESSAGE
         VALUES(SEQ_MESSAGE.NEXTVAL, #{memberSentId}, #{memberReceivedId}, #{messageTitle}, #{messageContent}, CURRENT_TIMESTAMP, 0)
@@ -32,20 +53,24 @@
         WHERE ID = #{messageId}
     </select>
 
+    <select id="selectCountOfMessageReceived" resultType="int">
+        SELECT COUNT(ID)
+        FROM TBL_RECEIVED_MESSAGE
+        <include refid="search"/>
+    </select>
+
     <select id="selectAllReceived" resultType="messageReceivedDTO">
         SELECT MESSAGE_TITLE, MEM.MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
-        FROM TBL_MESSAGE MES
-                 JOIN TBL_RECEIVED_MESSAGE RM
-                      ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{id}
-                 JOIN TBL_MEMBER MEM
-                      ON MEM.ID = MES.MEMBER_RECEIVED_ID
+        FROM TBL_MESSAGE MES JOIN TBL_RECEIVED_MESSAGE RM
+        ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{id}
+                             JOIN TBL_MEMBER MEM
+        ON MEM.ID = MES.MEMBER_RECEIVED_ID
     </select>
 
     <select id="selectReceived" resultType="messageReceivedDTO">
         SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT
-        FROM TBL_MEMBER MEM
-                 JOIN TBL_MESSAGE MES
-                      ON MEM.ID = MES.MEMBER_RECEIVED_ID AND MES.ID = #{id}
+        FROM TBL_MEMBER MEM JOIN TBL_MESSAGE MES
+        ON MEM.ID = MES.MEMBER_RECEIVED_ID AND MES.ID = #{id}
     </select>
 
     <delete id="deleteReceived">
@@ -53,24 +78,33 @@
         WHERE MESSAGE_ID = #{messageId}
     </delete>
 
+    <select id="selectCountOfMessageSent" resultType="int">
+        SELECT COUNT(ID)
+        FROM TBL_SENT_MESSAGE
+        <include refid="search"/>
+    </select>
+
     <select id="selectAllSent" resultType="messageSentDTO">
         SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
-        FROM TBL_MESSAGE MES
-                 JOIN TBL_SENT_MESSAGE SM
-                      ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_SENT_ID = #{id}
-                 JOIN TBL_MEMBER MEM
-                      ON MEM.ID = MES.MEMBER_SENT_ID
+        FROM TBL_MESSAGE MES JOIN TBL_SENT_MESSAGE SM
+        ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_SENT_ID = #{id}
+                             JOIN TBL_MEMBER MEM
+        ON MEM.ID = MES.MEMBER_SENT_ID
     </select>
 
     <select id="selectSent" resultType="messageSentDTO">
         SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT
-        FROM TBL_MEMBER MEM
-                 JOIN TBL_MESSAGE MES
-                      ON MEM.ID = MES.MEMBER_SENT_ID AND MES.ID = #{id}
+        FROM TBL_MEMBER MEM JOIN TBL_MESSAGE MES
+        ON MEM.ID = MES.MEMBER_SENT_ID AND MES.ID = #{id}
     </select>
 
     <delete id="deleteSent">
         DELETE FROM TBL_SENT_MESSAGE
         WHERE MESSAGE_ID = #{messageId}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE FROM TBL_MESSAGE
+        WHERE MEMBER_SENT_ID = #{memberId} OR MEMBER_RECEIVED_ID = #{memberId}
     </delete>
 </mapper>

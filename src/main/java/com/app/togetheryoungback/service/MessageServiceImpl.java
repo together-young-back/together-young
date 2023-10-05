@@ -1,11 +1,9 @@
 package com.app.togetheryoungback.service;
 
 import com.app.togetheryoungback.dao.MessageDAO;
-import com.app.togetheryoungback.domain.MessageDTO;
-import com.app.togetheryoungback.domain.MessageReceivedDTO;
-import com.app.togetheryoungback.domain.MessageSentDTO;
-import com.app.togetheryoungback.domain.MessageVO;
+import com.app.togetheryoungback.domain.*;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,6 +69,12 @@ public class MessageServiceImpl implements MessageService {
     }
 
 
+    //    받은 메시지 총 개수
+    @Override
+    public int getCountOfMessageReceived(Search search) {
+        return messageDAO.findCountOfMessageReceived(search);
+    }
+
     //    받은 메시지 목록
     @Override
     public List<MessageReceivedDTO> getMessagesReceived(Long memberId) {
@@ -94,6 +98,12 @@ public class MessageServiceImpl implements MessageService {
     }
 
 
+    //    보낸 메시지 총 개수
+    @Override
+    public int getCountOfMessageSent(Search search) {
+        return messageDAO.findCountOfMessageSent(search);
+    }
+
     //    보낸 메시지 목록
     @Override
     public List<MessageSentDTO> getMessagesSent(Long memberId) {
@@ -114,6 +124,12 @@ public class MessageServiceImpl implements MessageService {
 //        if(getMessage(messageId).getMessageDeleteStatus() == 2){
 //            delete(messageId);
 //        }
+    }
+
+    //    메시지 전체 삭제 (회원 탈퇴시)
+    @Override
+    public void deleteAll(Long memberId) {
+        messageDAO.deleteAllMessages(memberId);
     }
 
 

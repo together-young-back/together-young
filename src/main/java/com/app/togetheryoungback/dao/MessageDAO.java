@@ -1,11 +1,9 @@
 package com.app.togetheryoungback.dao;
 
-import com.app.togetheryoungback.domain.MessageDTO;
-import com.app.togetheryoungback.domain.MessageReceivedDTO;
-import com.app.togetheryoungback.domain.MessageSentDTO;
-import com.app.togetheryoungback.domain.MessageVO;
+import com.app.togetheryoungback.domain.*;
 import com.app.togetheryoungback.mapper.MessageMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -45,6 +43,11 @@ public class MessageDAO {
         return messageMapper.select(messageId);
     }
 
+    //    받은 메시지 총 개수
+    public int findCountOfMessageReceived(Search search){
+        return messageMapper.selectCountOfMessageReceived(search);
+    }
+
     //    받은 메시지 목록
     public List<MessageReceivedDTO> findAllReceived(Long memberId){
         return messageMapper.selectAllReceived(memberId);
@@ -59,6 +62,11 @@ public class MessageDAO {
     }
 
 
+    //    보낸 메시지 총 개수
+    public int findCountOfMessageSent(Search search){
+        return messageMapper.selectCountOfMessageSent(search);
+    }
+
     //    보낸 메시지 목록
     public List<MessageSentDTO> findAllSent(Long memberId){
         return messageMapper.selectAllSent(memberId);
@@ -72,6 +80,10 @@ public class MessageDAO {
         messageMapper.deleteSent(messageId);
     }
 
+    //    메시지 전체 삭제 (회원 탈퇴시)
+    public void deleteAllMessages(Long memberId) {
+        messageMapper.deleteAll(memberId);
+    }
 
 //    //    메시지 삭제
 //    public void deleteMessage(Long messageId){
