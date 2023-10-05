@@ -1,5 +1,6 @@
 package com.app.togetheryoungback.mapper;
 
+import com.app.togetheryoungback.domain.MessageDTO;
 import com.app.togetheryoungback.domain.MessageReceivedDTO;
 import com.app.togetheryoungback.domain.MessageSentDTO;
 import com.app.togetheryoungback.domain.MessageVO;
@@ -26,7 +27,7 @@ public interface MessageMapper {
     public void insertSent(Long messageId);
 
     //    메시지 객체 불러오기
-    public MessageVO select(Long messageId);
+    public MessageDTO select(Long messageId);
 
     //    받은 메시지 목록
     public List<MessageReceivedDTO> selectAllReceived(Long memberId);
@@ -48,10 +49,10 @@ public interface MessageMapper {
     public void deleteSent(Long messageId);
 
 
-    //    메시지 삭제
-    public void delete(Long messageId);
+//    //    메시지 삭제
+//    public void delete(Long messageId);
 
-    //    메시지 삭제 카운트 증가
-    public void update(Long messageId);
+//    //    메시지 삭제 카운트 증가
+//    public void update(Long messageId);
 
 }
