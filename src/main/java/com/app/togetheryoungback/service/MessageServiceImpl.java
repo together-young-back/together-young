@@ -116,6 +116,12 @@ public class MessageServiceImpl implements MessageService {
 //        }
     }
 
+    //    메시지 전체 삭제 (회원 탈퇴시)
+    @Override
+    public void deleteAll(Long memberId) {
+        messageDAO.deleteAllMessages(memberId);
+    }
+
 
 //    //    메시지 삭제는 데이터 관리 및 기타 이유로 기능 삭제
 //    @Override

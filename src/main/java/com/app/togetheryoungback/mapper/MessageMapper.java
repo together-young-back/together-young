@@ -48,6 +48,8 @@ public interface MessageMapper {
     //    보낸 메시지 삭제
     public void deleteSent(Long messageId);
 
+    //    메시지 전체 삭제 (회원 탈퇴시)
+    public void deleteAll(Long memberId);
 
 //    //    메시지 삭제
 //    public void delete(Long messageId);
