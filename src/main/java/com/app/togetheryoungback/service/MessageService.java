@@ -46,10 +46,10 @@ public interface MessageService {
     public void deleteSent(Long messageId);
 
 
-    //    메시지 삭제
-    public void delete(Long messageId);
+//    //    메시지 삭제
+//    public void delete(Long messageId);
 
-    //    메시지 삭제 카운트 증가
-    public void update(Long messageId);
+//    //    메시지 삭제 카운트 증가
+//    public void update(Long messageId);
 
 }

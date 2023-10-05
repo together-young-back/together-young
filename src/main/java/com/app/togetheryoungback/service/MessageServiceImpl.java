@@ -87,10 +87,10 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void deleteReceived(Long messageId) {
         messageDAO.deleteReceivedMessage(messageId);
-        update(messageId);
-        if(getMessage(messageId).getMessageDeleteStatus() == 2){
-            delete(messageId);
-        }
+//        update(messageId);
+//        if(getMessage(messageId).getMessageDeleteStatus() == 2){
+//            delete(messageId);
+//        }
     }
 
 
@@ -110,22 +110,22 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void deleteSent(Long messageId) {
         messageDAO.deleteSentMessage(messageId);
-        update(messageId);
-        if(getMessage(messageId).getMessageDeleteStatus() == 2){
-            delete(messageId);
-        }
+//        update(messageId);
+//        if(getMessage(messageId).getMessageDeleteStatus() == 2){
+//            delete(messageId);
+//        }
     }
 
 
-    //    메시지 삭제
-    @Override
-    public void delete(Long messageId) {
-        messageDAO.deleteMessage(messageId);
-    }
+//    //    메시지 삭제는 데이터 관리 및 기타 이유로 기능 삭제
+//    @Override
+//    public void delete(Long messageId) {
+//        messageDAO.deleteMessage(messageId);
+//    }
 
-    //    메시지 삭제 카운트 증가
-    public void update(Long messageId){
-        messageDAO.updateMessage(messageId);
-    }
+//    //    메시지 삭제 카운트 증가
+//    public void update(Long messageId){
+//        messageDAO.updateMessage(messageId);
+//    }
 
 }

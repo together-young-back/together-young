@@ -73,14 +73,14 @@ public class MessageDAO {
     }
 
 
-    //    메시지 삭제
-    public void deleteMessage(Long messageId){
-        messageMapper.delete(messageId);
-    }
+//    //    메시지 삭제
+//    public void deleteMessage(Long messageId){
+//        messageMapper.delete(messageId);
+//    }
 
-    //    메시지 삭제 카운트 증가
-    public void updateMessage(Long messageId){
-        messageMapper.update(messageId);
-    }
+//    //    메시지 삭제 카운트 증가
+//    public void updateMessage(Long messageId){
+//        messageMapper.update(messageId);
+//    }
 
 }
