@@ -17,4 +17,15 @@ public class MessageMapperTest {
         messageMapper.deleteAll(memberId);
     }
 
+    @Test
+    public void deleteReceivedTest(){
+        Long messageId = 85L;
+        messageMapper.deleteReceived(messageId);
+    }
+
+    @Test
+    public void deleteSentTest(){
+        Long messageId = 85L;
+        messageMapper.deleteSent(messageId);
+    }
 }

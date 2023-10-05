@@ -19,5 +19,7 @@
         <typeAlias type="com.app.togetheryoungback.domain.MessageReceivedDTO" alias="messageReceivedDTO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MessageSentDTO" alias="messageSentDTO"/>
         <typeAlias type="com.app.togetheryoungback.domain.NotificationVO" alias="notificationVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.Pagination" alias="pagination"/>
+        <typeAlias type="com.app.togetheryoungback.domain.Search" alias="search"/>
     </typeAliases>
 </configuration>

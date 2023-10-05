@@ -1,10 +1,8 @@
 package com.app.togetheryoungback.mapper;
 
-import com.app.togetheryoungback.domain.MessageDTO;
-import com.app.togetheryoungback.domain.MessageReceivedDTO;
-import com.app.togetheryoungback.domain.MessageSentDTO;
-import com.app.togetheryoungback.domain.MessageVO;
+import com.app.togetheryoungback.domain.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,6 +27,9 @@ public interface MessageMapper {
     //    메시지 객체 불러오기
     public MessageDTO select(Long messageId);
 
+    //    받은 메시지 총 개수
+    public int selectCountOfMessageReceived(@Param("search") Search search);
+
     //    받은 메시지 목록
     public List<MessageReceivedDTO> selectAllReceived(Long memberId);
 
@@ -38,6 +39,9 @@ public interface MessageMapper {
     //    받은 메시지 삭제
     public void deleteReceived(Long messageId);
 
+
+    //    보낸 메시지 총 개수
+    public int selectCountOfMessageSent(@Param("search") Search search);
 
     //    보낸 메시지 목록
     public List<MessageSentDTO> selectAllSent(Long memberId);
