@@ -118,8 +118,9 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <div th:if="${session.member.memberImgName != null}">>
-                                        <img class="profile-img" th:src="${session.member.memberImgName}">
+                                    <div th:if="${session.member.memberImgName != null}">
+                                        <img class="profile-img"
+                                             th:src="@{/file/display(fileName=${session.member.memberImgPath} + '/' + ${session.member.memberImgName})}">
                                     </div>
                                     <div th:if="${session.member.memberKakaoProfileUrl != null and session.member.memberImgName == null}">
                                         <img class="profile-img"
@@ -145,11 +146,12 @@
                                                         </path>
                                                     </svg>
                                                 </div>
-                                                <div th:if="${session.member.memberImgName != null}">>
-                                                    <img class="profile-img" th:src="${session.member.memberImgName}">
+                                                <div th:if="${session.member.memberImgName != null}">
+                                                    <img class="header-detail-profile-img"
+                                                         th:src="@{/file/display(fileName=${session.member.memberImgPath} + '/' + ${session.member.memberImgName})}">
                                                 </div>
                                                 <div th:if="${session.member.memberKakaoProfileUrl != null and session.member.memberImgName == null}">
-                                                    <img class="profile-img"
+                                                    <img class="header-detail-profile-img"
                                                          th:src="${session.member.memberKakaoProfileUrl}">
                                                 </div>
                                             </div>

@@ -1,6 +1,6 @@
 package com.app.togetheryoungback.service;
 
-import com.app.togetheryoungback.dao.MemberDAO;
+import com.app.togetheryoungback.dao.*;
 import com.app.togetheryoungback.domain.MemberVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,17 @@ import java.util.Optional;
 @Transactional(rollbackFor = Exception.class)
 public class MemberServiceImpl implements MemberService {
     private final MemberDAO memberDAO;
+    private final GeneralPostDAO generalPostDAO;
+    private final MeetingPostDAO meetingPostDAO;
+    private final GeneralReplyDAO generalReplyDAO;
+    private final MeetingReplyDAO meetingReplyDAO;
+    private final ParticipationDAO participationDAO;
+
+    @Override
+    public MemberVO bringMemberInfo(Long id) {
+        return memberDAO.bringMemberInfo(id);
+    }
+
     @Override
     public void join(MemberVO memberVO) {
         Optional<MemberVO> foundMember = findAccount(memberVO.getMemberEmail());
@@ -32,13 +43,33 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public void deleteProfileImg(Long id) {
+        memberDAO.deleteProfileImg(id);
+    }
+
+    @Override
+    public int getAllPostCount(Long id) {
+        return generalPostDAO.selectCountByMemberId(id) + meetingPostDAO.selectCountByMemberId(id);
+    }
+
+    @Override
+    public int getAllReplyCount(Long id) {
+        return generalReplyDAO.selectCountByMemberId(id) + meetingReplyDAO.selectCountByMemberId(id);
+    }
+
+    @Override
+    public int getAllParticipationCount(Long id) {
+        return participationDAO.selectCountByMemberId(id);
+    }
+
+    @Override
     public Optional<String> findNickname(String memberNickname) {
         return memberDAO.findByMemberNickname(memberNickname);
     }
 
     @Override
-    public void saveNickname(String memberNickname) {
-        memberDAO.saveNickname(memberNickname);
+    public void saveNickname(String memberNickname, Long id) {
+        memberDAO.saveNickname(memberNickname, id);
     }
 
     @Override

@@ -15,6 +15,22 @@ public class MemberMapperTest {
     @Autowired
     private MemberMapper memberMapper;
 
+
+    @Test
+    public void bringTest() {
+        Long id = 181L;
+
+        log.info(String.valueOf(memberMapper.selectById(id)));
+    }
+
+    @Test
+    public void updateNick(){
+        String nickname = "nathan";
+        Long id = 181L;
+
+        memberMapper.updateMemberNickname(nickname, id);
+    }
+
     @Test
     public void insertTest() {
         MemberVO memberVO = new MemberVO();
@@ -39,5 +55,15 @@ public class MemberMapperTest {
         Long id = 142L;
 
         memberMapper.updateMemberTel(phoneTel, id);
+    }
+
+    @Test
+    public void updateIMG(){
+        MemberVO memberVO = new MemberVO();
+        memberVO.setId(181L);
+        memberVO.setMemberImgName("asdf");
+        memberVO.setMemberImgPath("qwer");
+
+        memberMapper.updateProfileImg(memberVO);
     }
 }
