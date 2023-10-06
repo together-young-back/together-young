@@ -21,5 +21,6 @@
         <typeAlias type="com.app.togetheryoungback.domain.NotificationVO" alias="notificationVO"/>
         <typeAlias type="com.app.togetheryoungback.domain.Pagination" alias="pagination"/>
         <typeAlias type="com.app.togetheryoungback.domain.Search" alias="search"/>
+        <typeAlias type="com.app.togetheryoungback.domain.FriendDTO" alias="friendDTO" />
     </typeAliases>
 </configuration>

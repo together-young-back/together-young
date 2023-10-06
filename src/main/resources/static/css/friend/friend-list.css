@@ -590,15 +590,6 @@ footer {
     overflow: hidden;
 }
 
-.no-avatar {
-    background: #f3f4f5;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
 
 .need-login {
     color: #202325;
@@ -665,6 +656,92 @@ footer {
     font-size: 12px;
     font-weight: 400;
     line-height: 15px
+}
+
+#imageUploadContainer {
+    cursor: pointer;
+    display: block;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    line-height: 68px;
+    text-align: center;
+}
+
+.userName {
+    color: #202325;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    word-wrap: break-word;
+    word-break: keep-all;
+    margin-bottom: 2px !important;
+}
+
+.userInformationContainer .image {
+    background-image: url(https://cdn.comento.kr/images/illust/illust-photo-upload.svg);
+    width: 90px;
+    height: 90px;
+    background-size: 100% 100%;
+    line-height: 68px;
+    border-radius: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.image,
+.update-container-img {
+    width: 40px;
+    height: 40px;
+}
+
+.update-container-img {
+    width: 40px;
+    height: 40px;
+    background-size: 100% 100%;
+    line-height: 68px;
+    border-radius: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.userInformationContainer1 .image1 {
+    background-image: url(https://cdn.comento.kr/images/illust/illust-photo-upload.svg);
+    width: 90px;
+    height: 90px;
+    background-size: 100% 100%;
+    line-height: 68px;
+    border-radius: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.image1,
+.update-container-img1 {
+    width: 68px;
+    height: 68px;
+}
+
+.update-container-img1 {
+    width: 68px;
+    height: 68px;
+    background-size: 100% 100%;
+    line-height: 68px;
+    border-radius: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.userEmail {
+    color: #767d82;
+    line-height: 16px !important;
+    font-size: 12px;
+    font-weight: 400;
+    word-break: keep-all;
+    word-wrap: normal !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
 }
 
 
