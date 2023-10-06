@@ -16,11 +16,13 @@
                P.MEETING_PLACE,
                P.MEETING_POST_VIEW_COUNT,
                P.MEETING_POST_LIKE_COUNT,
-               P.MEETING_POST_BOOKMARK_COUNT
+               P.MEETING_POST_BOOKMARK_COUNT,
+               P.MEETING_POST_WRITE_TIME,
+               P.MEETING_POST_UPDATE_TIME
         FROM TBL_MEETING_BOOKMARK B
                  JOIN
              TBL_MEETING_POST P ON B.MEETING_POST_ID = P.ID
-        WHERE B.MEMBER_ID = #{memberId};
+        WHERE B.MEMBER_ID = #{memberId}
+        ORDER BY B.MEETING_POST_ID DESC
     </select>
-
 </mapper>
