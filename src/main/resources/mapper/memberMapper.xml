@@ -8,7 +8,7 @@
     </select>
 
     <select id="selectByEmail" resultType="memberVO">
-        SELECT ID, MEMBER_EMAIL, MEMBER_TEL, MEMBER_NICKNAME, MEMBER_IMG_NAME, MEMBER_IMG_PATH, MEMBER_KAKAO_PROFILE_URL
+        SELECT ID, MEMBER_EMAIL, MEMBER_TEL, MEMBER_NICKNAME, MEMBER_KAKAO_PROFILE_URL, MEMBER_IMG_NAME, MEMBER_IMG_PATH, MEMBER_STATUS
         FROM TBL_MEMBER
         WHERE MEMBER_EMAIL = #{memberEmail}
     </select>
@@ -20,13 +20,13 @@
 
     <update id="updateProfileImg">
         UPDATE TBL_MEMBER
-        SET MEMBER_IMG_NAME = #{memberImgName}, MEMBER_IMG_PATH = #{memberImgPath}
+        SET MEMBER_IMG_NAME = #{memberImgName}, MEMBER_IMG_PATH = #{memberImgPath}, MEMBER_UPDATE_TIME = CURRENT_TIMESTAMP
         WHERE ID = #{id}
     </update>
 
     <update id="updateToDeleteProfileImg">
         update TBL_MEMBER
-        SET MEMBER_IMG_NAME = NULL, MEMBER_IMG_PATH = NULL
+        SET MEMBER_IMG_NAME = NULL, MEMBER_IMG_PATH = NULL, MEMBER_UPDATE_TIME = CURRENT_TIMESTAMP
         WHERE ID = #{id}
     </update>
 
@@ -37,7 +37,7 @@
 
     <update id="updateMemberNickname">
         UPDATE TBL_MEMBER
-        SET MEMBER_NICKNAME = #{memberNickname}
+        SET MEMBER_NICKNAME = #{memberNickname}, MEMBER_UPDATE_TIME = CURRENT_TIMESTAMP
         WHERE ID = #{id}
     </update>
 
@@ -47,9 +47,15 @@
         WHERE ID = #{id}
     </update>
 
-    <update id="softDelete">
+    <update id="updateMemberStatus">
         UPDATE TBL_MEMBER
-        SET MEMBER_STATUS = 'DISABLED'
+        SET MEMBER_STATUS = 'ACTIVE', MEMBER_UPDATE_TIME = CURRENT_TIMESTAMP
+        WHERE ID = #{id}
+    </update>
+
+    <update id="updateToDelete">
+        UPDATE TBL_MEMBER
+        SET MEMBER_STATUS = 'DISABLE', MEMBER_UPDATE_TIME = CURRENT_TIMESTAMP
         WHERE ID = #{id}
     </update>
 </mapper>

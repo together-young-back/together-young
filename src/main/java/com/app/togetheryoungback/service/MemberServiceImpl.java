@@ -76,4 +76,14 @@ public class MemberServiceImpl implements MemberService {
     public void saveTel(String memberTel, Long id) {
         memberDAO.saveTel(memberTel, id);
     }
+
+    @Override
+    public void cancelWithdraw(Long id) {
+        memberDAO.cancelWithdraw(id);
+    }
+
+    @Override
+    public void withdraw(Long id) {
+        memberDAO.softDeleteAccount(id);
+    }
 }

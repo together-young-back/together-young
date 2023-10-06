@@ -27,8 +27,13 @@ public class KakaoController {
         if(foundInfo.isPresent()){
             memberService.join(foundInfo.get());
             MemberVO memberVO = memberService.findAccount(foundInfo.get().getMemberEmail()).get();
+            if ("DISABLE".equals(memberVO.getMemberStatus())) {
+                memberService.cancelWithdraw(memberVO.getId());
+                memberVO.setMemberStatus("ACTIVE");
+                redirectAttributes.addFlashAttribute("withdraw", false);
+            }
             session.setAttribute("member", memberVO);
-            return new RedirectView("/member/my-page");
+            return new RedirectView("/");
         }
         return new RedirectView("/member/login");
     }

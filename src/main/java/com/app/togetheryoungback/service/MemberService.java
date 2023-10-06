@@ -26,4 +26,8 @@ public interface MemberService {
     public void saveNickname(String memberNickname, Long id);
 
     public void saveTel(String memberTel, Long id);
+
+    public void cancelWithdraw(Long id);
+
+    public void withdraw(Long id);
 }
