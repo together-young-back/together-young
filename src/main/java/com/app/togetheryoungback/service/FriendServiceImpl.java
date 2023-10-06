@@ -1,8 +1,7 @@
 package com.app.togetheryoungback.service;
 
 import com.app.togetheryoungback.dao.FriendDAO;
-import com.app.togetheryoungback.domain.FriendDTO;
-import com.app.togetheryoungback.domain.FriendVO;
+import com.app.togetheryoungback.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,8 +31,8 @@ public class FriendServiceImpl implements FriendService {
 //    친구 검색
 
     @Override
-    public Optional<FriendVO> seslect(Long id) {
-        return friendDAO.selectDao(id);
+    public List<FriendDTO> getSearchFriend(Search search) {
+        return friendDAO.selectDao(search);
     }
 
 //    친구 리스트 목록으로 이동
@@ -43,4 +42,15 @@ public class FriendServiceImpl implements FriendService {
         return friendDAO.findAllFriend(memberId);
     }
 
+//    친구가 최근 보낸 쪽지 상세보기
+    @Override
+    public MessageSentDTO getFriendMessage(Long messageId) {
+        return friendDAO.messageSent(messageId);
+    }
+
+//    친구가 최근 받은 쪽지 상세보기
+    @Override
+    public MessageReceivedDTO getFriendReceivedMessage(Long messageId) {
+        return friendDAO.messageReceived(messageId);
+    }
 }

@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.togetheryoungback.mapper.FriendMapper">
 
-<!-- 친구 추가   -->
     <insert id="insert">
         INSERT INTO TBL_FRIEND
         <choose>
@@ -15,24 +14,12 @@
         </choose>
     </insert>
 
-
-<!-- 친구 삭제   -->
     <delete id="delete">
         DELETE
         FROM TBL_FRIEND
         WHERE ID = #{id}
     </delete>
 
-<!-- 친구 검색   -->
-    <select id="select" resultType="FriendVO">
-        SELECT TF.MEMBER_ID, TF.FRIEND_ID, TF.FRIEND_DESCRIPTION, TM.MEMBER_KAKAO_PROFILE_URL, TM.MEMBER_NICKNAME
-        FROM TBL_FRIEND TF
-            JOIN TBL_MEMBER TM
-            ON TM.ID = TF.FRIEND_ID
-        WHERE FRIEND_REQUEST_STATUS = 'ACCEPTED' AND MEMBER_ID = #{id}
-    </select>
-
-<!-- 친구 리스트 목록   -->
     <select id="selectAllFriend" resultType="FriendDTO">
         SELECT TM.MEMBER_KAKAO_PROFILE_URL,TM.MEMBER_NICKNAME,TF.FRIEND_DESCRIPTION
         FROM TBL_FRIEND TF
@@ -41,5 +28,35 @@
         WHERE TF.MEMBER_ID = #{id} AND TF.FRIEND_REQUEST_STATUS = 'ACCEPTED'
     </select>
 
+    <select id="selectFriendMessage" resultType="messageSentDTO">
+        SELECT MEMBER_NICKNAME, MESSAGE_TITLE, MESSAGE_CONTENT
+        FROM TBL_MESSAGE MES
+            JOIN TBL_SENT_MESSAGE SM
+            ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_SENT_ID = #{id}
+                JOIN TBL_MEMBER MEM
+                ON MEM.ID = MES.MEMBER_SENT_ID
+
+    </select>
+
+    <select id="friendReceivedMessage" resultType="MessageReceivedDTO">
+        SELECT MEMBER_NICKNAME, MESSAGE_TITLE, MESSAGE_CONTENT
+        FROM TBL_MESSAGE MES
+            JOIN TBL_RECEIVED_MESSAGE RM
+            ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{id}
+                JOIN TBL_MEMBER MEM
+                ON MEM.ID = MES.MEMBER_RECEIVED_ID
+    </select>
+
+
+<!--    <select id="selectFriend" resultType="friendDAO">-->
+<!--        SELECT  TF.MEMBER_ID, TF.FRIEND_ID,TF.FRIEND_DESCRIPTION, TM.MEMBER_KAKAO_PROFILE_URL, TM.MEMBER_NICKNAME-->
+<!--        FROM-->
+<!--            (SELECT MEMBER_KAKAO_PROFILE_URL, MEMBER_NICKNAME-->
+<!--             FROM TBL_MEMBER TM-->
+<!--             WHERE MEMBER_NICKNAME LIKE '%' || #{keyword} || '%')-->
+<!--            JOIN TBL_FRIEND TF-->
+<!--            ON TM.ID = TF.FRIEND_ID-->
+<!--        WHERE FRIEND_REQUEST_STATUS = 'ACCEPTED' AND MEMBER_ID = #{id}-->
+<!--    </select>-->
 
 </mapper>
