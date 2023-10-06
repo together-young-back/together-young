@@ -53,85 +53,20 @@ $(document).ready(function () {
         }
     }
 
-    /*
-    닉네임 에러시
-    .nicknameBox {
-      border-color: #e92525;
-      color: #e92525;
-    }
+    const $modalBackground = $(".modal-background");
+    const $modal = $(".modal-container");
 
-    .nicknameUpdateMessageContainer {
-      color: rgb(233, 37, 37);
-    }
-
-    .nicknameUpdateMessageContainer > svg {
-      fill: rgb(233, 37, 37) !important;
-    }
-    */
-
-    $(document).on("click", function (e) {
-        // 2. 닉네임 중복확인 버튼 누를시 중복확인 버튼 css에 background-color: #d4e5f9; 저장 버튼 css에 background-color: #2a7de1; 주기
-        if (e.target === verifyNickname) {
-            verifyNickname.css("background-color", "#d4e5f9");
-            saveNickname.css("background-color", "#2a7de1");
-            saveNickname.css("cursor", "pointer");
-        }
-
-        // 3. 저장 버튼 누를시 저장 버튼 css에 background-color: #1b5192; 주기
-        if (e.target === saveNickname) {
-            verifyNickname.css("background-color", "#fff");
-            saveNickname.css("background-color", "#1b5192");
-        }
-
-        // 4. 중복확인이나 저장버튼 밖을 누르면 색깔 다시 돌아오기
-        if (e.target !== (verifyNickname && saveNickname)) {
-            if (verifyNickname.css("background-color") === "#d4e5f9") {
-                verifyNickname.css("background-color", "#fff");
-                saveNickname.css("background-color", "#2a7de1");
-                saveNickname.css("cursor", "not-allowed");
-            }
-            if (saveNickname.css("background-color") === "#1b5192") {
-                verifyNickname.css("background-color", "#fff");
-                saveNickname.css("background-color", "#2a7de1");
-                saveNickname.css("cursor", "not-allowed");
-            }
-        }
-        // 5. 큰 옵션 선택하면 초기화되는 기능
-        if (
-            e.target === editProfile ||
-            e.target === backwardButton ||
-            e.target === myProfile ||
-            e.target === membershipWithdrawal
-        ) {
-            verifyNickname.css("background-color", "#fff");
-            saveNickname.css("background-color", "#d4e5f9");
-            saveNickname.css("cursor", "not-allowed");
-        }
+    // 버튼 클릭 시 모달 표시
+    $(".membershipWithdrawalButton").click(function () {
+        $modalBackground.fadeIn();
+        $modal.fadeIn();
     });
 
-    // 6. 서비스 알림 동의, 광고 알림 동의 버튼 누를 시 label 태그에 checked 추가하기, 이미 checked되 있는 상태에서 다시 한번 누르면 checked 삭제하기
-    serviceNotificationAgreementContainer.on("click", function (e) {
-        changeChecked(e);
+    // 모달 닫기 버튼 클릭 시 모달 닫기
+    $modal.find(".btn-close, #modal-alert-back").click(function () {
+        $modalBackground.fadeOut();
+        $modal.fadeOut();
     });
-    commercialNotificationAgreementContainer.on("click", function (e) {
-        changeChecked(e);
-    });
-
-    function changeChecked(event) {
-        if (event.target === serviceNotificationAgreementContainer) {
-            if (serviceNotificationLabel.hasClass("checked")) {
-                serviceNotificationLabel.removeClass("checked");
-            } else {
-                serviceNotificationLabel.addClass("checked");
-            }
-        } else if (event.target === commercialNotificationAgreementContainer) {
-            if (commercialNotificationLabel.hasClass("checked")) {
-                commercialNotificationLabel.removeClass("checked");
-            } else {
-                commercialNotificationLabel.addClass("checked");
-            }
-        }
-    }
 
     //7. 회원탈퇴 링크버튼 누를 시 profileContentsContainer 에서 profileContentsHeader, membershipWithdrawalWrapper만  display: block 설정하고 나머지 요소들에 display: none 설정하기
     membershipWithdrawalLinkButton.on("click", function () {
@@ -203,9 +138,5 @@ $(document).ready(function () {
             button.css("background-color", "#2A7DE1");
             button.css("cursor", "pointer");
         }
-    });
-
-    $(document).on("click", function (e) {
-        console.log(e.target);
     });
 });

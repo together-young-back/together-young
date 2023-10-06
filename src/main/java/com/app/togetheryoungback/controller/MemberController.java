@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
@@ -29,11 +30,6 @@ import java.util.UUID;
 @RequestMapping("/member/*")
 public class MemberController {
     private final MemberService memberService;
-    private final GeneralPostService generalPostService;
-    private final MeetingPostService meetingPostService;
-    private final GeneralReplyService generalReplyService;
-    private final MeetingReplyService meetingReplyService;
-    private final ParticipationService participationService;
 
     // 로그인 페이지로 이동
     @GetMapping("login")
@@ -136,6 +132,15 @@ public class MemberController {
         return new RedirectView("/member/my-page");
     }
 
+    @GetMapping("withdraw")
+    public RedirectView withdraw(HttpSession session, RedirectAttributes redirectAttributes){
+        MemberVO sessionVO = (MemberVO) session.getAttribute("member");
+        memberService.withdraw(sessionVO.getId());
+        session.invalidate();
+
+        redirectAttributes.addFlashAttribute("withdraw", "true");
+        return new RedirectView("/member/login");
+    }
 
     // 북마크로 이동
     @GetMapping("bookmark")
