@@ -8,37 +8,25 @@ import org.springframework.stereotype.Component;
 public class GeneralBookmarkDTO {
     //    일반 북마크 번호
     private Long id;
-    //    일반 게시글 번호
     //    회원 번호
     private Long memberId;
     //    일반 게시글 번호
     private Long generalPostId;
     //    카테고리
-    private Long meetingPostCategory;
-    //    모임 지역
-    private String meetingPostRegion;
+    private String generalPostCategory;
     //    게시글 제목
-    private String meetingPostTitle;
+    private String generalPostTitle;
     //    게시글 내용
-    private String meetingPostContent;
-    //    모임 날짜
-    private String meetingDate;
-    //    모임 진행 시간
-    private Long meetingDuration;
-    //    모임 최소 인원
-    private Long meetingPostMin;
-    //    모임 최대 인원
-    private Long meetingPostMax;
-    //    모임 장소
-    private String meetingPlace;
+    private String generalPostContent;
     //    조회수 카운트
-    private Long meetingPostViewCount;
+    private int generalPostViewCount;
     //    좋아요 카운트
-    private Long meetingPostLikeCount;
+    private int generalPostLikeCount;
     //    북마크 카운트
-    private Long meetingPostBookmarkCount;
+    private int generalPostBookmarkCount;
     //    글 작성 시간
-    private String meetingPostWriteTime;
-    //    글 수정 시간
-    private String meetingPostUpdateTime;
+    private String generalPostWriteTime;
+    //    글 수정시간
+    private String generalPostUpdateTime;
+
 }

@@ -13,7 +13,7 @@ public class MeetingBookmarkDTO {
     //    모임 게시글 번호
     private Long meetingPostId;
     //    카테고리
-    private Long meetingPostCategory;
+    private String meetingPostCategory;
     //    모임 지역
     private String meetingPostRegion;
     //    게시글 제목
@@ -23,21 +23,23 @@ public class MeetingBookmarkDTO {
     //    모임 날짜
     private String meetingDate;
     //    모임 진행 시간
-    private Long meetingDuration;
+    private int meetingDuration;
     //    모임 최소 인원
-    private Long meetingPostMin;
+    private int meetingPostMin;
     //    모임 최대 인원
-    private Long meetingPostMax;
+    private int meetingPostMax;
     //    모임 장소
     private String meetingPlace;
     //    조회수 카운트
-    private Long meetingPostViewCount;
+    private int meetingPostViewCount;
     //    좋아요 카운트
-    private Long meetingPostLikeCount;
+    private int meetingPostLikeCount;
     //    북마크 카운트
-    private Long meetingPostBookmarkCount;
+    private int meetingPostBookmarkCount;
     //    글 작성 시간
     private String meetingPostWriteTime;
     //    글 수정 시간
     private String meetingPostUpdateTime;
+    //    모임 시간 지나갔는지 여부 확인 체크(controller에서 값을 넣을 것)
+    private boolean isMeetingTimeNotExpired;
 }

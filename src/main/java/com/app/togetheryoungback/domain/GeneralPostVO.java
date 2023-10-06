@@ -12,20 +12,19 @@ public class GeneralPostVO {
 //    회원 번호
     private Long memberId;
 //    카테고리
-    private Long generalPostCategory;
+    private String generalPostCategory;
 //    게시글 제목
     private String generalPostTitle;
 //    게시글 내용
     private String generalPostContent;
 //    조회수 카운트
-    private Long generalPostViewCount;
+    private int generalPostViewCount;
 //    좋아요 카운트
-    private Long generalPostLikeCount;
+    private int generalPostLikeCount;
 //    북마크 카운트
-    private Long generalPostBookmarkCount;
+    private int generalPostBookmarkCount;
 //    글 작성 시간
     private String generalPostWriteTime;
 //    글 수정시간
     private String generalPostUpdateTime;
-
 }

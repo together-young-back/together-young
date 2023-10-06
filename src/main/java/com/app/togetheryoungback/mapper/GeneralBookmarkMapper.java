@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-
 //일반 게시글 북마크 Mapper
 public interface GeneralBookmarkMapper {
 //    일반 게시글 출력

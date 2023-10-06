@@ -1,5 +1,6 @@
 package com.app.togetheryoungback.controller;
 
+import com.app.togetheryoungback.domain.MeetingBookmarkDTO;
 import com.app.togetheryoungback.domain.MemberVO;
 import com.app.togetheryoungback.service.*;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,8 @@ import java.util.UUID;
 @RequestMapping("/member/*")
 public class MemberController {
     private final MemberService memberService;
+    private final GeneralBookmarkService generalBookmarkService;
+    private final MeetingBookmarkService meetingBookmarkService;
 
     // 로그인 페이지로 이동
     @GetMapping("login")
@@ -144,8 +147,11 @@ public class MemberController {
 
     // 북마크로 이동
     @GetMapping("bookmark")
-    public void goToBookmark() {
-        ;
+    public void goToBookmark(Model model, HttpSession session) {
+        MemberVO sessionVO = (MemberVO) session.getAttribute("member");
+        model.addAttribute("generalPosts", generalBookmarkService.loadGeneralBookmarks(sessionVO.getId()));
+        log.info("결과 = " + meetingBookmarkService.loadMeetingBookmarks(sessionVO.getId()));
+        model.addAttribute("meetingPosts", meetingBookmarkService.loadMeetingBookmarks(sessionVO.getId()));
     }
 
     // 나의 일정으로 이동
