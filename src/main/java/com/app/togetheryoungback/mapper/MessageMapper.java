@@ -28,10 +28,10 @@ public interface MessageMapper {
     public MessageDTO select(Long messageId);
 
     //    받은 메시지 총 개수
-    public int selectCountOfMessageReceived(@Param("search") Search search);
+    public int selectCountOfMessageReceived(Long memberId);
 
     //    받은 메시지 목록
-    public List<MessageReceivedDTO> selectAllReceived(Long memberId);
+    public List<MessageReceivedDTO> selectAllReceived(@Param("pagination") Pagination pagination , @Param("memberId") Long memberId);
 
     //    받은 메시지 상세보기
     public MessageReceivedDTO selectReceived(Long messageId);
@@ -41,10 +41,10 @@ public interface MessageMapper {
 
 
     //    보낸 메시지 총 개수
-    public int selectCountOfMessageSent(@Param("search") Search search);
+    public int selectCountOfMessageSent(Long memberId);
 
     //    보낸 메시지 목록
-    public List<MessageSentDTO> selectAllSent(Long memberId);
+    public List<MessageSentDTO> selectAllSent(@Param("pagination") Pagination pagination , @Param("memberId") Long memberId);
 
     //    보낸 메시지 상세보기
     public MessageSentDTO selectSent(Long messageId);

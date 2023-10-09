@@ -8,7 +8,7 @@
     <link data-n-head="ssr" rel="preload" as="style"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/message/sent.css">
+    <link rel="stylesheet" href="/css/message/list.css">
     <link rel="stylesheet" href="/css/header-footer.css"></link>
     <link rel="icon" href="/images/favicon.ico">
     <style>
@@ -32,7 +32,7 @@
                             <div class="login-container">
                                 <section class="login-user-container">
                                     <div class="login-user-avatar">
-                                        <div class="no-avatar">
+                                        <div class="no-avatar" th:if="${session.member.memberImgName == null and session.member.memberKakaoProfileUrl == null}">
                                             <svg width="36" height="36" viewBox="0 0 36 36" fill="black"
                                                  xmlns="http://www.w3.org/2000/svg" style="fill:#CFD4D7;"
                                                  data-v-bd9f2bcc="" data-v-16c10fa5="">
@@ -42,24 +42,33 @@
                                                         data-v-bd9f2bcc=""></path>
                                             </svg>
                                         </div>
+                                        <div th:if="${session.member.memberImgName != null}">
+                                            <img class="sidebar-profile-img"
+                                                 th:src="@{/file/display(fileName=${session.member.memberImgPath} + '/' + ${session.member.memberImgName})}">
+                                        </div>
+                                        <div th:if="${session.member.memberKakaoProfileUrl != null and session.member.memberImgName == null}">
+                                            <img class="sidebar-profile-img" th:src="${session.member.memberKakaoProfileUrl}">
+                                        </div>
                                     </div>
                                     <div>
-                                        <div class="need-login">
-                                            홍길동
-                                        </div>
+                                        <div th:text="${session.member.memberNickname}" class="need-login"></div>
                                         <div class="userEmailContainer">
-                                            <div class="caption1" style="color: #767D82; letter-spacing: -0.25px;">
-                                                abcd@naver.com
-                                            </div>
+                                            <div th:text="${session.member.memberEmail}" class="caption1" style="color: #767D82; letter-spacing: -0.25px;"></div>
                                         </div>
                                     </div>
                                 </section>
                                 <div class="page-category">
-                                    <button class="to-mypage">마이페이지</button>
-                                    <button class="to-mypage">친구 목록</button>
+                                    <button class="to-mypage">
+                                        <a href="/member/my-page">마이페이지</a>
+                                    </button>
+                                    <button class="to-mypage">
+                                        <a href="/friend/list">친구 목록</a>
+                                    </button>
                                 </div>
                             </div>
-                            <button class="to-post-write">게시글 작성</button>
+                            <a href="/general-community/write">
+                                <button class="to-post-write">게시글 작성</button>
+                            </a>
                             <div class="search-bar">
                                 <input type="text" autocomplete="off" placeholder="친구이름을 입력해보세요"
                                        class="search-input search-second">
@@ -97,7 +106,8 @@
                                     <div class="profileContentsHeader">
                                         <div class="profileContentsTitle">
                                             <div class="personalInfoSetting">
-                                                보낸 메세지 보관함
+                                                보낸 메세지 보관함:&nbsp;
+                                                <th:block th:text="${pagination.total} + '개'"></th:block>
                                             </div>
                                             <div>
                                                 <a href="/message/write">
@@ -108,78 +118,42 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="right-box-friend-box">
-                                        <div class="right-box-friend"
-                                             style="background-color: rgb(252,252,252); padding: 4px 0px">
-                                            <div class="right-box-profile">
-                                                <div class="right-box-profile-box">
-                                                    <input type="checkbox" id="idx" name="idx" onclick="toggleCheck('fmNoteData','idx',this)" onfocus="this.blur()">
-                                                </div>
-                                            </div>
-                                            <div class="right-box-name">
-                                                <div class="title">제목</div>
-                                                <div class="nickname">받은사람</div>
-                                                <div class="date">날짜</div>
-                                            </div>
+                                    <div class="right-box-friend-box" style="background-color: rgb(252,252,252); padding: 4px 0px">
+                                        <div class="right-box-name">
+                                            <div class="title">제목</div>
+                                            <div class="nickname">받은사람</div>
+                                            <div class="date">날짜</div>
                                         </div>
                                     </div>
-
-                                    <div class="right-box-friend-box">
-                                        <div class="right-box-friend"
-                                             style="background-color: rgb(252,252,252); padding: 4px 0px">
-                                            <div class="right-box-profile">
-                                                <div class="right-box-profile-box">
-                                                    <input type="checkbox" id="idx_1" name="idx_1" onclick="toggleCheck('fmNoteData','idx_1',this)" onfocus="this.blur()">
-                                                </div>
+                                    <th:block th:if="${#lists.size(messagesReceived) != 0}">
+                                        <th:block th:each="messageReceived:${messagesReceived}">
+                                            <div th:object="${messageReceived}" class="right-box-friend"
+                                                 style="background-color: rgb(252,252,252); padding: 4px 0px">
+                                                <a th:href="@{'/message/received-detail?messageId=' + *{messageId}}" class="right-box-name" style="cursor: pointer;">
+                                                    <div th:text="*{messageTitle}" class="message-title"></div>
+                                                    <div th:text="*{memberNickname}" class="message-nickname"></div>
+                                                    <div th:text="*{messageCreateTime}" class="message-date"></div>
+                                                </a>
                                             </div>
-                                            <div class="right-box-name">
-                                                <div class="message-title">질문에 대한 답변입니다.</div>
-                                                <div class="message-nickname">손오공</div>
-                                                <div class="message-date">2023.01.03</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="right-box-friend-box">
-                                        <div class="right-box-friend"
-                                             style="background-color: rgb(252,252,252); padding: 4px 0px">
-                                            <div class="right-box-profile">
-                                                <div class="right-box-profile-box">
-                                                    <input type="checkbox" id="idx_2" name="idx_2" onclick="toggleCheck('fmNoteData','idx_2',this)" onfocus="this.blur()">
-                                                </div>
-                                            </div>
-                                            <div class="right-box-name">
-                                                <div class="message-title">안삽니다.</div>
-                                                <div class="message-nickname">삼장법사</div>
-                                                <div class="message-date">2023.01.02</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="right-box-friend-box">
-                                        <div class="right-box-friend"
-                                             style="background-color: rgb(252,252,252); padding: 4px 0px">
-                                            <div class="right-box-profile">
-                                                <div class="right-box-profile-box">
-                                                    <input type="checkbox" id="idx_3" name="idx_3" onclick="toggleCheck('fmNoteData','idx_3',this)" onfocus="this.blur()">
-                                                </div>
-                                            </div>
-                                            <div class="right-box-name">
-                                                <div class="message-title">날짜 확인했습니다. 감사합니다</div>
-                                                <div class="message-nickname">저팔계</div>
-                                                <div class="message-date">2023.01.01</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        </th:block>
+                                    </th:block>
+                                    <th:block th:unless="${#lists.size(messagesReceived) != 0}">
+                                        <div class="none-font1">보관된 메시지가 없습니다.</div>
+                                        <div class="none-font2">친구와 메시지를 주고 받아보세요!</div>
+                                    </th:block>
                                 </div>
                             </div>
                         </div>
                         <div class="page-btn-wrap">
-                            <div class="btn-grid">&lt</div>
-                            <a href="#" class="btn-grid change-page">이전</a>
-                            <a href="#" class="btn-grid change-page number">1</a>
-                            <a href="#" class="btn-grid change-page">다음</a>
-                            <div class="btn-grid">&gt</div>
+                            <div id="paging-wrap">
+                                <a th:if="${pagination.prev}" th:href="'received/' + ${pagination.startPage - 1}" class="change-page paging paging-move"><img src="/images/prev.png" width="15px"></a>
+                                <th:block th:each="page:${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+                                    <a th:if="${page eq pagination.page}" class="paging paging-checked" th:text="${page}"></a>
+                                    <a th:unless="${page eq pagination.page}" th:href="'received/' + ${page}" class="change-page paging" th:text="${page}"></a>
+                                </th:block>
+                                <a th:if="${pagination.next}" th:href="'received/' + ${pagination.endPage + 1}" class="change-page paging paging-move"><img src="/images/next.png" width="15px"></a>
+                                <div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -189,5 +163,7 @@
 </div>
 <footer th:replace="~{main/footer :: footer}"></footer>
 </body>
-
+<script th:inline="javascript">
+    const messagesReceived = [[${messagesReceived}]];
+</script>
 </html>

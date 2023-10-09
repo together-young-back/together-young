@@ -4,6 +4,7 @@ import com.app.togetheryoungback.domain.*;
 import com.app.togetheryoungback.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -32,10 +33,13 @@ public class MessageController {
 
     // 받은 메시지 목록으로 이동
     @GetMapping("received")
-    public List<MessageReceivedDTO> goToReceivedMessagesForm(HttpSession session){
+    public void goToReceivedMessagesForm(Pagination pagination, Model model, HttpSession session){
         MemberVO memberVO = (MemberVO) session.getAttribute("member");
         Long memberId = memberVO.getId();
-        return messageService.getMessagesReceived(memberId);
+        pagination.setTotal(messageService.getCountOfMessageReceived(memberId));
+        pagination.progress();
+        model.addAttribute("pagination", pagination);
+        model.addAttribute("messagesReceived", messageService.getMessagesReceived(pagination, memberId));
     }
 
     // 받은 메시지 상세보기로 이동
@@ -53,10 +57,13 @@ public class MessageController {
 
     //    보낸 메시지 목록으로 이동
     @GetMapping("sent")
-    public List<MessageSentDTO> goToSentMessagesForm(HttpSession session){
+    public void goToSentMessagesForm(Pagination pagination, Model model, HttpSession session){
         MemberVO memberVO = (MemberVO) session.getAttribute("member");
         Long memberId = memberVO.getId();
-        return messageService.getMessagesSent(memberId);
+        pagination.setTotal(messageService.getCountOfMessageSent(memberId));
+        pagination.progress();
+        model.addAttribute("pagination", pagination);
+        model.addAttribute("messagesReceived", messageService.getMessagesSent(pagination, memberId));
     }
 
     // 보낸 메시지 상세보기로 이동

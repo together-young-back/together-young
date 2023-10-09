@@ -44,13 +44,13 @@ public class MessageDAO {
     }
 
     //    받은 메시지 총 개수
-    public int findCountOfMessageReceived(Search search){
-        return messageMapper.selectCountOfMessageReceived(search);
+    public int findCountOfMessageReceived(Long memberId){
+        return messageMapper.selectCountOfMessageReceived(memberId);
     }
 
     //    받은 메시지 목록
-    public List<MessageReceivedDTO> findAllReceived(Long memberId){
-        return messageMapper.selectAllReceived(memberId);
+    public List<MessageReceivedDTO> findAllReceived(Pagination pagination, Long memberId){
+        return messageMapper.selectAllReceived(pagination, memberId);
     }
 
     //    받은 메시지 상세보기
@@ -63,13 +63,13 @@ public class MessageDAO {
 
 
     //    보낸 메시지 총 개수
-    public int findCountOfMessageSent(Search search){
-        return messageMapper.selectCountOfMessageSent(search);
+    public int findCountOfMessageSent(Long memberId){
+        return messageMapper.selectCountOfMessageSent(memberId);
     }
 
     //    보낸 메시지 목록
-    public List<MessageSentDTO> findAllSent(Long memberId){
-        return messageMapper.selectAllSent(memberId);
+    public List<MessageSentDTO> findAllSent(Pagination pagination, Long memberId){
+        return messageMapper.selectAllSent(pagination, memberId);
     }
 
     //    보낸 메시지 상세보기

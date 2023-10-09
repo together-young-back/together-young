@@ -660,7 +660,11 @@ footer {
     word-break: keep-all;
 }
 
-.right-box-friend-box {}
+.right-box-friend-box {
+    border-radius: 4px;
+    display: flex !important;
+    flex-direction: row;
+}
 
 
 .right-box-profile {
@@ -861,7 +865,7 @@ footer {
     width:312px;
     padding : 6px 0 6px;
     font-weight: normal;
-    text-align: left;
+    text-align: center;
 }
 
 .message-nickname{
@@ -942,4 +946,35 @@ footer {
 
 .btn-grid:last-child {
     margin-right: 0;
+}
+
+div#paging-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    text-align: center;
+}
+
+a.paging {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+a.paging-checked {
+    color: #2A7DE1;
+    font-weight: 700;
+}
+
+a.paging-move {
+    margin: 0px 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-profile-img {
+    width: 68px;
+    height: 68px;
 }

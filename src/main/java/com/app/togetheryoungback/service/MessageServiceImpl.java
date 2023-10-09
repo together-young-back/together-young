@@ -71,14 +71,14 @@ public class MessageServiceImpl implements MessageService {
 
     //    받은 메시지 총 개수
     @Override
-    public int getCountOfMessageReceived(Search search) {
-        return messageDAO.findCountOfMessageReceived(search);
+    public int getCountOfMessageReceived(Long memberId) {
+        return messageDAO.findCountOfMessageReceived(memberId);
     }
 
     //    받은 메시지 목록
     @Override
-    public List<MessageReceivedDTO> getMessagesReceived(Long memberId) {
-        return messageDAO.findAllReceived(memberId);
+    public List<MessageReceivedDTO> getMessagesReceived(Pagination pagination, Long memberId) {
+        return messageDAO.findAllReceived(pagination, memberId);
     }
 
     //    받은 메시지 상세보기
@@ -100,14 +100,14 @@ public class MessageServiceImpl implements MessageService {
 
     //    보낸 메시지 총 개수
     @Override
-    public int getCountOfMessageSent(Search search) {
-        return messageDAO.findCountOfMessageSent(search);
+    public int getCountOfMessageSent(Long memberId) {
+        return messageDAO.findCountOfMessageSent(memberId);
     }
 
     //    보낸 메시지 목록
     @Override
-    public List<MessageSentDTO> getMessagesSent(Long memberId) {
-        return messageDAO.findAllSent(memberId);
+    public List<MessageSentDTO> getMessagesSent(Pagination pagination, Long memberId) {
+        return messageDAO.findAllSent(pagination, memberId);
     }
 
     //    보낸 메시지 상세보기
