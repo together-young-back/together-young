@@ -660,13 +660,6 @@ footer {
     word-break: keep-all;
 }
 
-.right-box-friend-box {
-    border-radius: 4px;
-    display: flex !important;
-    flex-direction: row;
-}
-
-
 .right-box-profile {
     display: flex !important;
     margin-right: 12px;

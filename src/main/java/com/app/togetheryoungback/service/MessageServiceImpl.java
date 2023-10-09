@@ -3,7 +3,6 @@ package com.app.togetheryoungback.service;
 import com.app.togetheryoungback.dao.MessageDAO;
 import com.app.togetheryoungback.domain.*;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

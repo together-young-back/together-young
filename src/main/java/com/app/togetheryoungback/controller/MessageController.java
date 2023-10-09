@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -44,8 +43,8 @@ public class MessageController {
 
     // 받은 메시지 상세보기로 이동
     @GetMapping("received-detail")
-    public MessageReceivedDTO goToMessageReceivedDetail(Long messageId){
-        return messageService.getMessageReceived(messageId);
+    public void goToMessageReceivedDetail(Long messageId, Model model){
+        model.addAttribute("messageReceived", messageService.getMessageReceived(messageId));
     }
 
     //    받은 메시지 삭제
@@ -68,8 +67,8 @@ public class MessageController {
 
     // 보낸 메시지 상세보기로 이동
     @GetMapping("sent-detail")
-    public MessageSentDTO goToMessageSentDetail(Long messageId){
-        return messageService.getMessageSent(messageId);
+    public void goToMessageSentDetail(Long messageId, Model model){
+        model.addAttribute("messageSent", messageService.getMessageSent(messageId));
     }
 
     //    보낸 메시지 삭제

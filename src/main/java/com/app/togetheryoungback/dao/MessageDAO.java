@@ -3,7 +3,6 @@ package com.app.togetheryoungback.dao;
 import com.app.togetheryoungback.domain.*;
 import com.app.togetheryoungback.mapper.MessageMapper;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -38,7 +37,7 @@ public class MessageDAO {
         messageMapper.insertSent(messageId);
     }
 
-    //    메시지 객체 불러오기
+    //    메시지 삭제시 메시지 객체 불러오기
     public MessageDTO selectMessage(Long messageId){
         return messageMapper.select(messageId);
     }

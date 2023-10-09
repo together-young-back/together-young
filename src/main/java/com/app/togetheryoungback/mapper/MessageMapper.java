@@ -24,7 +24,7 @@ public interface MessageMapper {
     //    메시지 작성시 보낸 메시지함 등록
     public void insertSent(Long messageId);
 
-    //    메시지 객체 불러오기
+    //    메시지 삭제시 메시지 객체 불러오기
     public MessageDTO select(Long messageId);
 
     //    받은 메시지 총 개수
