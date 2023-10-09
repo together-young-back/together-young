@@ -18,6 +18,16 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="/js/message/list.js"></script>
     <script src="/js/header-footer.js"></script>
+    <script th:inline="javascript">
+        /* 세션 확인 */
+        var session = [[${session.member}]];
+        if (session == null) {
+            // 세션이 비어있거나 memberVO 속성이 없을 때 알림창 표시
+            alert('로그인이 필요합니다.');
+            // 로그인 페이지로 이동
+            window.location.href = '/member/login';
+        }
+    </script>
 </head>
 
 <body>

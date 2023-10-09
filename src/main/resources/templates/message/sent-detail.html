@@ -17,6 +17,16 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="/js/header-footer.js"></script>
+    <script th:inline="javascript">
+        /* 세션 확인 */
+        var session = [[${session.member}]];
+        if (session == null) {
+            // 세션이 비어있거나 memberVO 속성이 없을 때 알림창 표시
+            alert('로그인이 필요합니다.');
+            // 로그인 페이지로 이동
+            window.location.href = '/member/login';
+        }
+    </script>
 </head>
 
 <body>
@@ -102,7 +112,7 @@
                         <div class="right-box-big">
                             <div class="right-box-middle">
                                 <div class="right-box-small">
-                                    <div class="right-box-friend-box">
+                                    <div class="right-box-friend-box" th:if="${messageSent} != null">
                                         <div class="right-box-friend"
                                              style="background-color: rgb(252,252,252); padding: 4px 0px">
                                             <div class="right-box-name">
@@ -129,10 +139,15 @@
                                                     <div class="enter-button-icon">메시지 작성</div>
                                                 </button>
                                             </a>
-                                            <button class="delete-btn">
-                                                <div class="enter-button-icon">삭제</div>
-                                            </button>
+                                            <a th:href="@{/message/remove-sent-detail(messageId=${messageSent.messageId})}">
+                                                <button class="delete-btn">
+                                                    <div class="enter-button-icon">삭제</div>
+                                                </button>
+                                            </a>
                                         </div>
+                                    </div>
+                                    <div class="right-box-friend-box" th:if="${messageSent} == null">
+                                        <h3>해당 메시지는 존재하지 않거나 삭제된 메시지입니다.</h3>
                                     </div>
                                 </div>
                             </div>

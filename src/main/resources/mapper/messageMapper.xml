@@ -60,14 +60,6 @@
         ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{memberId}
     </select>
 
-<!--    <select id="selectAllReceived" resultType="messageReceivedDTO">-->
-<!--        SELECT MESSAGE_TITLE, MEM.MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME-->
-<!--        FROM TBL_MESSAGE MES JOIN TBL_RECEIVED_MESSAGE RM-->
-<!--        ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{memberId}-->
-<!--                             JOIN TBL_MEMBER MEM-->
-<!--        ON MEM.ID = MES.MEMBER_RECEIVED_ID-->
-<!--    </select>-->
-
     <select id="selectAllReceived" resultType="messageReceivedDTO">
         SELECT MESSAGE_ID, MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CREATE_TIME FROM
             (
@@ -88,9 +80,12 @@
     </select>
 
     <select id="selectReceived" resultType="messageReceivedDTO">
-        SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT
-        FROM TBL_MEMBER MEM JOIN TBL_MESSAGE MES
-        ON MEM.ID = MES.MEMBER_RECEIVED_ID AND MES.ID = #{messageId}
+        SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT, MES.ID AS "MESSAGE_ID"
+        FROM TBL_MESSAGE MES JOIN TBL_RECEIVED_MESSAGE RM
+        ON RM.MESSAGE_ID = MES.ID
+                             JOIN TBL_MEMBER MEM
+        ON MEM.ID = MES.MEMBER_RECEIVED_ID
+        WHERE MES.ID = #{messageId}
     </select>
 
     <delete id="deleteReceived">
@@ -103,14 +98,6 @@
         FROM TBL_MESSAGE MES JOIN TBL_SENT_MESSAGE SM
         ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{memberId}
     </select>
-
-<!--    <select id="selectAllSent" resultType="messageSentDTO">-->
-<!--        SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME-->
-<!--        FROM TBL_MESSAGE MES JOIN TBL_SENT_MESSAGE SM-->
-<!--        ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_SENT_ID = #{id}-->
-<!--                             JOIN TBL_MEMBER MEM-->
-<!--        ON MEM.ID = MES.MEMBER_SENT_ID-->
-<!--    </select>-->
 
     <select id="selectAllSent" resultType="messageSentDTO">
         SELECT MESSAGE_ID, MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CREATE_TIME FROM
@@ -132,9 +119,12 @@
     </select>
 
     <select id="selectSent" resultType="messageSentDTO">
-        SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT
-        FROM TBL_MEMBER MEM JOIN TBL_MESSAGE MES
-        ON MEM.ID = MES.MEMBER_SENT_ID AND MES.ID = #{messageId}
+        SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT, MES.ID AS "MESSAGE_ID"
+        FROM TBL_MESSAGE MES JOIN TBL_SENT_MESSAGE SM
+                                  ON SM.MESSAGE_ID = MES.ID
+                             JOIN TBL_MEMBER MEM
+                                  ON MEM.ID = MES.MEMBER_SENT_ID
+        WHERE MES.ID = #{messageId}
     </select>
 
     <delete id="deleteSent">
