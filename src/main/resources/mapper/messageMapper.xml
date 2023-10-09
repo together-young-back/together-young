@@ -8,13 +8,13 @@
                     <trim prefix="OR">
                         <choose>
                             <when test="type=='t'.toString()">
-                                POST_TITLE LIKE '%'||#{search.keyword}||'%'
+                                MESSAGE_TITLE LIKE '%'||#{search.keyword}||'%'
                             </when>
                             <when test="type=='c'.toString()">
-                                POST_CONTENT LIKE '%'||#{search.keyword}||'%'
+                                MESSAGE_CONTENT LIKE '%'||#{search.keyword}||'%'
                             </when>
                             <when test="type=='w'.toString()">
-                                MEMBER_NAME LIKE '%'||#{search.keyword}||'%'
+                                MEMBER_NICKNAME LIKE '%'||#{search.keyword}||'%'
                             </when>
                         </choose>
                     </trim>
@@ -22,6 +22,7 @@
             </trim>
         </if>
     </sql>
+
     <insert id="insert">
         INSERT INTO TBL_MESSAGE
         VALUES(SEQ_MESSAGE.NEXTVAL, #{memberSentId}, #{memberReceivedId}, #{messageTitle}, #{messageContent}, CURRENT_TIMESTAMP, 0)
@@ -54,23 +55,42 @@
     </select>
 
     <select id="selectCountOfMessageReceived" resultType="int">
-        SELECT COUNT(ID)
-        FROM TBL_RECEIVED_MESSAGE
-        <include refid="search"/>
+        SELECT COUNT(MES.ID)
+        FROM TBL_MESSAGE MES JOIN TBL_RECEIVED_MESSAGE RM
+        ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{memberId}
     </select>
 
+<!--    <select id="selectAllReceived" resultType="messageReceivedDTO">-->
+<!--        SELECT MESSAGE_TITLE, MEM.MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME-->
+<!--        FROM TBL_MESSAGE MES JOIN TBL_RECEIVED_MESSAGE RM-->
+<!--        ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{memberId}-->
+<!--                             JOIN TBL_MEMBER MEM-->
+<!--        ON MEM.ID = MES.MEMBER_RECEIVED_ID-->
+<!--    </select>-->
+
     <select id="selectAllReceived" resultType="messageReceivedDTO">
-        SELECT MESSAGE_TITLE, MEM.MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
-        FROM TBL_MESSAGE MES JOIN TBL_RECEIVED_MESSAGE RM
-        ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{id}
-                             JOIN TBL_MEMBER MEM
-        ON MEM.ID = MES.MEMBER_RECEIVED_ID
+        SELECT MESSAGE_ID, MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CREATE_TIME FROM
+            (
+                SELECT ROWNUM R, MESSAGE_ID, MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CREATE_TIME FROM
+                    (
+                        SELECT RM.MESSAGE_ID, MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CREATE_TIME
+                        FROM TBL_MESSAGE MES JOIN TBL_RECEIVED_MESSAGE RM
+                                                 ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{memberId}
+                                            JOIN TBL_MEMBER MEM
+                                                 ON MEM.ID = MES.MEMBER_RECEIVED_ID
+                        ORDER BY MES.ID DESC
+                    ) P1
+    <![CDATA[
+                WHERE ROWNUM <= #{pagination.endRow}
+            ) P2
+        WHERE P2.R >= #{pagination.startRow}
+        ]]>
     </select>
 
     <select id="selectReceived" resultType="messageReceivedDTO">
         SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT
         FROM TBL_MEMBER MEM JOIN TBL_MESSAGE MES
-        ON MEM.ID = MES.MEMBER_RECEIVED_ID AND MES.ID = #{id}
+        ON MEM.ID = MES.MEMBER_RECEIVED_ID AND MES.ID = #{messageId}
     </select>
 
     <delete id="deleteReceived">
@@ -79,23 +99,42 @@
     </delete>
 
     <select id="selectCountOfMessageSent" resultType="int">
-        SELECT COUNT(ID)
-        FROM TBL_SENT_MESSAGE
-        <include refid="search"/>
+        SELECT COUNT(MES.ID)
+        FROM TBL_MESSAGE MES JOIN TBL_SENT_MESSAGE SM
+        ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{memberId}
     </select>
 
+<!--    <select id="selectAllSent" resultType="messageSentDTO">-->
+<!--        SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME-->
+<!--        FROM TBL_MESSAGE MES JOIN TBL_SENT_MESSAGE SM-->
+<!--        ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_SENT_ID = #{id}-->
+<!--                             JOIN TBL_MEMBER MEM-->
+<!--        ON MEM.ID = MES.MEMBER_SENT_ID-->
+<!--    </select>-->
+
     <select id="selectAllSent" resultType="messageSentDTO">
-        SELECT MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CONTENT, MESSAGE_CREATE_TIME
-        FROM TBL_MESSAGE MES JOIN TBL_SENT_MESSAGE SM
-        ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_SENT_ID = #{id}
-                             JOIN TBL_MEMBER MEM
-        ON MEM.ID = MES.MEMBER_SENT_ID
+        SELECT MESSAGE_ID, MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CREATE_TIME FROM
+            (
+                SELECT ROWNUM R, MESSAGE_ID, MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CREATE_TIME FROM
+                    (
+                        SELECT SM.MESSAGE_ID, MESSAGE_TITLE, MEMBER_NICKNAME, MESSAGE_CREATE_TIME
+                        FROM TBL_MESSAGE MES JOIN TBL_SENT_MESSAGE SM
+                                                  ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_SENT_ID = #{memberId}
+                                             JOIN TBL_MEMBER MEM
+                                                  ON MEM.ID = MES.MEMBER_SENT_ID
+                        ORDER BY MES.ID DESC
+                    ) P1
+    <![CDATA[
+                WHERE ROWNUM <= #{pagination.endRow}
+            ) P2
+        WHERE P2.R >= #{pagination.startRow}
+        ]]>
     </select>
 
     <select id="selectSent" resultType="messageSentDTO">
         SELECT MEMBER_NICKNAME, MESSAGE_CREATE_TIME, MESSAGE_TITLE, MESSAGE_CONTENT
         FROM TBL_MEMBER MEM JOIN TBL_MESSAGE MES
-        ON MEM.ID = MES.MEMBER_SENT_ID AND MES.ID = #{id}
+        ON MEM.ID = MES.MEMBER_SENT_ID AND MES.ID = #{messageId}
     </select>
 
     <delete id="deleteSent">

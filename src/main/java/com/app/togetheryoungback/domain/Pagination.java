@@ -1,12 +1,12 @@
 package com.app.togetheryoungback.domain;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Data
 public class Pagination {
     private Integer page;
+    private int startRow;
+    private int endRow;
     private int rowCount;
     private int pageCount;
     private int startPage;
@@ -17,9 +17,10 @@ public class Pagination {
 
     public void progress() {
         this.page = page == null ? 1 : page;
-        this.rowCount = 5;
-        this.pageCount = 5;
-        this.total = total;
+        this.rowCount = 10;
+        this.pageCount = 10;
+        this.endRow = page * rowCount;
+        this.startRow = endRow - rowCount + 1;
         this.endPage = (int)(Math.ceil(page / (double)pageCount) * pageCount);
         this.startPage = endPage - pageCount + 1;
         this.realEnd = (int)Math.ceil(total / (double)rowCount);

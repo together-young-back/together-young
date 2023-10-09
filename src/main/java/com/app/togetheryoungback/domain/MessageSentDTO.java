@@ -3,6 +3,7 @@ package com.app.togetheryoungback.domain;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Component
@@ -12,7 +13,7 @@ public class MessageSentDTO {
     //    보낸 메시지 ID
     private Long id;
     //    메시지 ID : SentMessageVO와 MessageVO 연결
-    private Long messageID;
+    private Long messageId;
 
     //    보낸 유저
     private Long memberSentId;
@@ -23,7 +24,7 @@ public class MessageSentDTO {
     //    메시지 내용
     private String messageContent;
     //    보낸 시간
-    private String messageCreateTime;
+    private Date messageCreateTime;
     //    삭제 상태
     private Long messageDeleteStatus;
 
