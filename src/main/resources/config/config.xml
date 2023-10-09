@@ -11,6 +11,7 @@
         <typeAlias type="com.app.togetheryoungback.domain.MeetingBookmarkDTO" alias="meetingBookmarkDTO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MeetingReplyVO" alias="meetingReplyVO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MeetingPostVO" alias="meetingPostVO"/>
+        <typeAlias type="com.app.togetheryoungback.domain.MeetingPostDTO" alias="meetingPostDTO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MemberVO" alias="memberVO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MessageVO" alias="messageVO"/>
         <typeAlias type="com.app.togetheryoungback.domain.MessageDTO" alias="messageDTO"/>

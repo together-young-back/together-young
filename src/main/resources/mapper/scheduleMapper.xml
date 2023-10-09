@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.togetheryoungback.mapper.ScheduleMapper">
+
+
+    <select id="selectMeeting" resultType="meetingPostDTO">
+        SELECT
+            P.ID,
+            P.MEMBER_ID,
+            M.MEMBER_EMAIL,
+            M.MEMBER_NICKNAME,
+            P.MEETING_POST_TITLE,
+            P.MEETING_POST_CONTENT,
+            P.MEETING_DATE,
+            P.MEETING_POST_VIEW_COUNT,
+            P.MEETING_POST_BOOKMARK_COUNT,
+            (
+                SELECT COUNT(*)
+                FROM TBL_MEETING_REPLY R
+                WHERE R.MEETING_POST_ID = P.ID
+            ) AS MEETING_POST_REPLY_COUNT
+        FROM TBL_MEETING_POST P
+        INNER JOIN TBL_MEETING_BOOKMARK B ON B.MEETING_POST_ID = P.ID
+        INNER JOIN TBL_MEMBER M ON M.ID = B.MEMBER_ID
+        WHERE B.MEMBER_ID = #{memberId}
+        ORDER BY P.MEETING_DATE DESC
+    </select>
+
+    <delete id="deleteMeeting">
+            DELETE FROM TBL_MEETING_BOOKMARK
+            WHERE MEETING_POST_ID = #{postId}
+    </delete>
+</mapper>
