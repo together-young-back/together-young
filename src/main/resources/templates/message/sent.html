@@ -18,6 +18,16 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="/js/message/list.js"></script>
     <script src="/js/header-footer.js"></script>
+    <script th:inline="javascript">
+        /* 세션 확인 */
+        var session = [[${session.member}]];
+        if (session == null) {
+            // 세션이 비어있거나 memberVO 속성이 없을 때 알림창 표시
+            alert('로그인이 필요합니다.');
+            // 로그인 페이지로 이동
+            window.location.href = '/member/login';
+        }
+    </script>
 </head>
 
 <body>
@@ -125,11 +135,11 @@
                                             <div class="date">날짜</div>
                                         </div>
                                     </div>
-                                    <th:block th:if="${#lists.size(messagesReceived) != 0}">
-                                        <th:block th:each="messageReceived:${messagesReceived}">
-                                            <div th:object="${messageReceived}" class="right-box-friend"
+                                    <th:block th:if="${#lists.size(messagesSent) != 0}">
+                                        <th:block th:each="messageSent:${messagesSent}">
+                                            <div th:object="${messageSent}" class="right-box-friend"
                                                  style="background-color: rgb(252,252,252); padding: 4px 0px">
-                                                <a th:href="@{'/message/received-detail?messageId=' + *{messageId}}" class="right-box-name" style="cursor: pointer;">
+                                                <a th:href="@{'/message/sent-detail?messageId=' + *{messageId}}" class="right-box-name" style="cursor: pointer;">
                                                     <div th:text="*{messageTitle}" class="message-title"></div>
                                                     <div th:text="*{memberNickname}" class="message-nickname"></div>
                                                     <div th:text="*{messageCreateTime}" class="message-date"></div>
@@ -137,7 +147,7 @@
                                             </div>
                                         </th:block>
                                     </th:block>
-                                    <th:block th:unless="${#lists.size(messagesReceived) != 0}">
+                                    <th:block th:unless="${#lists.size(messagesSent) != 0}">
                                         <div class="none-font1">보관된 메시지가 없습니다.</div>
                                         <div class="none-font2">친구와 메시지를 주고 받아보세요!</div>
                                     </th:block>
@@ -146,12 +156,12 @@
                         </div>
                         <div class="page-btn-wrap">
                             <div id="paging-wrap">
-                                <a th:if="${pagination.prev}" th:href="'received/' + ${pagination.startPage - 1}" class="change-page paging paging-move"><img src="/images/prev.png" width="15px"></a>
+                                <a th:if="${pagination.prev}" th:href="'sent/' + ${pagination.startPage - 1}" class="change-page paging paging-move"><img src="/images/prev.png" width="15px"></a>
                                 <th:block th:each="page:${#numbers.sequence(pagination.startPage, pagination.endPage)}">
                                     <a th:if="${page eq pagination.page}" class="paging paging-checked" th:text="${page}"></a>
-                                    <a th:unless="${page eq pagination.page}" th:href="'received/' + ${page}" class="change-page paging" th:text="${page}"></a>
+                                    <a th:unless="${page eq pagination.page}" th:href="'sent/' + ${page}" class="change-page paging" th:text="${page}"></a>
                                 </th:block>
-                                <a th:if="${pagination.next}" th:href="'received/' + ${pagination.endPage + 1}" class="change-page paging paging-move"><img src="/images/next.png" width="15px"></a>
+                                <a th:if="${pagination.next}" th:href="'sent/' + ${pagination.endPage + 1}" class="change-page paging paging-move"><img src="/images/next.png" width="15px"></a>
                                 <div></div>
                             </div>
                         </div>
@@ -164,6 +174,6 @@
 <footer th:replace="~{main/footer :: footer}"></footer>
 </body>
 <script th:inline="javascript">
-    const messagesReceived = [[${messagesReceived}]];
+    const messagesSent = [[${messagesSent}]];
 </script>
 </html>
