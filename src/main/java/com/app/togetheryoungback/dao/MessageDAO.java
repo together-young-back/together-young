@@ -3,7 +3,6 @@ package com.app.togetheryoungback.dao;
 import com.app.togetheryoungback.domain.*;
 import com.app.togetheryoungback.mapper.MessageMapper;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -38,19 +37,19 @@ public class MessageDAO {
         messageMapper.insertSent(messageId);
     }
 
-    //    메시지 객체 불러오기
+    //    메시지 삭제시 메시지 객체 불러오기
     public MessageDTO selectMessage(Long messageId){
         return messageMapper.select(messageId);
     }
 
     //    받은 메시지 총 개수
-    public int findCountOfMessageReceived(Search search){
-        return messageMapper.selectCountOfMessageReceived(search);
+    public int findCountOfMessageReceived(Long memberId){
+        return messageMapper.selectCountOfMessageReceived(memberId);
     }
 
     //    받은 메시지 목록
-    public List<MessageReceivedDTO> findAllReceived(Long memberId){
-        return messageMapper.selectAllReceived(memberId);
+    public List<MessageReceivedDTO> findAllReceived(Pagination pagination, Long memberId){
+        return messageMapper.selectAllReceived(pagination, memberId);
     }
 
     //    받은 메시지 상세보기
@@ -63,13 +62,13 @@ public class MessageDAO {
 
 
     //    보낸 메시지 총 개수
-    public int findCountOfMessageSent(Search search){
-        return messageMapper.selectCountOfMessageSent(search);
+    public int findCountOfMessageSent(Long memberId){
+        return messageMapper.selectCountOfMessageSent(memberId);
     }
 
     //    보낸 메시지 목록
-    public List<MessageSentDTO> findAllSent(Long memberId){
-        return messageMapper.selectAllSent(memberId);
+    public List<MessageSentDTO> findAllSent(Pagination pagination, Long memberId){
+        return messageMapper.selectAllSent(pagination, memberId);
     }
 
     //    보낸 메시지 상세보기

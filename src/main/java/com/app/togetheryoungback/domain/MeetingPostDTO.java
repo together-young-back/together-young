@@ -5,15 +5,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class MeetingBookmarkDTO {
-    //    모임 북마크 번호
+//모임 게시글 DTO, 회원 정보 & 모임게시글 북마크 & 모임 게시글 댓글 & 모임 참석 테이블 & 게시글 카테고리 DTO
+public class MeetingPostDTO {
+    //    모임 게시글 번호
     private Long id;
     //    회원 번호
     private Long memberId;
-    //    모임 게시글 번호
-    private Long meetingPostId;
     //    카테고리
-    private String meetingPostCategory;
+    private Long meetingPostCategory;
     //    모임 지역
     private String meetingPostRegion;
     //    게시글 제목
@@ -23,23 +22,27 @@ public class MeetingBookmarkDTO {
     //    모임 날짜
     private String meetingDate;
     //    모임 진행 시간
-    private int meetingDuration;
+    private Long meetingDuration;
     //    모임 최소 인원
-    private int meetingPostMin;
+    private Long meetingPostMin;
     //    모임 최대 인원
-    private int meetingPostMax;
+    private Long meetingPostMax;
     //    모임 장소
     private String meetingPlace;
     //    조회수 카운트
-    private int meetingPostViewCount;
+    private Long meetingPostViewCount;
     //    좋아요 카운트
-    private int meetingPostLikeCount;
+    private Long meetingPostLikeCount;
     //    북마크 카운트
-    private int meetingPostBookmarkCount;
+    private Long meetingPostBookmarkCount;
     //    글 작성 시간
     private String meetingPostWriteTime;
     //    글 수정 시간
     private String meetingPostUpdateTime;
-    //    모임 시간 지나갔는지 여부 확인 체크(controller에서 값을 넣을 것)
-    private boolean isMeetingTimeNotExpired;
+    //    댓글 카운트
+    private Long meetingPostReplyCount;
+    //    유저 닉네임
+    private String memberNickname;
+    //    유저 이메일
+    private String memberEmail;
 }

@@ -51,8 +51,13 @@ public class MemberDAO {
         memberMapper.updateMemberTel(memberTel, id);
     }
 
+    // 복귀 계정 active 처리
+    public void cancelWithdraw(Long id) {
+        memberMapper.updateMemberStatus(id);
+    }
+
     //    계정 소프트 딜리트
     public void softDeleteAccount(Long id) {
-        memberMapper.softDelete(id);
+        memberMapper.updateToDelete(id);
     }
 }

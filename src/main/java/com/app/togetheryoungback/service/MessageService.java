@@ -1,7 +1,6 @@
 package com.app.togetheryoungback.service;
 
 import com.app.togetheryoungback.domain.*;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,14 +20,14 @@ public interface MessageService {
     //    메시지 작성시 보낸 메시지함 등록
     public void setSent(Long messageId);
 
-    //    메시지 객체 불러오기
+    //    메시지 삭제시 메시지 객체 불러오기
     public MessageDTO getMessage(Long messageId);
 
     //    받은 메시지 총 개수
-    public int getCountOfMessageReceived(Search search);
+    public int getCountOfMessageReceived(Long memberId);
 
     //    받은 메시지 목록
-    public List<MessageReceivedDTO> getMessagesReceived(Long memberId);
+    public List<MessageReceivedDTO> getMessagesReceived(Pagination pagination, Long memberId);
 
     //    받은 메시지 상세보기
     public MessageReceivedDTO getMessageReceived(Long messageId);
@@ -38,12 +37,12 @@ public interface MessageService {
 
 
     //    보낸 메시지 총 개수
-    public int getCountOfMessageSent(Search search);
+    public int getCountOfMessageSent(Long memberId);
 
     //    보낸 메시지 목록
-    public List<MessageSentDTO> getMessagesSent(Long memberId);
+    public List<MessageSentDTO> getMessagesSent(Pagination pagination, Long memberId);
 
-    //    메시지 상세보기
+    //    보낸 메시지 상세보기
     public MessageSentDTO getMessageSent(Long messageId);
 
     //    보낸 메시지함에서 메시지 삭제

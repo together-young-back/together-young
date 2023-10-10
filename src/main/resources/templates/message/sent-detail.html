@@ -17,6 +17,16 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="/js/header-footer.js"></script>
+    <script th:inline="javascript">
+        /* 세션 확인 */
+        var session = [[${session.member}]];
+        if (session == null) {
+            // 세션이 비어있거나 memberVO 속성이 없을 때 알림창 표시
+            alert('로그인이 필요합니다.');
+            // 로그인 페이지로 이동
+            window.location.href = '/member/login';
+        }
+    </script>
 </head>
 
 <body>
@@ -31,7 +41,7 @@
                             <div class="login-container">
                                 <section class="login-user-container">
                                     <div class="login-user-avatar">
-                                        <div class="no-avatar">
+                                        <div class="no-avatar" th:if="${session.member.memberImgName == null and session.member.memberKakaoProfileUrl == null}">
                                             <svg width="36" height="36" viewBox="0 0 36 36" fill="black"
                                                  xmlns="http://www.w3.org/2000/svg" style="fill:#CFD4D7;"
                                                  data-v-bd9f2bcc="" data-v-16c10fa5="">
@@ -41,24 +51,33 @@
                                                         data-v-bd9f2bcc=""></path>
                                             </svg>
                                         </div>
+                                        <div th:if="${session.member.memberImgName != null}">
+                                            <img class="sidebar-profile-img"
+                                                 th:src="@{/file/display(fileName=${session.member.memberImgPath} + '/' + ${session.member.memberImgName})}">
+                                        </div>
+                                        <div th:if="${session.member.memberKakaoProfileUrl != null and session.member.memberImgName == null}">
+                                            <img class="sidebar-profile-img" th:src="${session.member.memberKakaoProfileUrl}">
+                                        </div>
                                     </div>
                                     <div>
-                                        <div class="need-login">
-                                            홍길동
-                                        </div>
+                                        <div th:text="${session.member.memberNickname}" class="need-login"></div>
                                         <div class="userEmailContainer">
-                                            <div class="caption1" style="color: #767D82; letter-spacing: -0.25px;">
-                                                abcd@naver.com
-                                            </div>
+                                            <div th:text="${session.member.memberEmail}" class="caption1" style="color: #767D82; letter-spacing: -0.25px;"></div>
                                         </div>
                                     </div>
                                 </section>
                                 <div class="page-category">
-                                    <button class="to-mypage">마이페이지</button>
-                                    <button class="to-mypage">친구 목록</button>
+                                    <button class="to-mypage">
+                                        <a href="/member/my-page">마이페이지</a>
+                                    </button>
+                                    <button class="to-mypage">
+                                        <a href="/friend/list">친구 목록</a>
+                                    </button>
                                 </div>
                             </div>
-                            <button class="to-post-write">게시글 작성</button>
+                            <a href="/general-community/write">
+                                <button class="to-post-write">게시글 작성</button>
+                            </a>
                             <div class="search-bar">
                                 <input type="text" autocomplete="off" placeholder="친구이름을 입력해보세요"
                                        class="search-input search-second">
@@ -93,39 +112,42 @@
                         <div class="right-box-big">
                             <div class="right-box-middle">
                                 <div class="right-box-small">
-                                    <div class="right-box-friend-box">
+                                    <div class="right-box-friend-box" th:if="${messageSent} != null">
                                         <div class="right-box-friend"
                                              style="background-color: rgb(252,252,252); padding: 4px 0px">
                                             <div class="right-box-name">
-                                                <div class="nickname">삼장법사</div>
-                                                <div class="date">2023.01.02</div>
+                                                <div class="nickname" th:text="${messageSent.memberNickname}"></div>
+                                                <div class="date" th:text="${messageSent.messageCreateTime}"></div>
                                             </div>
                                         </div>
                                         <table class="right-box-friend title">
                                             <td class="label">
                                                 제목
                                             </td>
-                                            <td class="value">
-                                                도를 믿으시나요? 당신 곁에 신이 있습니다.
-                                            </td>
+                                            <td class="value" th:text="${messageSent.messageTitle}"></td>
                                         </table>
                                         <table class="right-box-friend detail">
                                             <td class="label detail">
                                                 내용
                                             </td>
-                                            <td class="value detail">
-                                                관상이 좋아보이네. 이번 기회에 저희 교를 믿으시면서 그 느낌 그대로 그 행복 영원토록 지니고 삶을 산다면 좋겠습니다. 답장을 주거든 전화번호를 남겨줄 터이니 관심이 있거든 답을 주시게나.
-                                            </td>
+                                            <td class="value detail" th:text="${messageSent.messageContent}"></td>
                                         </table>
                                         <div class="right-box-friend command"
                                              style="background-color: rgb(252,252,252); padding: 4px 0px">
-                                            <button class="send-btn">
-                                                <div class="enter-button-icon">답장</div>
-                                            </button>
-                                            <button class="delete-btn">
-                                                <div class="enter-button-icon">삭제</div>
-                                            </button>
+                                            <a th:href="'/message/write?memberNickname=' + ${messageSent.memberNickname}">
+                                                <button class="send-btn">
+                                                    <div class="enter-button-icon">메시지 작성</div>
+                                                </button>
+                                            </a>
+                                            <a th:href="@{/message/remove-sent-detail(messageId=${messageSent.messageId})}">
+                                                <button class="delete-btn">
+                                                    <div class="enter-button-icon">삭제</div>
+                                                </button>
+                                            </a>
                                         </div>
+                                    </div>
+                                    <div class="right-box-friend-box" th:if="${messageSent} == null">
+                                        <h3>해당 메시지는 존재하지 않거나 삭제된 메시지입니다.</h3>
                                     </div>
                                 </div>
                             </div>

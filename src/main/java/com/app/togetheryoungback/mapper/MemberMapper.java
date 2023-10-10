@@ -24,6 +24,8 @@ public interface MemberMapper {
     public void updateMemberNickname(String memberNickname, Long id);
 //    유저 전화번호 업데이트 - 마이페이지
     public void updateMemberTel(String memberTel, Long id);
+//    유저 복귀
+    public void updateMemberStatus(Long id);
 //    유저 계정 삭제(MEMBER_STATUS = 'DISABLED')
-    public void softDelete(Long id);
+    public void updateToDelete(Long id);
 }

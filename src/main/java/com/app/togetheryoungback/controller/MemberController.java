@@ -1,5 +1,7 @@
 package com.app.togetheryoungback.controller;
 
+import com.app.togetheryoungback.domain.MeetingBookmarkDTO;
+import com.app.togetheryoungback.domain.MeetingPostDTO;
 import com.app.togetheryoungback.domain.MemberVO;
 import com.app.togetheryoungback.service.*;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
@@ -16,24 +19,21 @@ import javax.swing.text.html.Option;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/member/*")
 public class MemberController {
+    private final ScheduleService scheduleService;
     private final MemberService memberService;
-    private final GeneralPostService generalPostService;
-    private final MeetingPostService meetingPostService;
-    private final GeneralReplyService generalReplyService;
-    private final MeetingReplyService meetingReplyService;
-    private final ParticipationService participationService;
+    private final GeneralBookmarkService generalBookmarkService;
+    private final MeetingBookmarkService meetingBookmarkService;
 
     // 로그인 페이지로 이동
     @GetMapping("login")
@@ -136,17 +136,105 @@ public class MemberController {
         return new RedirectView("/member/my-page");
     }
 
+    @GetMapping("withdraw")
+    public RedirectView withdraw(HttpSession session, RedirectAttributes redirectAttributes){
+        MemberVO sessionVO = (MemberVO) session.getAttribute("member");
+        memberService.withdraw(sessionVO.getId());
+        session.invalidate();
+
+        redirectAttributes.addFlashAttribute("withdraw", "true");
+        return new RedirectView("/member/login");
+    }
 
     // 북마크로 이동
     @GetMapping("bookmark")
-    public void goToBookmark() {
-        ;
+    public void goToBookmark(Model model, HttpSession session) {
+        MemberVO sessionVO = (MemberVO) session.getAttribute("member");
+        model.addAttribute("generalPosts", generalBookmarkService.loadGeneralBookmarks(sessionVO.getId()));
+        log.info("결과 = " + meetingBookmarkService.loadMeetingBookmarks(sessionVO.getId()));
+        model.addAttribute("meetingPosts", meetingBookmarkService.loadMeetingBookmarks(sessionVO.getId()));
     }
 
     // 나의 일정으로 이동
     @GetMapping("my-schedule")
-    public void goToMySchedule() {
-        ;
+    public String goToMySchedule(HttpSession session, Model model) {
+
+        if (session.getAttribute("member") == null) {
+            // 세션에 "member"가 없을 때만 alertMessage를 설정합니다.
+            log.info("{}",session.getAttribute("member"));
+            String alertMessage = "로그인이 필요합니다.";
+            model.addAttribute("alertMessage", alertMessage);
+            return "redirect:/member/login";
+        }
+
+        MemberVO memberVO = ((MemberVO) session.getAttribute("member"));
+        Long memberId = memberVO.getId();
+
+
+        log.info("{}",session.getAttribute("member"));
+
+        //  나의 일정 조회
+        List<MeetingPostDTO> mySchedules = scheduleService.searchSchedule(memberId);
+
+        String memberNickname = null;
+        String memberEmail= null;
+
+
+        memberNickname = memberVO.getMemberNickname();
+        memberEmail = memberVO.getMemberEmail();
+
+
+        List<String> formattedDates = new ArrayList<>();
+        List<String> truncatedPostContents = new ArrayList<>();
+
+        for (MeetingPostDTO mySchedule : mySchedules) {
+            String meetingDateStr = mySchedule.getMeetingDate(); // 날짜 문자열
+            String postContent = mySchedule.getMeetingPostContent();
+
+            // 글 내용을 30자로 제한
+            String truncatedPostContent = postContent.length() > 30 ? postContent.substring(0, 30) : postContent;
+
+            truncatedPostContents.add(truncatedPostContent);
+
+            // 날짜 문자열을 Date 객체로 변환
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date meetingDate = null;
+
+            try {
+                meetingDate = dateFormat.parse(meetingDateStr);
+            } catch (ParseException e) {
+                // 첫 번째 형식으로 파싱이 실패하면 다른 형식으로 시도
+                SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    meetingDate = newDateFormat.parse(meetingDateStr);
+                } catch (ParseException ex) {
+                    // 두 번째 형식으로도 파싱 실패 시 예외 처리
+                    // 적절한 오류 처리를 수행하세요.
+                }
+            }
+
+            // 날짜를 포맷에 맞게 변환합니다.
+            SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+            String formattedDate = newDateFormat.format(meetingDate);
+
+            // 계산한 값을 formattedDates 리스트에 추가
+            formattedDates.add(formattedDate);
+        }
+        model.addAttribute("memberNickname", memberNickname);
+        model.addAttribute("memberEmail", memberEmail);
+        model.addAttribute("mySchedules",mySchedules);
+        model.addAttribute("truncatedPostContents",truncatedPostContents);
+        model.addAttribute("formattedDates",formattedDates);
+
+
+        return "/member/my-schedule";
+    }
+
+
+    @GetMapping("my-schedule/delete/{postId}")
+    public RedirectView deleteMeetingSchedule(@PathVariable Long postId) {
+        scheduleService.removeSchedule(postId);
+        return new RedirectView("/member/my-schedule");
     }
 
     @GetMapping("logout")
