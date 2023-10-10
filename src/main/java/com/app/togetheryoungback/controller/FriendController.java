@@ -1,11 +1,13 @@
 package com.app.togetheryoungback.controller;
 
 import com.app.togetheryoungback.domain.FriendDTO;
+import com.app.togetheryoungback.domain.Search;
 import com.app.togetheryoungback.service.FriendService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -21,6 +23,12 @@ public class FriendController {
     // 친구 검색으로 이동
     @GetMapping("search")
     public void goToFriendSearchForm(){;}
+
+//    // 친구 검색
+//    @GetMapping("search")
+//    public List<FriendDTO> getSearchFriend(Search search){
+//        return friendService.getSearchFriend(search);
+//    }
 
 
     @GetMapping("message")

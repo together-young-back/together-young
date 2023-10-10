@@ -15,9 +15,8 @@
     </insert>
 
     <delete id="delete">
-        DELETE
-        FROM TBL_FRIEND
-        WHERE ID = #{id}
+        DELETE FROM TBL_FRIEND
+        WHERE FRIEND_ID = #{friendId}
     </delete>
 
     <select id="selectAllFriend" resultType="FriendDTO">
@@ -29,31 +28,35 @@
     </select>
 
     <select id="selectFriendMessage" resultType="messageSentDTO">
-        SELECT MEMBER_NICKNAME, MESSAGE_TITLE, MESSAGE_CONTENT
+        SELECT MEM.MEMBER_NICKNAME, MES.MESSAGE_TITLE, MES.MESSAGE_CONTENT
         FROM TBL_MESSAGE MES
             JOIN TBL_SENT_MESSAGE SM
             ON SM.MESSAGE_ID = MES.ID AND MES.MEMBER_SENT_ID = #{id}
                 JOIN TBL_MEMBER MEM
                 ON MEM.ID = MES.MEMBER_SENT_ID
-
+        WHERE ROWNUM = 1
+        ORDER BY SM.ID DESC
     </select>
 
     <select id="friendReceivedMessage" resultType="MessageReceivedDTO">
-        SELECT MEMBER_NICKNAME, MESSAGE_TITLE, MESSAGE_CONTENT
+        SELECT MEM.MEMBER_NICKNAME, MES.MESSAGE_TITLE, MES.MESSAGE_CONTENT
         FROM TBL_MESSAGE MES
             JOIN TBL_RECEIVED_MESSAGE RM
             ON RM.MESSAGE_ID = MES.ID AND MES.MEMBER_RECEIVED_ID = #{id}
                 JOIN TBL_MEMBER MEM
                 ON MEM.ID = MES.MEMBER_RECEIVED_ID
+        WHERE ROWNUM = 1
+        ORDER BY RM.ID DESC
     </select>
-
 
 <!--    <select id="selectFriend" resultType="friendDAO">-->
 <!--        SELECT  TF.MEMBER_ID, TF.FRIEND_ID,TF.FRIEND_DESCRIPTION, TM.MEMBER_KAKAO_PROFILE_URL, TM.MEMBER_NICKNAME-->
 <!--        FROM-->
-<!--            (SELECT MEMBER_KAKAO_PROFILE_URL, MEMBER_NICKNAME-->
+<!--            (-->
+<!--            SELECT MEMBER_KAKAO_PROFILE_URL, MEMBER_NICKNAME-->
 <!--             FROM TBL_MEMBER TM-->
-<!--             WHERE MEMBER_NICKNAME LIKE '%' || #{keyword} || '%')-->
+<!--             WHERE MEMBER_NICKNAME LIKE '%' || #{keyword} || '%'-->
+<!--             )-->
 <!--            JOIN TBL_FRIEND TF-->
 <!--            ON TM.ID = TF.FRIEND_ID-->
 <!--        WHERE FRIEND_REQUEST_STATUS = 'ACCEPTED' AND MEMBER_ID = #{id}-->

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,14 +28,12 @@ public class FriendServiceImpl implements FriendService {
     }
 
 //    친구 검색
-
     @Override
     public List<FriendDTO> getSearchFriend(Search search) {
         return friendDAO.selectDao(search);
     }
 
 //    친구 리스트 목록으로 이동
-
     @Override
     public List<FriendDTO> getFriend(Long memberId) {
         return friendDAO.findAllFriend(memberId);
