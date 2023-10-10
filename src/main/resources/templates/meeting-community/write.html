@@ -24,7 +24,7 @@
         <div class="main-container">
             <div class="grid">
                 <div class="write-form-wrap">
-                    <div class="write-form-container">
+                    <form class="write-form-container" method="post" th:action="@{/meeting-community/write}">
                         <h2 class="write-form-title">
                             모임 게시글 작성
                             <p class="write-form-subtitle"><strong>모임 게시글</strong>을 작성해서 <strong>다양한 사람</strong>들과 모임을
@@ -165,8 +165,10 @@
                                 </div>
                             </div>
                         </div>
+
+                    </form>
                         <div class="write-form-title-con">
-                            <input placeholder="제목을 입력하세요" name="question" label="" autocomplete="off" type="text"
+                            <input placeholder="제목을 입력하세요" name="meetingPostTitle" label="" autocomplete="off" type="text"
                                 class="form-title" style="text-align: left;">
                         </div>
                         <div class="write-form-content-container">
@@ -174,7 +176,7 @@
                                 class="form-content"></textarea>
                         </div>
                         <div class="form-type-count">
-                            글자수:&nbsp;
+                            글자수:
                             <span id="type-counter"> 0 </span>
                             &nbsp;/ 1000
                         </div>
@@ -223,7 +225,7 @@
                             <div id="menu_wrap" class="bg_white">
                                 <div class="option">
                                     <div>
-                                        <form class="map-search-form" onsubmit="searchPlaces(); return false;">
+                                        <div class="map-search-form" onsubmit="searchPlaces(); return false;">
                                             <div class="map-search-div">
                                                 <svg data-v-bd9f2bcc="" data-v-02656bf6="" width="20" height="20"
                                                     viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg"
@@ -242,9 +244,9 @@
                                                     size="15">
                                             </div>
                                             <div class="map-search-div">
-                                                <button class="map-search-btn" type="submit">검색하기</button>
+                                                <button class="map-search-btn" type="button">검색하기</button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr>
@@ -252,10 +254,10 @@
                                 <div id="pagination"></div>
                             </div>
                         </div>
-                        <div class="summit-container">
-                            <button class="summit-btn">작성하기</button>
+                        <div href="/meeting-community/posts" class="summit-container">
+                            <button class="summit-btn" type="submit">작성하기</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
