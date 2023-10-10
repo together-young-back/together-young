@@ -13,7 +13,7 @@ public class MeetingPostVO {
     //    회원 번호
     private Long memberId;
     //    카테고리
-    private Long meetingPostCategory;
+    private String meetingPostCategory;
     //    모임 지역
     private String meetingPostRegion;
     //    게시글 제목
@@ -23,11 +23,11 @@ public class MeetingPostVO {
     //    모임 날짜
     private String meetingDate;
     //    모임 진행 시간
-    private Long meetingDuration;
+    private int meetingDuration;
     //    모임 최소 인원
-    private Long meetingPostMin;
+    private int meetingPostMin;
     //    모임 최대 인원
-    private Long meetingPostMax;
+    private int meetingPostMax;
     //    모임 장소
     private String meetingPlace;
     //    조회수 카운트

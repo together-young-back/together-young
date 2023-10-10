@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.togetheryoungback.mapper.MeetingPostMapper">
+
+    <insert id="insert">
+        INSERT INTO TBL_MEETING_POST(ID, MEMBER_ID, MEETING_POST_CATEGORY, MEETING_POST_REGION, MEETING_POST_TITLE, MEETING_POST_CONTENT, MEETING_DATE, MEETING_DURATION, MEETING_POST_MIN, MEETING_POST_MAX, MEETING_PLACE, MEETING_POST_WRITE_TIME)
+        VALUES (SEQ_MEETING_POST.NEXTVAL, #{memberId}, #{meetingPostCategory}, #{meetingPostRegion}, #{meetingPostTitle}, #{meetingPostContent}, #{meetingDate}, #{meetingDuration}, #{meetingPostMin}, #{meetingPostMax}, #{meetingPlace}, CURRENT_TIMESTAMP)
+    </insert>
+
+
+    <update id="update">
+        UPDATE TBL_MEETING_POST
+        SET MEETING_POST_TITLE = #{meetingPostTitle}, MEETING_POST_CONTENT = #{meetingPostContent}
+        WHERE ID = #{id}
+    </update>
+
+
+    <select id="selectMemberId" resultType="long">
+        SELECT * FROM TBL_MEETING_POST
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+
     <select id="selectCountByMemberId" resultType="int">
         SELECT COUNT(MEMBER_ID)
         FROM TBL_MEETING_POST
