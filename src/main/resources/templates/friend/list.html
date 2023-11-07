@@ -15,10 +15,7 @@
         @import url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css);
         @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
     </style>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="/js/friend/friend-list.js"></script>
 </head>
-
 <body>
 <div class="wrap">
     <!--        <header style="width: 100%; height: 70px;position: fixed;top: 0;"></header>-->
@@ -39,16 +36,19 @@
                                                     <i class="image1"></i>
                                                 </div>
                                                 <div th:if="${session.member.memberImgName != null}">>
-                                                    <img class="update-container-img1" th:src="${session.member.memberImgName}">
+                                                    <img class="update-container-img1"
+                                                         th:src="${session.member.memberImgName}">
                                                 </div>
                                                 <div th:if="${session.member.memberKakaoProfileUrl != null and session.member.memberImgName == null}">
-                                                    <img class="update-container-img1" th:src="${session.member.memberKakaoProfileUrl}">
+                                                    <img class="update-container-img1"
+                                                         th:src="${session.member.memberKakaoProfileUrl}">
                                                 </div>
                                             </label>
                                         </div>
                                     </div>
                                     <div>
-                                        <div th:if="${session.member.memberImgName == null and session.member.memberKakaoProfileUrl == null}" class="need-login">
+                                        <div th:if="${session.member.memberImgName == null and session.member.memberKakaoProfileUrl == null}"
+                                             class="need-login">
                                             <svg width="36" height="36" viewBox="0 0 36 36" fill="black"
                                                  xmlns="http://www.w3.org/2000/svg" style="fill:#CFD4D7;"
                                                  data-v-bd9f2bcc="" data-v-16c10fa5="">
@@ -65,13 +65,17 @@
                                     </div>
                                 </section>
                                 <div class="page-category">
-                                    <button th:onclick="|location.href='@{/member/my-page}'|" class="to-mypage">마이페이지</button>
-                                    <button th:onclick="|location.href='@{/friend/list}'|" class="to-mypage">친구 목록</button>
+                                    <button th:onclick="|location.href='@{/member/my-page}'|" class="to-mypage">마이페이지
+                                    </button>
+                                    <button th:onclick="|location.href='@{/friend/list}'|" class="to-mypage">친구 목록
+                                    </button>
                                 </div>
                             </div>
-                            <button th:onclick="|location.href='@{/general-community/write}'|" class="to-post-write">게시글 작성</button>
+                            <button th:onclick="|location.href='@{/general-community/write}'|" class="to-post-write">게시글
+                                작성
+                            </button>
                             <div class="search-bar">
-                                <input type="text" autocomplete="off" placeholder="친구이름을 입력해보세요"
+                                <input id="searchFriend" type="text" autocomplete="off" placeholder="친구이름을 입력해보세요"
                                        class="search-input search-second">
                                 <div class="input-erase-btn">
                                     <svg data-v-bd9f2bcc="" data-v-02656bf6="" width="16" height="16"
@@ -103,157 +107,37 @@
                     <div class="main-container-small-box-right">
                         <div class="right-box-big">
                             <div class="right-box-middle">
-                                <div class="right-box-small">
+                                <div class="right-box-small" th:each="friend : ${friends}">
+
                                     <div class="right-box-friend-box">
                                         <div class="right-box-friend"
                                              style="background-color: rgb(252,252,252); padding: 16px 20px">
                                             <div class="right-box-profile">
                                                 <div class="right-box-profile-box">
-                                                    <div class="no-avatar">
-                                                        <label for="imageUploadContainer">
-                                                            <div th:if="${session.member.memberImgName == null and session.member.memberKakaoProfileUrl == null}">
-                                                                <i class="image"></i>
-                                                            </div>
-                                                            <div th:if="${session.member.memberImgName != null}">>
-                                                                <img class="update-container-img" th:src="${session.member.memberImgName}">
-                                                            </div>
-                                                            <div th:if="${session.member.memberKakaoProfileUrl != null and session.member.memberImgName == null}">
-                                                                <img class="update-container-img" th:src="${session.member.memberKakaoProfileUrl}">
-                                                            </div>
-                                                        </label>
+                                                    <div th:if="${friend.memberKakaoProfileUrl != null and friend.memberImgName==null}" class="no-avatar">
+                                                        <img th:src="${friend.memberKakaoProfileUrl}" class="update-container-img">
+
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="right-box-name">
                                                 <div class="name-memo-box">
-                                                    <div th:onclick="|location.href='@{/friend/message}'|" class="name-box" style="color: rgb(60,65,68);">
-                                                        <strong class="friend-name">
-                                                            <input id="imageUploadContainer" class="no-avatar" style="display: none" type="file"
-                                                                   accept="image/jpg,image/png,image/jpeg,image/gif">
-                                                            <div class="userName" th:text="${session.member.memberNickname}"></div>
+                                                    <a th:href="@{/friend/message/(friendId=${friend.friendId})}" class="name-box" style="color: rgb(60,65,68);">
+                                                        <strong class="friend-name" th:text="${friend.memberNickname}">
+
                                                         </strong>
-                                                    </div>
+                                                        &nbsp;&nbsp;
+                                                    </a>
                                                     <div class="memo-box">
-                                                        <button class="memo-text" style="color: rgb(0, 107, 235)" id="map">
+                                                        <div class="memo-text" style="color : rgb(0, 107, 235)">
                                                             친구 메모
-                                                            <div class="post-action-list-container">
-                                                                <div class="post-action-selection">
-                                                                    축구
-                                                                </div>
-                                                                <div class="post-action-selection">
-                                                                    농구
-                                                                </div>
-                                                            </div>
-                                                        </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!--                                    <div class="right-box-friend-box">-->
-                                    <!--                                        <div class="right-box-friend"-->
-                                    <!--                                             style="background-color: rgb(252,252,252); padding: 16px 20px">-->
-                                    <!--                                            <div class="right-box-profile">-->
-                                    <!--                                                <div class="right-box-profile-box">-->
-                                    <!--                                                    <div class="no-avatar">-->
-                                    <!--                                                        <svg width="24" height="24" viewBox="0 0 36 36" fill="black"-->
-                                    <!--                                                             xmlns="http://www.w3.org/2000/svg" style="fill:#CFD4D7;" data-v-bd9f2bcc=""-->
-                                    <!--                                                             data-v-16c10fa5="">-->
-                                    <!--                                                            <circle cx="18" cy="11" r="6" data-v-bd9f2bcc=""></circle>-->
-                                    <!--                                                            <path-->
-                                    <!--                                                                    d="M8.89065 23.704C10.986 20.7531 14.3809 19 18 19C21.6191 19 25.014 20.7531 27.1094 23.704L27.3942 24.1052C29.7451 27.416 27.3779 32 23.3174 32H12.6826C8.6221 32 6.25494 27.416 8.60575 24.1052L8.89065 23.704Z"-->
-                                    <!--                                                                    data-v-bd9f2bcc=""></path>-->
-                                    <!--                                                        </svg>-->
-                                    <!--                                                    </div>-->
-                                    <!--                                                </div>-->
-                                    <!--                                            </div>-->
-                                    <!--                                            <div class="right-box-name">-->
-                                    <!--                                                <div class="name-memo-box">-->
-                                    <!--                                                    <div class="name-box" style="color: rgb(60,65,68);">-->
-                                    <!--                                                        <strong class="friend-name">-->
-                                    <!--                                                            친구2-->
-                                    <!--                                                        </strong>-->
-                                    <!--                                                        &nbsp;&nbsp; 축구-->
-                                    <!--                                                    </div>-->
-                                    <!--                                                    <div class="memo-box">-->
-                                    <!--                                                        <div class="memo-text" style="color : rgb(0, 107, 235)">-->
-                                    <!--                                                            친구 메모-->
-                                    <!--                                                        </div>-->
-                                    <!--                                                    </div>-->
-                                    <!--                                                </div>-->
-                                    <!--                                            </div>-->
-                                    <!--                                        </div>-->
-                                    <!--                                    </div>-->
-                                    <!--                                    <div class="right-box-friend-box">-->
-                                    <!--                                        <div class="right-box-friend"-->
-                                    <!--                                             style="background-color: rgb(252,252,252); padding: 16px 20px">-->
-                                    <!--                                            <div class="right-box-profile">-->
-                                    <!--                                                <div class="right-box-profile-box">-->
-                                    <!--                                                    <div class="no-avatar">-->
-                                    <!--                                                        <svg width="24" height="24" viewBox="0 0 36 36" fill="black"-->
-                                    <!--                                                             xmlns="http://www.w3.org/2000/svg" style="fill:#CFD4D7;" data-v-bd9f2bcc=""-->
-                                    <!--                                                             data-v-16c10fa5="">-->
-                                    <!--                                                            <circle cx="18" cy="11" r="6" data-v-bd9f2bcc=""></circle>-->
-                                    <!--                                                            <path-->
-                                    <!--                                                                    d="M8.89065 23.704C10.986 20.7531 14.3809 19 18 19C21.6191 19 25.014 20.7531 27.1094 23.704L27.3942 24.1052C29.7451 27.416 27.3779 32 23.3174 32H12.6826C8.6221 32 6.25494 27.416 8.60575 24.1052L8.89065 23.704Z"-->
-                                    <!--                                                                    data-v-bd9f2bcc=""></path>-->
-                                    <!--                                                        </svg>-->
-                                    <!--                                                    </div>-->
-                                    <!--                                                </div>-->
-                                    <!--                                            </div>-->
-                                    <!--                                            <div class="right-box-name">-->
-                                    <!--                                                <div class="name-memo-box">-->
-                                    <!--                                                    <div class="name-box" style="color: rgb(60,65,68);">-->
-                                    <!--                                                        <strong class="friend-name">-->
-                                    <!--                                                            친구3-->
-                                    <!--                                                        </strong>-->
-                                    <!--                                                        &nbsp;&nbsp; 노래-->
-                                    <!--                                                    </div>-->
-                                    <!--                                                    <div class="memo-box">-->
-                                    <!--                                                        <div class="memo-text" style="color : rgb(0, 107, 235)">-->
-                                    <!--                                                            친구 메모-->
-                                    <!--                                                        </div>-->
-                                    <!--                                                    </div>-->
-                                    <!--                                                </div>-->
-                                    <!--                                            </div>-->
-                                    <!--                                        </div>-->
-                                    <!--                                    </div>-->
-
-                                    <!--                                    <div class="right-box-friend-box">-->
-                                    <!--                                        <div class="right-box-friend"-->
-                                    <!--                                             style="background-color: rgb(252,252,252); padding: 16px 20px">-->
-                                    <!--                                            <div class="right-box-profile">-->
-                                    <!--                                                <div class="right-box-profile-box">-->
-                                    <!--                                                    <div class="no-avatar">-->
-                                    <!--                                                        <svg width="24" height="24" viewBox="0 0 36 36" fill="black"-->
-                                    <!--                                                             xmlns="http://www.w3.org/2000/svg" style="fill:#CFD4D7;" data-v-bd9f2bcc=""-->
-                                    <!--                                                             data-v-16c10fa5="">-->
-                                    <!--                                                            <circle cx="18" cy="11" r="6" data-v-bd9f2bcc=""></circle>-->
-                                    <!--                                                            <path-->
-                                    <!--                                                                    d="M8.89065 23.704C10.986 20.7531 14.3809 19 18 19C21.6191 19 25.014 20.7531 27.1094 23.704L27.3942 24.1052C29.7451 27.416 27.3779 32 23.3174 32H12.6826C8.6221 32 6.25494 27.416 8.60575 24.1052L8.89065 23.704Z"-->
-                                    <!--                                                                    data-v-bd9f2bcc=""></path>-->
-                                    <!--                                                        </svg>-->
-                                    <!--                                                    </div>-->
-                                    <!--                                                </div>-->
-                                    <!--                                            </div>-->
-                                    <!--                                            <div class="right-box-name">-->
-                                    <!--                                                <div class="name-memo-box">-->
-                                    <!--                                                    <div class="name-box" style="color: rgb(60,65,68);">-->
-                                    <!--                                                        <strong class="friend-name">-->
-                                    <!--                                                            친구4-->
-                                    <!--                                                        </strong>-->
-                                    <!--                                                        &nbsp;&nbsp; 농구-->
-                                    <!--                                                    </div>-->
-                                    <!--                                                    <div class="memo-box">-->
-                                    <!--                                                        <div class="memo-text" style="color : rgb(0, 107, 235)">-->
-                                    <!--                                                            친구 메모-->
-                                    <!--                                                        </div>-->
-                                    <!--                                                    </div>-->
-                                    <!--                                                </div>-->
-                                    <!--                                            </div>-->
-                                    <!--                                        </div>-->
-                                    <!--                                    </div>-->
 
 
                                 </div>
@@ -271,5 +155,16 @@
 
 </div>
 
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="/js/friend/friend-list.js"></script>
+<script th:inline="javascript">
+    $('#searchFriend').on('keypress',function (e){
+        if(e.code =='Enter'){
+            e.preventDefault();
+            let keyword = $('#searchFriend').val();
+            window.location.href = `/friend/search?keyword=${keyword}`;
+        }
+    });
+</script>
 </body>
 </html>

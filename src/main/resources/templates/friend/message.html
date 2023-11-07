@@ -37,13 +37,15 @@
                                         <img class="update-container-img1" th:src="${session.member.memberImgName}">
                                     </div>
                                     <div th:if="${session.member.memberKakaoProfileUrl != null and session.member.memberImgName == null}">
-                                        <img class="update-container-img1" th:src="${session.member.memberKakaoProfileUrl}">
+                                        <img class="update-container-img1"
+                                             th:src="${session.member.memberKakaoProfileUrl}">
                                     </div>
                                 </label>
                             </div>
                         </div>
                         <div>
-                            <div th:if="${session.member.memberImgName == null and session.member.memberKakaoProfileUrl == null}" class="need-login">
+                            <div th:if="${session.member.memberImgName == null and session.member.memberKakaoProfileUrl == null}"
+                                 class="need-login">
                                 <svg width="36" height="36" viewBox="0 0 36 36" fill="black"
                                      xmlns="http://www.w3.org/2000/svg" style="fill:#CFD4D7;"
                                      data-v-bd9f2bcc="" data-v-16c10fa5="">
@@ -55,7 +57,8 @@
                             </div>
                             <input class="no-avatar" style="display: none" type="file"
                                    accept="image/jpg,image/png,image/jpeg,image/gif">
-                            <div id="imageUploadContainer" class="userName" th:text="${session.member.memberNickname}"></div>
+                            <div id="imageUploadContainer" class="userName"
+                                 th:text="${session.member.memberNickname}"></div>
                             <div class="userEmail" th:text="${session.member.memberEmail}"></div>
                         </div>
                     </section>
@@ -66,7 +69,7 @@
                 </div>
                 <button th:onclick="|location.href='@{/general-community/write}'|" class="to-post-write">게시글 작성</button>
                 <div class="search-bar">
-                    <input type="text" autocomplete="off" placeholder="친구이름을 입력해보세요"
+                    <input id="searchFriend" type="text" autocomplete="off" placeholder="친구이름을 입력해보세요"
                            class="search-input search-second">
                     <div class="input-erase-btn">
                         <svg data-v-bd9f2bcc="" data-v-02656bf6="" width="16" height="16"
@@ -110,24 +113,17 @@
                         <div class="userInformationContainer">
                             <div class="imageUploadContainer">
                                 <div class="find-user-avatar">
-                                    <div class="no-avatar">
-                                        <svg width="36" height="36" viewBox="0 0 36 36" fill="black"
-                                             xmlns="http://www.w3.org/2000/svg" style="fill:#CFD4D7;" data-v-bd9f2bcc=""
-                                             data-v-16c10fa5="">
-                                            <circle cx="18" cy="11" r="6" data-v-bd9f2bcc=""></circle>
-                                            <path
-                                                    d="M8.89065 23.704C10.986 20.7531 14.3809 19 18 19C21.6191 19 25.014 20.7531 27.1094 23.704L27.3942 24.1052C29.7451 27.416 27.3779 32 23.3174 32H12.6826C8.6221 32 6.25494 27.416 8.60575 24.1052L8.89065 23.704Z"
-                                                    data-v-bd9f2bcc=""></path>
-                                        </svg>
+                                    <div th:if="${friendInfo.memberKakaoProfileUrl != null and friendInfo.memberImgName == null}"
+                                         class="no-avatar">
+                                        <img th:src="${friendInfo.memberKakaoProfileUrl}" class="update-container-img">
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="userName">
-                                친구1
-                            </div>
-                            <div class="name-box">
-                                축구,농구
-                            </div>
+                            <a th:text="${friendInfo.memberNickname}" class="userName">
+
+                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -142,20 +138,40 @@
                     <div class="community-container">
                         <div class="community">
                             <div>
-                                <strong class="community-title">보낸 쪽지 제목</strong>
+                                <th:block th:if="${sentMessage != null} ">
+                                <strong class="community-title" th:text="${sentMessage.messageTitle}"></strong>
                                 <br><br>
-                                <p class="community-content">안녕하세요!
-                                    보낸 쪽지 내용입니다
+                                <p class="community-content"
+                                th:text="${sentMessage.messageContent}">
                                 </p>
+                                </th:block>
+
+                                <th:block th:unless="${sentMessage != null} ">
+                                    <strong class="community-title">보낸 메세지가 없습니다.</strong>
+                                    <br><br>
+                                    <p class="community-content">
+                                        보낸 메시지 내용이 없습니다.
+                                    </p>
+                                </th:block>
                             </div>
                         </div>
                         <div class="community">
-                            <div>
-                                <strong class="community-title">받은 쪽지 제목</strong>
-                                <br><br>
-                                <p class="community-content">그렇군요!
-                                    받은 쪽지 내용입니다
-                                </p>
+                            <div >
+                                <th:block th:if="${received != null} ">
+                                    <strong class="community-title" th:text="${received.messageTitle}"></strong>
+                                    <br><br>
+                                    <p class="community-content" th:text="${received.messageContent}">
+                                    </p>
+                                </th:block>
+
+                                <th:block th:unless="${received != null} ">
+                                    <strong class="community-title">받은 메세지가 없습니다.</strong>
+                                    <br><br>
+                                    <p class="community-content">
+                                        받은 메시지 내용이 없습니다.
+                                    </p>
+                                </th:block>
+
                             </div>
                         </div>
                     </div>
@@ -165,13 +181,17 @@
             <br>
             <div class="button-box">
                 <button th:onclick="|location.href='@{/message/write}'|" class="friend-message-btn">
-                    <div class="enter-button-icon"></div> 쪽지 작성
+                    <div class="enter-button-icon"></div>
+                    쪽지 작성
                     <div class="enter-button-icon"></div>
                 </button>
-                <button th:onclick="alert('친구 삭제 완료')" class="friend-delete-btn">
-                    <div class="enter-button-icon"></div> 친구 삭제
-                    <div class="enter-button-icon"></div>
-                </button>
+                <a th:href="@{/friend/delete-friend(friendId=${friendInfo.id})}">
+                    <button th:onclick="alert('친구 삭제 완료')" class="friend-delete-btn">
+                        <div class="enter-button-icon"></div>
+                        친구 삭제
+                        <div class="enter-button-icon"></div>
+                    </button>
+                </a>
             </div>
         </div>
     </div>
@@ -184,5 +204,8 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="/js/friend/friend-message.js"></script>
-
+<script th:inline="javascript">
+    const getFriend = [[${friendInfo}]];
+    console.log(getFriend);
+</script>
 </html>

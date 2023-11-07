@@ -1962,3 +1962,14 @@ input[type="checkbox"]:checked + .able:before {
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
 }
+
+.update-container-img {
+    width: 90px;
+    height: 90px;
+    background-size: 100% 100%;
+    line-height: 68px;
+    border: 1px solid #e1e4e6;
+    border-radius: 100%;
+    display: block;
+    cursor: pointer;
+}

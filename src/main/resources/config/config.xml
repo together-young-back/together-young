@@ -23,5 +23,6 @@
         <typeAlias type="com.app.togetheryoungback.domain.Pagination" alias="pagination"/>
         <typeAlias type="com.app.togetheryoungback.domain.Search" alias="search"/>
         <typeAlias type="com.app.togetheryoungback.domain.FriendDTO" alias="friendDTO" />
+        <typeAlias type="com.app.togetheryoungback.domain.GeneralPostDTO" alias="generalPostDTO" />
     </typeAliases>
 </configuration>

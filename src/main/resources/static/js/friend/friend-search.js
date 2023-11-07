@@ -20,3 +20,11 @@ $(function () {
     $(this).hide();
   });
 });
+
+$('#searchFriend').on('keypress',function (e){
+  if(e.code =='Enter'){
+    e.preventDefault();
+    let keyword = $('#searchFriend').val();
+    window.location.href = `/friend/search?keyword=${keyword}`;
+  }
+});
