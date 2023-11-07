@@ -12,7 +12,7 @@ public class MeetingPostDTO {
     //    회원 번호
     private Long memberId;
     //    카테고리
-    private Long meetingPostCategory;
+    private String meetingPostCategory;
     //    모임 지역
     private String meetingPostRegion;
     //    게시글 제목

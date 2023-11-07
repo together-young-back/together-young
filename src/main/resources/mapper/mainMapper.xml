@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.togetheryoungback.mapper.MainMapper">
+    <select id="countGeneralPost" resultType="int">
+        SELECT  COUNT(ID)
+        FROM TBL_GENERAL_POST
+    </select>
+
+    <select id="countMeetingPost" resultType="int">
+        SELECT COUNT(ID)
+        FROM TBL_MEETING_POST
+    </select>
+
+    <select id="viewTopMeetingPost" resultType="MeetingPostDTO">
+        SELECT ID,MEETING_POST_TITLE,MEETING_POST_CONTENT, MEETING_POST_LIKE_COUNT, MEETING_POST_VIEW_COUNT, MEETING_POST_CATEGORY
+        FROM TBL_MEETING_POST
+        ORDER BY MEETING_POST_VIEW_COUNT DESC
+    </select>
+
+    <select id="viewTopGeneralPost" resultType="generalPostDTO">
+SELECT P.ID, GENERAL_POST_TITLE, GENERAL_POST_CONTENT,
+       GENERAL_POST_LIKE_COUNT, GENERAL_POST_VIEW_COUNT,GENERAL_POST_CATEGORY,
+       COUNT(R.ID) AS GENERAL_POST_REPLY_COUNT,
+       DR.ID,DR.GENERAL_REPLY_CONTENT, DR.MEMBER_ID,DR.GENERAL_POST_ID,
+       M.ID AS MEMBER_ID,M.MEMBER_NICKNAME, M.MEMBER_KAKAO_PROFILE_URL
+FROM TBL_GENERAL_POST P
+         LEFT JOIN TBL_GENERAL_REPLY R
+                   ON P.ID = R.GENERAL_POST_ID
+         LEFT JOIN (
+         SELECT ID,GENERAL_REPLY_CONTENT, MEMBER_ID,GENERAL_POST_ID
+                    FROM TBL_GENERAL_REPLY
+        <![CDATA[
+                    WHERE ROWNUM = 1
+        ]]>
+                    ORDER BY GENERAL_REPLY_CREATE_TIME DESC) DR
+                   ON P.ID = DR.GENERAL_POST_ID
+         LEFT JOIN TBL_MEMBER M
+                   ON DR.MEMBER_ID = M.ID
+group by M.MEMBER_KAKAO_PROFILE_URL, M.MEMBER_NICKNAME, M.ID, GENERAL_POST_LIKE_COUNT,
+         GENERAL_POST_VIEW_COUNT, GENERAL_POST_CONTENT, GENERAL_POST_TITLE, P.ID,
+         DR.MEMBER_ID, DR.GENERAL_REPLY_CONTENT, DR.ID, DR.GENERAL_POST_ID, GENERAL_POST_CATEGORY
+ORDER BY GENERAL_POST_VIEW_COUNT DESC
+    </select>
+
+<!--    <select id="viewTopMeetingPost" resultType="meetingPostDTO">-->
+<!--        SELECT P.ID, MEETING_POST_TITLE, MEETING_POST_CONTENT,-->
+<!--               MEETING_POST_LIKE_COUNT, MEETING_POST_VIEW_COUNT, MEETING_POST_CATEGORY,-->
+<!--               COUNT(R.ID) AS MEETING_POST_REPLY_COUNT,-->
+<!--               DR.ID, DR.MEETING_REPLY_CONTENT, DR.MEMBER_ID, DR.MEETING_POST_ID,-->
+<!--               M.ID AS MEMBER_ID, M.MEMBER_NICKNAME, M.MEMBER_KAKAO_PROFILE_URL-->
+<!--        FROM TBL_MEETING_POST P-->
+<!--                 LEFT JOIN TBL_MEETING_REPLY R-->
+<!--                           ON  P.ID = R.MEETING_POST_ID-->
+<!--                 LEFT JOIN (-->
+<!--            SELECT ID,MEETING_REPLY_CONTENT, MEMBER_ID, MEETING_POST_ID-->
+<!--            FROM TBL_MEETING_REPLY-->
+<!--            WHERE ROWNUM = 1-->
+<!--            ORDER BY MEETING_REPLY_CREATE_TIME DESC ) DR-->
+<!--                           ON P.ID = DR.MEETING_POST_ID-->
+<!--                 LEFT JOIN TBL_MEMBER M-->
+<!--                           ON DR.MEMBER_ID = M.ID-->
+<!--        group by P.ID, MEETING_POST_TITLE, MEETING_POST_CONTENT, MEETING_POST_LIKE_COUNT, MEETING_POST_VIEW_COUNT, MEETING_POST_CATEGORY, DR.ID, DR.MEETING_REPLY_CONTENT, DR.MEMBER_ID, DR.MEETING_POST_ID, M.ID, M.MEMBER_NICKNAME, M.MEMBER_KAKAO_PROFILE_URL-->
+<!--        ORDER BY MEETING_POST_VIEW_COUNT DESC-->
+<!--    </select>-->
+</mapper>
